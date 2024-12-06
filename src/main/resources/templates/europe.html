@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../static/CSS/continentr.css" />
+  <link rel="stylesheet" href="../static/CSS/globalr.css" />
+  <link rel="stylesheet" href="../static/CSS/headerr.css" />
+  <link rel="stylesheet" href="../static/CSS/footerr.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Europe - Vibes Voyages</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <section class="hero-image">
+    <header></header>
+    <video autoplay muted loop playsinline class="background-video">
+      <source src="../static/VIDEOS/hero_europe.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-text">
+      <h1>Bienvenue en Europe</h1>
+      <button>Regarder Maintenant</button>
+    </div>
+  </section>
+  <!-- Bloc filtre -->
+  <div class="filter-continents">
+    <button class="btn active" onclick="europe('Popular Videos')">Vidéo populaires</button>
+    <button class="btn" onclick="zone('West Europe')">Europe de l'Ouest</button>
+    <button class="btn" onclick="zone('North Europe')">Europe du Nord</button>
+    <button class="btn" onclick="zone('South Europe')">Europe du Sud</button>
+    <button class="btn" onclick="zone('Central Europe')">Europe Centrale</button>
+    <button class="btn" onclick="zone('East Europe')">Europe de l'Est</button>
+  </div>
+  <section class="popular-video">
+    <h2>Vidéos Populaires</h2>
+    <div class="container" id="europe-container"></div>
+
+  </section>
+
+  <!-- Banniere -->
+  <section class="banner-continents">
+    <p>L'Europe avec Vibes Voyage</p>
+    <img src="../static/IMAGES/banner_europe.png" alt="banner Australia">
+  </section>
+  <!-- Section suggestion -->
+  <section class="suggestion">
+    <h2>Suggestions Pour Vous</h2>
+    <div class="container-suggestion">
+      <div class="video-list">
+        <video src="../src/assets/videos/oceania.mp4" autoplay muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="../src/assets/icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-list">
+        <video src="../src/assets/videos/oceania.mp4" autoplay muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="../src/assets/icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-list">
+        <video src="../src/assets/videos/oceania.mp4" autoplay muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="../src/assets/icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-list">
+        <video src="../src/assets/videos/oceania.mp4" autoplay muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="../src/assets/icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer></footer>
+
+  <!-- Scripts -->
+  <script src="../static/JS/europe.js" defer></script>
+  <script src="../static/JS/loadHeaderFooter.js"></script>
+</body>
+
+</html>

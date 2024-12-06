@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./css/continent.css" />
+  <link rel="stylesheet" href="./css/global.css" />
+  <link rel="stylesheet" href="./css/header.css" />
+  <link rel="stylesheet" href="./css/footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <title>Océanie - Vibes Voyages</title>
+</head>
+
+<body>
+  <!-- Header -->
+  <div class="hero-image">
+    <header></header>
+    <video autoplay muted loop playsinline class="background-video">
+      <source src="./videos/hero-oceania.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-text">
+      <h1>Bienvenue en Océanie</h1>
+      <button class="btn-hero">Regarder Maintenant</button>
+    </div>
+  </div>
+  <div class="filter-continents">
+    <button class="btn active" onclick="filterSelection('popular-video')">Vidéo populaires</button>
+    <button class="btn" onclick="filterSelection('Australia')">Australie</button>
+    <button class="btn" onclick="filterSelection('New Zealand')">Nouvelle-Zélande</button>
+    <button class="btn" onclick="filterSelection('Melanesia')">Mélanésie</button>
+  </div>
+  <section class="popular-video">
+    <h2>Vidéos Populaires</h2>
+    <div class="container" id="oceania-container"></div>
+  </section>
+  <!-- Banner section -->
+  <section class="banner-continents">
+    <p>L'Océanie avec Vibes Voyage</p>
+    <img src="./images/banner_oceanie.png" alt="banner Australia">
+  </section>
+
+  <!-- Suggestion -->
+  <section class="suggestion">
+    <h2>Suggestions Pour Vous</h2>
+    <div class="container-suggestion">
+      <div class="video-list">
+        <video src="./videos/hero-oceania.mp4" muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="./icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-list">
+        <video src="./videos/hero-oceania.mp4" muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="./icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-list">
+        <video src="./videos/hero-oceania.mp4" muted loop controls playsinline></video>
+        <div class="info-video">
+          <img src="./icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </div>
+      </div>
+      <figure class="video-list">
+        <video src="./videos/hero-oceania.mp4" muted loop controls playsinline></video>
+        <figcaption class="info-video">
+          <img src="./icons/avatar_profil.png" alt="logo_autor" width="50" height="50" />
+          <div class="flex-row">
+            <h4>Titre de la vidéo</h4>
+
+            <p>Lorem, ipsum.</p>
+            <p class="bg-play">26k Vues</p>
+          </div>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+  <div class="logo-middle">
+    <img src="./icons/logo_vv.png" alt="logo_vibes_voyages">
+  </div>
+  <!-- Footer -->
+  <footer></footer>
+
+  <!-- Scripts -->
+  <script src="./js/loadHeaderFooter.js"></script>
+  <script src="./js/oceania.js" defer></script>
+</body>
+
+</html>
