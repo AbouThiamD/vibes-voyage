@@ -1,0 +1,101 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #3b3b3b;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  background: #2b2b2b;
+}
+
+  header {
+    color: #9e9ea4;
+    font-size: 30px;
+    font-weight: 600;
+    text-align: center;
+    margin: 20px 0 40px 0;
+  }
+
+
+ i{
+    color: #ffffff;
+    padding: 10px;
+    font-size: 15px;
+    margin-left: 15px;
+  }
+
+
+
+
+/* Styles de base pour centrer le tableau */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+}
+
+table {
+  /* border: 1px solid #ccc; */
+    width: 75%; 
+    text-align: center;
+    border-collapse: collapse;
+    margin: 0 auto; 
+    background-color: #fff4;
+    border-radius: .6rem;
+  
+}
+
+
+
+th, td {
+  /* border: 1px solid #dddddd70; */
+  padding: 8px;
+ 
+ 
+}
+td{
+  color: #fff;
+  text-align: center;
+}
+
+th {
+  background-color: #0056b3;
+  
+}
+
+
+video {
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+#homeTableauBord{
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 10%;
+}
+
+
+
+thead th{
+  position: sticky;
+  top: 0;
+  left: 0;
+  background-color: #d5d1defe;
+}
+
+tbody tr:nth-child(even){
+  background-color: #0000000b;
+}
+
+tbody tr:hover{
+  background-color: #fff6;
+}

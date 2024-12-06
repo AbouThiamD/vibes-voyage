@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link th:href="@{/CSS/lesFormulaireAdmin.css}" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulaire categorie</title>
+  </head>
+  <body>
+    <div class="login-box">
+      <div class="login-header">
+        <header>Modifier la categorie</header>
+        <th:block th:if="${session.succMsg}">
+          <p class="alertVert">[[${session.succMsg}]]</p>
+          <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+        </th:block>
+
+        <th:block th:if="${session.errorMsg}">
+          <p id="alertRouge">[[${session.errorMsg}]]</p>
+          <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+        </th:block>
+      </div>
+      <form action="/updateCategorie" method="post">
+        <div class="input-box">
+            <input type="hidden" name="id" th:value="${categorie.id}">
+          <input
+            type="text"
+            name="nomCategorie" th:value="${categorie.nomCategorie}"
+            class="input-field"
+            placeholder="Nom de la categorie"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div>
+            <!-- Vérification si le statut est actif (true) -->
+            <input id="box1" type="radio" th:checked="${categorie == true}" name="isActive" value="true"/ checked>
+            <label for="box1">Active</label>
+            <br />
+            
+            <!-- Vérification si le statut est inactif (false) -->
+            <input id="box2" type="radio" th:checked="${categorie == false}" name="isActive" value="false"/>
+            <label for="box2">Inactive</label>
+        </div>
+        
+        <div class="input-submit">
+          <button class="submit-btn" id="submit"></button>
+          <label for="submit">Ajouter une categorie</label>
+        </div>
+      </form>
+      <a href="/ajouterCategorie" id="homeTableauBord">Revenir à la page categorie</a>
+    </div>
+   
+
+      
+      
+      
+  </body>
+</html>

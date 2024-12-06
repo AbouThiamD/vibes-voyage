@@ -1,0 +1,433 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin:ital,wght@0,400..700;1,400..700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin:ital,wght@0,400..700;1,400..700&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+*{
+    margin :0;
+    padding: 0;
+    /* font-family: 'poppins',sans-serif; */
+    box-sizing: border-box;
+    font-family: "DM Sans", sans-serif;
+    
+}
+
+header{
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    /* justify-content: space-between;
+    align-items: center;
+    padding: 15px 200px; */
+    transition: 0.5 ease;
+
+    padding: 10px 20px; /* Réduction des marges */
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+header .titre {
+    color: #fff;
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.toggle-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    color: black;
+    font-weight: 400;
+    transition: 0.3s ease;
+}
+
+.toggle-btn:hover{
+    transform: scale(1.1);
+}
+
+#section{
+    padding: 100px 200px;
+}
+
+
+.home{
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #2696E9;
+    
+}
+
+.home:before{
+    z-index: 777;
+    content: '';
+    position: absolute;
+    background: rgba(3,96,251,0.3);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.home .content{
+    z-index: 888;
+    color: #fff;
+    /* width: 70%;
+    margin-top: 50px; */
+
+
+    width: 90%; /* Réduction pour petit écran */
+    margin-top: 20px;
+ 
+}
+
+.texteBi{
+    max-width: 100%; /* Assure que la largeur est limitée à celle du conteneur */
+  
+}
+
+
+.home .content h1{
+ 
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+    font-size: 2.5em; /* Réduction de la taille du titre */
+    line-height: 1.2em;
+
+}
+
+.home .content h1 span{
+    font-size: 1.2em;
+    font-weight: 600;
+
+}
+
+.home .content p{
+    margin-bottom: 65px;
+}
+
+.home .content #bouton{
+    background-color: #fff;
+    padding: 10px 20px; /* Ajuste la taille du bouton */
+    color: #1580AC;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block; /* Garde le bouton à sa largeur minimale */
+    text-align: center; /* Centre le texte */
+  
+}
+
+
+
+
+.home img{
+    z-index: 000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+}
+
+.slider-navigation{
+    z-index: 888;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(80px);
+    margin-bottom: 12px;
+}
+
+
+
+.center{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+
+.center button{
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+    background: #f5f5f5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.popup{
+    position: absolute;
+    top: -150%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.25);
+    width: 380px;
+    padding: 20px 30px;
+   
+    
+    border-radius: 10px;
+    transition:top 0ms ease-in-out 200ms;
+               opacity: 200ms ease-in-out 0ms; 
+               transform: 20ms ease-in-out 0ms;
+    
+    
+}
+
+.popup.active {
+    top: 50%;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 15px;
+    height: 15px;
+    background: #888;
+    color: #eee;
+    text-align: center;
+    line-height: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.popup .form h2{
+    text-align: center;
+    color: #222;
+    margin: 10px 0px 20px;
+    font-size: 25px;
+}
+
+.popup .form .form-element{
+    margin:15px 0px ;
+}
+
+.popup .form .form-element label {
+    font-size: 14px;
+    color: #222;
+}
+
+.popup .form .form-element input[type="text"],
+.popup .form .form-element input[type="password"] {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.popup .form .form-element input[type="checkbox"]{
+    margin-right: 5px;
+}
+
+.popup .form .form-element #btnConx{
+    width: 100%;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: #222;
+    color: #f5f5f5;
+    border-radius: 100px;
+    cursor: pointer;
+
+}
+
+
+
+#show-login{
+    background-color: #fff;
+    padding: 15px 35px;
+    color: #1580AC;
+    font-size: 1.1em;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.popup .form .form-element a {
+    display: block;
+    text-align: right;
+    font-size: 15px;
+    color: #1a79ca;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+
+/* css pour le register et login */
+
+
+.form-box{
+    width: 380px;
+    height: 480px;
+    position: relative;
+    background-color: rgba(134, 22, 22, 0.105);
+    border: 1px solidrgba(255,255,255,0.196);
+    backdrop-filter: blur(20px);
+    padding: 5px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.button-box{
+    width: 310px;
+    margin: 35px auto;
+    position: relative;
+    background-color: (255,255,255,0.196) ;
+    box-shadow: 0 0 25px 5px #0000003b;
+    border-radius: 30px;
+     
+}
+
+
+
+.toggle-btn{
+    padding: 10px 30px;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    outline: none;
+    position: relative;
+    color: black;
+    font-weight: 400;
+    transition: 0.3s ease;
+}
+
+.toggle-btn:hover{
+    transform: scale(1.1);
+}
+
+#btn{
+    top: 0;
+    left: 0;
+    position: absolute;
+    width: 110px;
+    height: 100%;
+    background: white;
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+.social-icons{
+    margin: 30px auto;
+    text-align: center;
+}
+
+.social-icons i{
+    font-size: 30px;
+    color: white;
+    box-shadow: 0 0 20 0 #7f7f7f3d;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.social-icons i:hover{
+    transform: scale(1.2);
+}
+
+.input-group{
+    top:180px;
+    position: absolute;
+    width: 280px;
+    transition: .5s ease;
+}
+
+.input-field{
+    width: 100%;
+    padding: 10px 0;
+    margin: 5px 0;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 1px solid #ffffff;
+    outline: none;
+    background: transparent;
+}
+
+
+.submit-btn{
+    width: 85%;
+    padding: 10px 30px;
+    cursor: pointer;
+    display: block;
+    margin: auto;
+    color: black;
+    background: white;
+    border: 0;
+    outline: none;
+    border-radius: 30px;
+    border: 2px solid transparent;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+
+.submit-btn:hover{
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+
+}
+
+#login{
+    left: 450px;
+}
+
+#register{
+    left: 50px;
+}
+
+input::placeholder{
+    color: white;
+}
+
+
+
+
+    
+@media (max-width: 768px) {
+    .home .content h1 {
+        white-space: nowrap; /* Empêche les retours à la ligne */
+        overflow: hidden; /* Masque le débordement */
+        text-overflow: ellipsis; /* Ajoute "..." si le texte est trop long */
+        font-size: 5vw; /* Taille du texte dépend de la largeur de l'écran */
+        text-align: left; /* Facultatif : changer l'alignement */
+    }
+
+    .home img {
+        object-fit: contain; /* Affiche toute l'image sans découpe */
+        height: 100%; /* Ajuste automatiquement la hauteur */
+        width: auto;
+    }
+
+}
+

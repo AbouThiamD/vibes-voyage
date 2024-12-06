@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>  
+    <link rel="stylesheet" href="CSS/destination.css">
+    <link rel="stylesheet" href="CSS/mesvideos.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <title>MES VIDEOS</title>
+</head>
+<body>
+    <div class="block1imgafrique">
+
+
+        <nav>
+            <img src="../images/logo-Emmy.png" class="logo">
+         
+            
+            <ul class="menuderoulant">
+                <li class="surTelephone"><a href="/card">Accueil</a></li>
+                <li class="surTelephone"><a href="/destination">Destination</a>
+                <ul class="sousmenu">
+                  <li><a href="Afrique.html">Afrique</a></li>
+                  <li><a href="">Amérique du nord </a></li>
+                  <li><a href="">Amérique du sud</a></li>
+                  <li><a href="">Asie </a></li>
+                  <li><a href="">Europe</a></li>
+                  <li><a href="">Océanie</a></li>
+                </ul>
+              </li>
+                <li class="surTelephone"><a href="/MesVideos">Tableau de bord</a></li>
+                <li class="surTelephone"><a href="/Contact">Contact</a></li>
+                
+
+              
+               
+        </nav>
+
+
+
+
+        <div class="containerVideoafrique">
+
+          <div class="main-video">
+            <div class="video">
+              <video src="VIDEOS/safari.mp4" controls muted autoplay></video>
+              <div class="GrandedesG">
+              <h3 class="title">01. Video titre de la video</h3>
+              <p class="descriptionVideoG">Nom de la personne</p>
+              <p class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Pariatur, dicta! Incidunt laboriosam officia voluptatum odio impedit! Obcaecati,
+                 atque. Modi odio dolorum laboriosam nulla hic libero pariatur dolore, obcaecati voluptas vitae!</p>
+            </div>
+            </div>
+          </div>
+
+          <div class="video-list">
+            <div class="vid active" >
+              <video src="VIDEOS/enfantsNoir.mp4" muted></video>
+              <div class="Grandedes">
+              <h3 class="title">02. Video titre de la video</h3>
+              <p class="descriptionVideo">description de la video</p>
+              </div>
+            </div>
+
+
+            <div class="vid">
+              <video src="VIDEOS/safari.mp4" muted ></video>
+              <div class="Grandedes">
+              <h3 class="title">03. Video titre de la video</h3>
+              <p class="descriptionVideo">description de la video</p>
+            </div>
+            </div>
+
+            <div class="vid">
+              <video src="VIDEOS/safari.mp4" muted ></video>
+              <div class="Grandedes">
+              <h3 class="title">04. Video titre de la video</h3>
+              <p class="descriptionVideo">description de la video</p>
+            </div>
+            </div>
+
+            <div class="vid">
+              <video src="VIDEOS/safari.mp4" muted></video>
+              <div class="Grandedes">
+              <h3 class="title">05. Video titre de la video</h3>
+              <p class="descriptionVideo">description de la video</p>
+            </div>
+            </div>
+
+            <div class="vid">
+              <video src="VIDEOS/safari.mp4" muted></video>
+              <div class="Grandedes">
+              <h3 class="title">06. Video titre de la video</h3>
+              <p class="descriptionVideo">description de la video</p>
+            </div>
+            </div>
+
+            <div class="vid">
+              <video src="VIDEOS/safari.mp4" muted></video>
+              <div class="Grandedes">
+              <h3 class="title">07. Video titre de la video</h3>
+              <p class="descriptionVideo">description de la video</p>
+            </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="commantaire">
+      <div class="messageComm">
+      <h2>0 de commentaire</h2>
+      <input type="text" placeholder="Entrez votre commantaire">
+      <button type="submit">Envoyez</button>
+      <div class="boxMessage">
+
+      </div>
+    </div>
+    </div>
+
+
+    <footer class="footer">
+      <div class="containerfoter">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Vibes Voyage</h4>
+            <ul>
+              <li><a href="#">Contact</a></li>
+              <li><a href="#">Nos service</a></li>
+              <li><a href="#">Politique</a></li>
+              <li><a href="#">Vibes</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Nos pages</h4>
+            <ul>
+              <li><a href="#">Accueil</a></li>
+              <li><a href="#">Destination</a></li>
+              <li><a href="#">Mes videos</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Vibes Voyage</h4>
+            <ul>
+              <li><a href="#">Afrique</a></li>
+              <li><a href="#">Afrique</a></li>
+              <li><a href="#">Afrique</a></li>
+              <li><a href="#">Afrique</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>follow us</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </footer>
+<!-- LISTE VIDEO -->
+    <script>
+      let listVideo = document.querySelectorAll('.video-list .vid');
+      let mainVideo = document.querySelector('.main-video video');
+      let title = document.querySelector('.main-video .title');
+
+      listVideo.forEach(video =>{
+        video.onclick = () =>{
+          listVideo.forEach(vid =>vid.classList.remove('active'));
+          video.classList.add('active');
+
+          if(video.classList.contains('active')){
+            let src = video.children[0].getAttribute('src');
+            mainVideo.src = src;
+            let text = video.children[1].innerHTML;
+            title.innerHTML =text;
+          };
+        };
+      });
+
+    </script>
+</body>
+</html>

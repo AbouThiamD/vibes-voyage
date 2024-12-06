@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <link rel="icon" type="image/png" href="images/logo-vv-sans-cadre-bleue-orange.png">
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="CSS/admin.css">
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <!-- <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        </div>
+      </header> -->
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined"></span>Vibes Voyage
+          </div>
+          <!-- <span class="material-icons-outlined" onclick="closeSidebar()">close</span> -->
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="admin.html" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Tableau de bord
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="formVideo.html" target="_blank">
+              <span class="material-icons-outlined"> play_circle</span> Videos
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="formCategorie.html" target="_blank">
+              <span class="material-icons-outlined">category</span> Categories
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="allVideo.html" target="_blank">
+              <span class="material-icons-outlined">format_list_bulleted </span> All videos
+          </li>
+          <li class="sidebar-list-item">
+            <a href="allUtilisateur.html" target="_blank">
+              <span class="material-icons-outlined"> person </span> Utilisateurs
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="formAdmin.html" target="_blank">
+              <span class="material-icons-outlined"> person_add</span> Ajoutez Admin
+            </a>
+          </li>
+          <!-- <li class="sidebar-list-item">
+            <a href="#" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li> -->
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>Tableau de bord</h2>
+        </div>
+
+        <div class="main-cards">
+
+          
+
+          <div class="card">
+            <div class="card-inner">
+              <a href="/ajouterVideo">
+              <h3>AJOUTER VIDEO</h3>
+            </a>
+              <span class="material-icons-outlined"> play_circle</span> 
+            </div>
+            <h1>249</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+              <a href="/ajouterCategorie">
+              <h3>AJOUTER CATEGORIES</h3>
+            </a>
+              <span class="material-icons-outlined">category</span>
+            </div>
+            <h1>25</h1>
+          </div>
+
+          <div class="card">
+            <div class="card-inner">
+            <a href="/lesVideos">
+              <h3>VOIR VIDEOS</h3>
+            </a>
+              <span class="material-icons-outlined">
+                video_camera_front
+                </span>
+            </div>
+            <h1>1500</h1>
+          </div>
+          
+
+          <div class="card">
+            <div class="card-inner">
+              <a href="/lesUtilisateurs">
+              <h3>UTILISATEURS</h3>
+            </a>
+              <span class="material-icons-outlined"> person </span>
+            </div>
+            <h1>56</h1>
+          </div>
+
+          
+          <div class="card">
+            <div class="card-inner">
+              <a href="/ajouterAdmnistateur">
+              <h3>AJOUTER ADMIN</h3>
+            </a>
+              <span class="material-icons-outlined"> person_add</span>
+            </div>
+            <h1>56</h1>
+          </div>
+
+
+          
+
+        </div>
+
+        <!-- <div class="charts">
+
+          <div class="charts-card">
+            <h2 class="chart-title">Top 5 Products</h2>
+            <div id="bar-chart"></div>
+          </div>
+
+          <div class="charts-card">
+            <h2 class="chart-title">Purchase and Sales Orders</h2>
+            <div id="area-chart"></div>
+          </div>
+
+        </div>
+      </main> -->
+      <!-- End Main -->
+
+    </div>
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="js/scripts.js"></script>
+  </body>
+</html>

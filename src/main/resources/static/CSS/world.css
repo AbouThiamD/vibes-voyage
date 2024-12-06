@@ -1,0 +1,24 @@
+*{
+    margin : 0;
+    padding: 0;
+}
+
+svg{
+    display: block;
+    margin: auto;
+    margin-bottom: 100px;
+    margin-top: 50px;
+}
+svg path {
+    fill : #F5951E;
+    stroke :#00394f;
+    stroke-width: .25;
+}
+
+svg path:hover{
+    fill:#006284;
+    transition:0.6s;
+    cursor: pointer;
+
+}
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>  
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h3>Ajouter une video </h3>
+    <form th:action="@{/video}" th:object="${videoForm}" method="post" enctype="multipart/form-data">
+        <div>
+            <div>
+                <!-- <label for="videoType">Type de vidéo :</label>
+                <select id="videoType" th:field="*{videoType}">
+                    <option value="" disabled selected>Selectionnez le type</option>
+                    <option th:each="type : ${type}" th:value="${type}" th:text="${type}">Type</option>
+                </select> -->
+                <!-- Affichage des erreurs pour le champ "videoType" -->
+                <!-- <div th:if="${#fields.hasErrors('videoType')}" th:errors="*{videoType}">Erreur dans le type de vidéo</div>
+                <br> -->
+                <label for="titre">Titre de la video</label>
+            <input type="text" id="nomVideo" th:field=*{nomVideo} required>
+        </div>
+
+        <!-- Sélection de la catégorie -->
+        <div>
+            <label for="categorie">Sélectionner la catégorie :</label>
+            <select th:field="*{idcategorie}" name="categorie" id="categorie" required >
+                <option th:each="catDTO : ${categorieDTO}"
+                th:value="${catDTO.id}"
+                th:label="${catDTO.nomCategorie}">
+            </option>
+             
+            </select>
+        </div>
+
+        <!-- Description de la vidéo -->
+        <div>
+            <label for="description">Description :</label>
+            <input id="description" th:field="*{description}" name="description" required></input>
+        </div>
+<!-- 
+         Sélection du fichier vidéo -->
+         <div>
+            <label for="video">Sélectionnez la vidéo :</label>
+            <input type="file" id="video" th:field="*{fichier}" name="video"  required>
+        </div> 
+
+        <div>
+            <label for="video">Date :</label>
+            <input type="date" id="date" th:field="*{date}" name="date" required>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div>
+            <button type="submit">Téléverser la vidéo</button>
+        </div>
+    </form>
+</body>
+
+</html>

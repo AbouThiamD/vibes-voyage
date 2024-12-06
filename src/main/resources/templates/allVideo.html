@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" th:href="@{CSS/all.css}">
+
+    <title>Toutes les vidéos</title>
+</head>
+<body>
+  <section>
+    <header>
+      VIDEO DE VIBES VOYAGE
+    </header>
+
+    <div class="wrapper">
+      <table class="table">
+        
+        <thead>
+          <tr>
+            <th>Nom de la vidéo</th>
+            <th>Date</th>
+            <th>Catégorie</th>
+            <th>Description</th>
+            <th>Vidéo</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <!-- Affichage dynamique des vidéos -->
+          <tr th:each="v : ${video}">
+            <td th:text="${v.nomVideo}"></td>
+            <td th:text="${v.date}"></td>
+            <td th:text="${v.categorie}"></td>
+            <td th:text="${v.description}"></td>
+            <td>
+              <!-- Affichage de la vidéo -->
+              <video th:src="@{'/IMAGES/video_img/' + ${v.vid}}" width="150" height="100" controls></video>
+            </td>
+            <td class="lienBlanc">
+              <a>
+              <i class="fa-solid fa-pen-to-square"></i></a>
+
+              <a th:hred="@{'/deleteVideo/'+${v.id}}">
+               
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <footer>
+      <a href="/Admin" id="homeTableauBord">Revenir au tableau de bord</a>
+    </footer>
+  </section>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymelef.org">
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMcyo3Bz2omAdQmk5QgKJjJdLz9MzD0MC2oX9I8" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>    
+    <link rel="stylesheet" href="CSS/destination.css">
+    <link rel="stylesheet" href="CSS/mesvideos.css">
+    <link rel="stylesheet" href="CSS/footer.css">
+    <link rel="stylesheet" href="CSS/tableaudebord.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMcyo3Bz2omAdQmk5QgKJjJdLz9MzD0MC2oX9I8" crossorigin="anonymous">
+    <script src="JS/TB.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Tableau de bord</title>
+</head>
+<body>
+
+
+    
+    <nav>
+        <img src="../images/logo-Emmy.png" class="logo">
+     
+        
+       
+        <ul class="menuderoulant">
+            <li class="surTelephone"><a href="/card">Accueil</a></li>
+            <li class="surTelephone"><a href="/destination">Destination</a>
+            <ul class="sousmenu">
+              <li><a href="/Afrique">Afrique</a></li>
+              <li><a href="">Amérique du nord </a></li>
+              <li><a href="">Amérique du sud</a></li>
+              <li><a href="">Asie </a></li>
+              <li><a href="">Europe</a></li>
+              <li><a href="">Océanie</a></li>
+            </ul>
+          </li>
+          <li class="surTelephone"><a href="/Tableau">Tableau de bord</a></li>
+          <li class="surTelephone"><a href="/Contact">Contact</a></li>
+         
+
+           
+    </nav>
+    <div class="blockBord">
+        <section id="nav">
+        <ul>
+            <li>
+                
+                <span class="" id="bord">Tableau de bord</span>
+            <li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-house"></i> 
+                <span class="nav-item">Home</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-solid fa-user"></i> 
+                <span class="nav-item">Profil</span>
+            </a></li>
+            <li><a href="#">
+                <i class="fas fa-tasks"></i> 
+                <span class="nav-item">Video</span>
+            </a></li>
+
+            <li><a href="#">
+                <i class="fas fa-plus"></i>
+                <span class="nav-item"> Ajouter une video</span>
+            </a></li>
+        </ul>
+
+        
+    </section>
+    <section class="main">
+        
+
+
+<!-- Section principale avec le bouton pour ajouter une vidéo -->
+<div class="main-skills">
+    <div class="card">
+        
+        <i class="fa-solid fa-circle-plus"></i>
+        <button onclick="window.location.href = '/video/new'" class="nav-item" id="txte">Ajouter une vidéo</button>
+
+    </div>
+</div>
+
+
+        
+
+
+<section class="vosVideos">
+    <table>
+        <caption>Vos videos</caption>
+        <thead>
+          <tr>
+            <th scope="col">Nom de la video</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date</th>
+            <th scope="col">Image</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr th:each="video, status : ${videos}">
+                <td th:text="${video.nomVideo}"></td>
+                <td th:text="${video.description}"></td>
+                <td th:text="${#dates.format(video.date, 'dd/MM/yyyy')}"></td>
+                <td ><img th:src="${video.url}"></td>
+                <td>
+                    <a th:href="@{/video/edit/{id}(id=${video.id})}" class="boutonVideo">Modifier</a>
+                    <a th:href="@{/video/delete/{id}(id=${video.id})}" class="boutonVideo" 
+                       onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?');">Supprimer</a>
+                </td>
+            </tr>
+        </tbody>
+        
+    </table>
+</section>
+
+
+    
+</body>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="CSS/lesFormulaireAdmin.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulaire categorie</title>
+  </head>
+  <body>
+    <div class="login-box">
+      <div class="login-header">
+        <header>Ajouter une categorie</header>
+        <th:block th:if="${session.succMsg}">
+          <p class="alertVert">[[${session.succMsg}]]</p>
+          <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+        </th:block>
+
+        <th:block th:if="${session.errorMsg}">
+          <p id="alertRouge">[[${session.errorMsg}]]</p>
+          <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+        </th:block>
+      </div>
+      <form action="/saveCategorie" method="post">
+        <div class="input-box">
+          <input
+            type="text"
+            name="nomCategorie"
+            class="input-field"
+            placeholder="Nom de la categorie"
+            autocomplete="off"
+            required
+          />
+        </div>
+
+        <div>
+          <input id="box1" type="radio" name="isActive" value="true"/ checked>
+          <label for="box1">Active</label>
+          <br />
+          <input id="box2" type="radio" name="isActive" value="false" />
+          <label for="box2">Inactive</label>
+        </div>
+
+        <div class="input-submit">
+          <button class="submit-btn" id="submit"></button>
+          <label for="submit">Ajouter une categorie</label>
+        </div>
+      </form>
+      <a href="/Admin" id="homeTableauBord">Revenir tableau de bord</a>
+    </div>
+    <div class="tableau">
+      <h1>Toutes les categories</h1>
+
+      
+      <div>
+        <table class="rwd-table">
+          <thead>
+            <tr>
+              <th>Nom des catégorie</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="cat, c : ${categories}">
+              <!-- Affichage de la propriété nomCategorie -->
+              <td th:text="${cat.nomCategorie}"></td>
+             <td class="lienBlanc">
+              <a
+              th:href="@{'/loadEditCategorie/'+${cat.id}}">
+              <i class="fa-solid fa-pen-to-square"></i></a>
+
+              <a
+               th:href="@{'/deleteCategorie/'+${cat.id}}">
+               
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+  </body>
+</html>

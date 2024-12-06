@@ -1,0 +1,262 @@
+
+.blockBord{
+    display: flex;
+}
+
+
+#nav{
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100vh;
+    left: 0;
+    background: #fff;
+    width: 200px;
+    overflow: hidden;
+    box-shadow: 0 20px 35px rgba(0,0,0,0.1);
+}
+
+.logo{
+    text-align: center;
+    display: flex;
+    margin: 10px 0 0 10px;
+    font-size: 14px;
+    display: table;
+}
+
+#bord{
+    position: relative;
+    color: rgb(85, 83, 83);
+    font-size: 18px;
+    display: table;
+   font-weight: bold;
+    padding: 15px;
+    text-decoration: none;
+}
+.logo img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.logo span {
+    font-weight: bold;
+    padding-left: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+#nav a{
+    position: relative;
+    color: rgb(85, 83, 83);
+    font-size: 14px;
+    display: table;
+    width:280px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+nav .fas{
+    position: relative;
+    width: 76px;
+    height: 40px;
+    top: 14px;
+    font-size: 20px;
+    text-align: center;
+   
+}
+
+.nav-item{
+   
+    top: 12px;
+    margin-left: 10px;
+}
+
+a:hover{
+    background: #eee;
+}
+
+/* section */
+
+.main{
+    margin-top: 5%;
+    position: relative;
+    padding: 20px;
+    width: 100%;
+}
+
+.main-top{
+    display: flex;
+}
+.main-top i{
+    position: absolute;
+    right: 0;
+    margin: 10px 30px;
+    color: black;
+    cursor: pointer;
+}
+
+
+.main-skills{
+    display: flex;
+    margin-top: 20px;
+    align-content: center;
+    justify-content: center;
+}
+
+.main-skills .card{
+
+    width: 80%;
+    margin: 10px;
+    background: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 20px 35px rgb(0, 0, 0, 0.1);
+}
+
+.main-skills .card h3{
+    margin: 5px;
+    text-transform: capitalize;
+}
+
+.fa-solid fa-circle-plus{
+        cursor: pointer;
+}
+
+
+#txte{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+    .popup .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+        display: none;
+    }
+
+    .popup.active .overlay, .popup.active .content {
+        display: block;
+    }
+
+    .popup .content {
+        position: absolute;
+        top: 30%;
+        left: 45%;
+        transform: translate(-50%, -50%) scale(1);
+        background: #fff;
+        width: 550px;
+        z-index: 2;
+        text-align: center;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        display: none;
+        height: 500px;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        cursor: pointer;
+        font-size: 24px;
+    }
+.card button{
+    text-decoration: none;
+    background-color: #fff;
+    border: none;
+}
+
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+  
+  table caption {
+    font-size: 1.5em;
+    margin: .5em 0 .75em;
+  }
+  
+  table tr {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: .35em;
+  }
+  
+  table th,
+  table td {
+    padding: .625em;
+    text-align: center;
+  }
+  
+  table th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+  
+    table caption {
+      font-size: 1.3em;
+    }
+    
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    table td::before {
+      /*
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+  
+  
+  
+  

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="CSS/bienvenue.css" />
+    <title>Bienvenue</title>
+  </head>
+  <body>
+    <header>
+      <a href="#" class="titre">Vibes Voyage</a>
+  
+    </header>
+
+    <section class="home" id="section">
+      
+        <img class="image-slide" src="IMAGES/beautiful-landscape-1927327_1280.jpg" alt="" srcset="">
+
+    
+        <div  class="content">
+         
+            <h1>Incroyable.<br><span>Decouverte</span></h1>
+            <div class="texteBi">
+            <p>Lorem ipsum dolor sit, amet Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, praesentium distinctio nemo numquam sint eum nesciunt perspiciatis expedita molestiae soluta similique incidunt cum, temporibus obcaecati, tenetu
+                r aut! Architecto, blanditiis enim?consectetur adipisicing elit. Neque, dignissimos quisquam! Voluptatibus architecto, quos, ipsam dolore quod ducimus dolorum repellat, quaerat veniam fugiat reiciendis excepturi? Quam nisi ad ullam laudantium!</p>
+
+              </div>
+                  <div class="center">
+            <a href="#" id="show-login">Rejoindre</a>
+          </div>
+          <div class="popup">
+       
+
+
+            <!-- <div class="form">
+              <h2>Se connecter</h2>
+              <form method="post" action="/login" th:object="${loginRequest}">
+              <div class="form-element">
+                <label for="text">Pseudo</label>
+                <input type="text" name="Pseudo" placeholder="Pseudo" id="" required>
+              </div>
+              <div class="form-element">
+                <label for="">Mot de passe</label>
+                <input type="password" id="password" name="mdp" placeholder="Mots de passe" required>
+              </div>
+              <div class="form-element">
+                <input type="checkbox" name="" id="me">
+                <label for="remenber-me">Se souvenir de moi</label>
+              </div>
+              <div class="form-element">
+                <a href="#">Forgot password</a>
+              </div>
+              <div class="form-element">
+                <input type="submit" name="sign-in"  value="Se connecter" id="btnConx">
+              </div>
+              
+              <div class="form-element">
+                <a href="/register"> Pas encore de compte ? Inscrivez-vous</a> 
+              </div> -->
+
+              
+              <div class="hero">
+              
+                <div class="form-box">
+                  <div class="close-btn">&times;</div>
+                    <div class="button-box">
+                        <div class="btn"></div>
+                        <button type="button" class="toggle-btn" onclick="login()">Se connecter</button>
+                        <button type="button" class="toggle-btn" onclick="register()">S'inscrire</button>
+                    </div>
+                    <div class="social-icons">
+                        <i class="bx bxl-facebook-circle"></i>
+                        <i class="bx bxl-instagram"></i>
+                        <i class="bx bxl-twitter"></i>
+                    </div>
+                    <form method="post" id="login" class="input-group" action="/login" th:object="${loginRequest}">
+                     
+                        <input type="text" name="Pseudo" id="" class="input-field" placeholder="Votre Login" required>
+                        <input type="text" name="mdp" id="" class="input-field" placeholder="Votre Mot de passe" required>
+                        <input type="submit" name="sign-in"  value="Se connecter"  class="submit-btn">
+                    
+                  </form>
+                  
+                    <form method="post" id="register" class="input-group"  action="/register" th:object="${registerRequest}"> 
+                
+                        <input type="text" name="email" id="" class="input-field" placeholder="Votre E-mail" required>
+                        <input type="text" name="Pseudo" id="" class="input-field" placeholder="Votre Login" required>
+                        <input type="text" name="mdp" id="" class="input-field" placeholder=" Votre mot de passe" required>
+                    
+                        <input type="submit" name="sign-in"  value="S'inscrire"  class="submit-btn">
+                       
+                    </form>
+                   
+                </div>
+                <a href="/Admin">Admin</a>
+              </div>
+             
+
+            </div>
+
+
+
+            
+
+
+          </div>
+      
+    </section>
+  <script >
+
+       // Variable Declaration
+
+       var log = document.getElementById("login");
+    var reg = document.getElementById("register");
+    var button = document.getElementById("btn")
+    const loginForm = document.querySelector(".login-form");
+    const registerForm = document.querySelector(".register-form");
+
+    document.querySelector("#show-login").addEventListener ("click",function(){
+      document.querySelector(".popup").classList.add("active");
+    })
+
+    document.querySelector(".popup .close-btn").addEventListener ("click",function(){
+      document.querySelector(".popup").classList.remove("active");
+    })
+
+ 
+// Login button function
+
+
+
+// Register button function
+
+function register(){
+
+    log.style.left = "-400px";
+    reg.style.left ="50px"
+    button.style.left ="110px"
+
+}
+
+
+function login(){
+
+    log.style.left = "50px";
+    reg.style.left ="450px"
+    button.style.left ="0"
+
+}
+  </script>
+
+<!-- 
+
+    <div class="cox">
+    <h1>Bienvenue dans Vibes Voyage</h1>
+    <a href="/register">S'inscire</a>
+    <a href="/login">Se connectez</a>
+</div> -->
+  </body>
+</html>
