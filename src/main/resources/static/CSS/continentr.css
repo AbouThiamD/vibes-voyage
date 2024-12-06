@@ -1,0 +1,238 @@
+@import url("https: //fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin: ital, wght@0, 400..700;1, 400..700&display=swap");
+
+:root {
+  --red: #ec4212;
+  --dark-blue: #18005c;
+  --light-blue: #8aa6d0;
+  --orange: #f5951e;
+  --pink: #edb9ae;
+  --yellow: #edbc2b;
+  --title: "Abril Fatface", serif;
+  --secondary-title: "Cabin", sans-serif;
+  --border: #dbdbdb;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--secondary-title);
+  width: 100%;
+}
+
+h1 {
+  font-family: var(--title);
+  font-size: 95px;
+  color: #fff;
+  margin-bottom: 50px;
+  text-align: center;
+  overflow: hidden;
+}
+
+h2 {
+  font-family: var(--title);
+  color: #f5951e;
+  font-size: xx-large;
+}
+
+.hero-image {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero-text {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.hero-text button {
+  background-color: var(--dark-blue);
+  font-size: 23px;
+  color: #fff;
+  padding: 1rem;
+  border: 2px solid #fff;
+  border-radius: 1rem;
+  width: 300px;
+  margin-top: 1.25rem;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.hero-text button:hover {
+  background-color: #fff;
+  color: #18005c;
+}
+
+.filter-continents {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.btn {
+  background-color: var(--orange);
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 2rem;
+  flex: 0 0 auto;
+  background: #f5951e;
+  border: 1px solid var(--border);
+  margin-right: 10px;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ffb55a;
+}
+
+.btn.active {
+  color: #fff;
+  background: var(--dark-blue);
+}
+
+h2 {
+  margin-top: 1rem;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  padding: 10px;
+}
+
+.video-list {
+  width: 100%;
+  max-width: 360px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 1.5s ease;
+}
+
+.video-list:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.card-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-caption {
+  padding: 1rem;
+  color: #000;
+  height: 170px;
+}
+
+.card-author {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+.bg-views {
+  background-color: #444;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.suggestion {
+  padding: 1rem;
+}
+
+.container-suggestion {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.video-list video {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.banner-continents {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner-continents img {
+  width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.banner-continents p {
+  font-family: var(--title);
+  position: absolute;
+  z-index: 1;
+  font-size: 4rem;
+  font-weight: bolder;
+  color: white;
+  text-align: center;
+}
+
+.logo-middle {
+  display: flex;
+  justify-content: center;
+}
+
+.logo_middle img {
+  width: 200px;
+  height: auto;
+}
+
+@media (max-width: 480px) {
+  body {
+    width: 100%;
+    max-width: 480px;
+  }
+}
