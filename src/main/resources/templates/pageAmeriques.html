@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Amériques</title>
+    <link rel="stylesheet" href="/CSS/css-continent.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Bannière -->
+    <div class="block1-image-bandeau">
+        <nav>
+            <img src="../static/IMAGES/logo-blanc.png" class="logo" alt="Logo">
+            <ul class="menuderoulant">
+                <li class="surTelephone"><a href="accueil.html">Accueil</a></li>
+                <li class="surTelephone">
+                    <a href="destination.html">Destination</a>
+                    <ul class="sousmenu">
+                        <li><a href="Afrique.html">Afrique</a></li>
+                        <li><a href="amerique2.html">Les Amériques</a></li>
+                        <li><a href="asie2.html">Asie</a></li>
+                        <li><a href="">Europe</a></li>
+                        <li><a href="">Océanie</a></li>
+                    </ul>
+                </li>
+                <li class="surTelephone"><a href="nosConsei.html">Mes vidéos</a></li>
+                <li class="surTelephone"><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <video autoplay loop muted playsinline class="background-clip">
+            <source src="/VIDEOS/amerique.mp4" type="video/mp4">
+        </video>
+        <div class="elements">
+            <h1>Bienvenue en Amérique</h1>
+            <a href="#v-populaire" id="liens">Regarder maintenant !</a>
+        </div>
+    </div>
+
+    <!-- Section Vidéos et les filtres -->
+    <div class="section-video">
+        <div class="filtres">
+            <a href="#v-populaire" class="filtre-option active">Vidéos populaires</a>
+            <a href="#amerique-nord" class="filtre-option">Amérique du Nord</a>
+            <a href="#amerique-latine" class="filtre-option">Amérique Latine</a>
+            <a href="#iles" class="filtre-option">Les îles</a>
+        </div>
+
+        <section id="v-populaire">
+            <h2>Vidéos Populaires</h2>
+            <div class="video-grid">
+                <!-- Vidéos JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- bandeau du milieu pour la pub -->
+    <div class="middle-section">
+        <img src="/IMAGES/amerique/new york 2.png" alt="Thème Amérique" class="middle-image">
+        <h2 class="middle-title">Les Amériques avec Vibes Voyages</h2>
+    </div>
+
+    <!-- Sous-catégories géographiques -->
+    <section id="amerique-nord" class="subcategory-section">
+        <h2>Amérique du Nord</h2>
+        <div class="video-grid">
+            <!-- Vidéos JS -->
+        </div>
+    </section>
+
+    <section id="amerique-latine" class="subcategory-section">
+        <h2>Amérique Latine</h2>
+        <div class="video-grid">
+            <!-- Vidéos JS -->
+        </div>
+    </section>
+
+    <section id="iles" class="subcategory-section">
+        <h2>Les îles</h2>
+        <div class="video-grid">
+            <!-- Vidéos JS -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Vibes Voyages</p>
+    </footer>
+
+    <script src="/JS/ameriques.js"></script>
+</body>
+
+</html>

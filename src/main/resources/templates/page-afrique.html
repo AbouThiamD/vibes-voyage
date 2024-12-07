@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Afrique</title>
+    <link rel="stylesheet" href="/css-continent.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Bannière  -->
+    <div class="block1-image-bandeau">
+        <nav>
+            <img src="/logo-vv-blanc-orange.png" class="logo" alt="Logo">
+            <ul class="menuderoulant">
+                <li class="surTelephone"><a href="accueil.html">Accueil</a></li>
+                <li class="surTelephone">
+                    <a href="destination.html">Destination</a>
+                    <ul class="sousmenu">
+                        <li><a href="Afrique.html">Afrique</a></li>
+                        <li><a href="amerique2.html">Les Amériques</a></li>
+                        <li><a href="asie2.html">Asie</a></li>
+                        <li><a href="">Europe</a></li>
+                        <li><a href="">Océanie</a></li>
+                    </ul>
+                </li>
+                <li class="surTelephone"><a href="nosConsei.html">Mes vidéos</a></li>
+                <li class="surTelephone"><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <video autoplay loop muted playsinline class="background-clip">
+            <source src="/assets/video/afrique-video-bandeau.mp4" type="video/mp4">
+        </video>
+        <div class="elements">
+            <h1>Bienvenue en Afrique</h1>
+            <a href="#v-populaire" id="liens">Regarder maintenant !</a>
+        </div>
+    </div>
+
+    <!-- Section Vidéos et les filtres -->
+    <div class="section-video">
+        <div class="filtres">
+            <a href="#v-populaire" class="filtre-option active">Vidéos populaires</a>
+            <a href="#afrique-nord" class="filtre-option">Afrique du Nord</a>
+            <a href="#afrique-ouest" class="filtre-option">Afrique de l'Ouest</a>
+            <a href="#afrique-est" class="filtre-option">Afrique de l'Est</a>
+            <a href="#afrique-sud" class="filtre-option">Afrique du Sud</a>
+        </div>
+
+        <section id="v-populaire">
+            <h2>Vidéos Populaires</h2>
+            <div class="video-grid">
+                <!-- Vidéos  JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- bandeau du milieu pour la pub -->
+    <div class="middle-section">
+        <img src="/assets/image/photo-afrique/desert.jpg" alt="Thème Afrique" class="middle-image">
+        <h2 class="middle-title">L'Afrique avec Vibes Voyages</h2>
+    </div>
+
+    <!-- Sous-catégories géographiques -->
+
+    <section id="afrique-nord" class="subcategory-section">
+        <h2>Afrique du Nord</h2>
+        <div class="video-grid">
+            <!-- Vidéos JS -->
+        </div>
+    </section>
+    <section id="afrique-ouest" class="subcategory-section">
+        <h2>Afrique de l'Ouest</h2>
+        <div class="video-grid">
+            <!-- Vidéos  JS -->
+        </div>
+    </section>
+    <section id="afrique-est" class="subcategory-section">
+        <h2>Afrique de l'Est</h2>
+        <div class="video-grid">
+            <!-- Vidéos JS -->
+        </div>
+    </section>
+    <section id="afrique-sud" class="subcategory-section">
+        <h2>Afrique du Sud</h2>
+        <div class="video-grid">
+            <!-- Vidéos JS -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Vibes Voyages</p>
+    </footer>
+
+    <script src="/afrique.js"></script>
+</body>
+
+</html>

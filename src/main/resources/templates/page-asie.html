@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Asie</title>
+    <link rel="stylesheet" href="/css-continent.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Bannière avec vidéo -->
+    <div class="block1-image-bandeau">
+        <nav>
+            <img src="/logo-vv-blanc-orange.png" class="logo" alt="Logo">
+            <ul class="menuderoulant">
+                <li class="surTelephone"><a href="accueil.html">Accueil</a></li>
+                <li class="surTelephone">
+                    <a href="destination.html">Destination</a>
+                    <ul class="sousmenu">
+                        <li><a href="Afrique.html">Afrique</a></li>
+                        <li><a href="amerique2.html">Les Amériques</a></li>
+                        <li><a href="asie2.html">Asie</a></li>
+                        <li><a href="">Europe</a></li>
+                        <li><a href="">Océanie</a></li>
+                    </ul>
+                </li>
+                <li class="surTelephone"><a href="nosConsei.html">Mes vidéos</a></li>
+                <li class="surTelephone"><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <video autoplay loop muted playsinline class="background-clip">
+            <source src="/assets/video/video-hero-page-asie.mp4" type="video/mp4">
+        </video>
+        <div class="elements">
+            <h1>Bienvenue en Asie</h1>
+            <a href="#v-populaire" id="liens">Regarder maintenant !</a>
+        </div>
+    </div>
+
+    <!-- Section Vidéos avec filtres -->
+    <div class="section-video">
+        <div class="filtres">
+            <a href="#v-populaire" class="filtre-option active">Vidéos populaires</a>
+            <a href="#asie-nord" class="filtre-option">Asie du Nord</a>
+            <a href="#asie-ouest" class="filtre-option">Asie de l'Ouest</a>
+            <a href="#asie-est" class="filtre-option">Asie de l'Est</a>
+            <a href="#asie-sud" class="filtre-option">Asie du Sud</a>
+        </div>
+
+        <!-- Vidéos populaires -->
+        <section id="v-populaire">
+            <h2>Vidéos Populaires</h2>
+            <div class="video-grid">
+                <!-- Vidéos dynamiques via JS -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Section intermédiaire avec une image et un titre -->
+    <div class="middle-section">
+        <img src="/assets/image/photo-asie/asie.jpg" alt="Thème Asie" class="middle-image">
+        <h2 class="middle-title">L'Asie avec Vibes Voyages</h2>
+    </div>
+
+    <!-- Sous-catégories géographiques -->
+
+    <section id="asie-nord" class="subcategory-section">
+        <h2>Asie du Nord</h2>
+        <div class="video-grid">
+            <!-- Vidéos dynamiques via JS -->
+        </div>
+    </section>
+    <section id="asie-ouest" class="subcategory-section">
+        <h2>Asie de l'Ouest</h2>
+        <div class="video-grid">
+            <!-- Vidéos dynamiques via JS -->
+        </div>
+    </section>
+    <section id="asie-est" class="subcategory-section">
+        <h2>Asie de l'Est</h2>
+        <div class="video-grid">
+            <!-- Vidéos dynamiques via JS -->
+        </div>
+    </section>
+    <section id="asie-sud" class="subcategory-section">
+        <h2>Asie du Sud</h2>
+        <div class="video-grid">
+            <!-- Vidéos dynamiques via JS -->
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Vibes Voyages</p>
+    </footer>
+
+    <script src="/continent.js"></script>
+</body>
+
+</html>

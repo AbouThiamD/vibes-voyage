@@ -50,14 +50,16 @@ public class MainController {
     }
 
     @GetMapping("/Amerique")
-    public String amerique2() {
-        return "amerique2";
-    }
+    public String pageAmeriques() {
+        return "pageAmeriques";
+    } 
 
-    // @GetMapping("/Tableau")
-    // public String tableaudebord(){
-    // return "tableaudebord";
-    // }
+ /*     */
+   
+    @GetMapping("/Tableau")
+    public String tableaudebord(){
+    return "tableaudebord";
+    }
 
     // @GetMapping("/role-list")
     // public String role(Model model) {

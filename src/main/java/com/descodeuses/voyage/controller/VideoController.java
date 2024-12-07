@@ -2,19 +2,15 @@ package com.descodeuses.voyage.controller;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.stream.Collectors;
 
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.descodeuses.dto.ConverterDTO;
 import com.descodeuses.voyage.form.VideoForm;
 import com.descodeuses.voyage.service.CategorieService;
 import com.descodeuses.voyage.service.VideoService;
@@ -37,6 +33,11 @@ public class VideoController {
 
     // }
 
+    @GetMapping("/pageVideos")
+    public String pageVideos() {
+        return "pageVideos"; 
+    }
+    
     // @GetMapping("/video/new")
     // public String newVideo(Model model) {
 

@@ -1,0 +1,73 @@
+/* Global Styles */
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 5px ;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F5951E;
+    padding: 10px 20px;
+}
+
+nav .logo {
+    width: 120px;
+}
+
+.menuderoulant {
+    list-style: none;
+    display: flex;
+}
+
+.menuderoulant li {
+    position: relative;
+}
+
+.menuderoulant a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+}
+
+.menuderoulant .sousmenu {
+    display: none;
+    position: absolute;
+    background-color: #19005c31;
+}
+
+.menuderoulant li:hover .sousmenu {
+    display: block;
+}
+
+/* Main Content */
+.main-video {
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; 
+    position: relative;
+} 
+
+.video-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.main-video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.main-video .title {
+    margin-top: 56.25%; /* Même que le padding-bottom de .main-video */
+    padding: 10px;
+}
