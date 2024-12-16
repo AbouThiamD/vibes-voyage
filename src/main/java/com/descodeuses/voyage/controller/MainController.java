@@ -19,14 +19,14 @@ public class MainController {
     // this.roleService = roleService;
     // }
 
-    // @GetMapping("/home")
-    // public String registre() {
-    // return "registre";
-    // }
+     @GetMapping("/home")
+     public String home() {
+     return "home";
+    }
 
-    @GetMapping("/card")
-    public String card() {
-        return "card";
+    @GetMapping("/accueil")
+    public String accueil() {
+        return "accueil";
     }
 
     @GetMapping("/destination")
@@ -39,19 +39,19 @@ public class MainController {
         return "Afrique";
     }
 
-    @GetMapping("/PlayVideos")
-    public String MesVideos() {
-        return "MesVideos";
+    @GetMapping("/playvideos")
+    public String playvideos() {
+        return "playvideos";
     }
 
-    @GetMapping("/Contact")
-    public String index() {
-        return "index";
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
     }
 
-    @GetMapping("/Amerique")
-    public String pageAmeriques() {
-        return "pageAmeriques";
+    @GetMapping("/amerique")
+    public String amerique() {
+        return "amerique";
     } 
 
  /*     */
@@ -59,6 +59,60 @@ public class MainController {
     @GetMapping("/Tableau")
     public String tableaudebord(){
     return "tableaudebord";
+    }
+
+    @GetMapping("/asie")
+    public String asie(){
+        return "asie";
+    }
+
+
+    @GetMapping("/europe")
+    public String europe(){
+        return "europe";
+    }
+
+
+    @GetMapping("/oceanie")
+    public String oceanie(){
+        return "oceanie";
+    }
+
+    @GetMapping("/admin")
+    public String admin(){
+        return "admin";
+    }
+
+    @GetMapping("/error_page")
+    public String error_page(){
+        return "error_page";
+    }
+
+
+    @GetMapping("/formAdmin")
+    public String formAdmin(){
+        return "formAdmin";
+    }
+
+
+    @GetMapping("/formCategorie")
+    public String formCategorie(){
+        return "formCategorie";
+    }
+
+    @GetMapping("/formVideo")
+    public String formVideo(){
+        return "formVideo";
+    }
+
+    @GetMapping("/register_page")
+    public String register_page(){
+        return "register_page";
+    }
+
+    @GetMapping("/role")
+    public String role(){
+        return "role";
     }
 
     // @GetMapping("/role-list")
