@@ -5,45 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>  
     <link rel="stylesheet" href="CSS/destination.css">
-    <link rel="stylesheet" href="CSS/accueil.css">
-    <link rel="stylesheet" href="CSS/footer.css">
     <title>Destination</title>
 </head>
 <body>
 
-    <div class="block1img">
+    <!-- HEADER (identique à l'accueil) -->
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/card">
+      <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu">
+        <li><a href="/card">Accueil</a></li>
+
+        <!-- Menu déroulant Destination -->
+         <li class="has-submenu">
+          <a href="/destination" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+         <ul class="submenu" th:if="${categories}">
+  <li th:each="cat : ${categories}">
+    <a th:href="@{|/videos?categorie=${cat.id}|}"
+       th:text="${cat.nomCategorie}">Catégorie</a>
+  </li>
+</ul>
+
+        </li>
 
 
-    <nav>
-        <img src="../images/logo-Emmy.png" class="logo">
-     
-        
-        <ul class="menuderoulant">
-            <li class="surTelephone"><a href="/card">Accueil</a></li>
-            <li class="surTelephone"><a href="/destination">Destination</a>
-            <ul class="sousmenu">
-                <li><a href="/Afrique">Afrique</a></li>
-                <li><a href="">Amérique du nord </a></li>
-                <li><a href="">Amérique du sud</a></li>
-                <li><a href="">Asie </a></li>
-                <li><a href="">Europe</a></li>
-                <li><a href="">Océanie</a></li>
-            </ul>
-          </li>
-            <li class="surTelephone"><a href="/Tableau">Tableau de bord</a></li>
-            <li class="surTelephone"><a href="Contact">Contact</a></li>
-            
-           
+        <li><a href="/Tableau">Tableau de bord</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
     </nav>
-    <div class="droiteblock1">
-        <h1>Venez à l'aventure !</h1>
-        <form action="">
-            <input type="text" placeholder="Nom destination" name="" id="">
-            <button type="submit" class="btn">Rechercher</button>
-        </form>
-    </div>
+  </div>
+</header>
 
-    </div>
     <div class="block2sdesti1">
 
         <div class="divblockdroite1">
@@ -111,49 +110,50 @@
 
 
 
-
-    <footer class="footer">
-        <div class="containerfoter">
-          <div class="row">
-            <div class="footer-col">
-              <h4>Vibes Voyage</h4>
-              <ul>
-                <li><a href="#">Contact</a></li>
-                <li><a href="#">Nos service</a></li>
-                <li><a href="#">Politique</a></li>
-                <li><a href="#">Vibes</a></li>
-              </ul>
-            </div>
-            <div class="footer-col">
-              <h4>Nos pages</h4>
-              <ul>
-                <li><a href="#">Accueil</a></li>
-                <li><a href="#">Destination</a></li>
-                <li><a href="#">Mes videos</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-            <div class="footer-col">
-              <h4>Vibes Voyage</h4>
-              <ul>
-                <li><a href="#">Afrique</a></li>
-                <li><a href="#">Afrique</a></li>
-                <li><a href="#">Afrique</a></li>
-                <li><a href="#">Afrique</a></li>
-              </ul>
-            </div>
-            <div class="footer-col">
-              <h4>follow us</h4>
-              <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h4>Vibes Voyage</h4>
+          <ul>
+            <li><a href="/Contact">Contact</a></li>
+            <li><a href="#">Nos services</a></li>
+            <li><a href="#">Politique</a></li>
+            <li><a href="#">Vibes</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Nos pages</h4>
+          <ul>
+            <li><a href="/card">Accueil</a></li>
+            <li><a href="/destination">Destination</a></li>
+            <li><a href="#">Mes vidéos</a></li>
+            <li><a href="/Contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Continents</h4>
+          <ul>
+            <li><a href="/Afrique">Afrique</a></li>
+            <li><a href="/AmeriqueNord">Amérique du Nord</a></li>
+            <li><a href="/AmeriqueSud">Amérique du Sud</a></li>
+            <li><a href="/Asie">Asie</a></li>
+            <li><a href="/Europe">Europe</a></li>
+            <li><a href="/Oceanie">Océanie</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Suivez-nous</h4>
+          <div class="socials">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
           </div>
         </div>
-     </footer>
+      </div>
+      <div class="footnote">© 2025 Vibes Voyage — Voyager, comprendre, ressentir.</div>
+    </footer>
+    
     
 
 

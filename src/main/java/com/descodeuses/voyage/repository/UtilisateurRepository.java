@@ -12,8 +12,7 @@ import com.descodeuses.voyage.model.Utilisateur;
 @RepositoryRestResource
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long>  {
 
-   Optional <Utilisateur> findByPseudoAndMdp(String pseudo, String mdp);
+   Optional<Utilisateur> findByPseudoAndMdp(String pseudo, String mdp);
 
-   Optional <Utilisateur> findFirstByPseudo(String pseudo);
-
+   Optional<Utilisateur> findByPseudo(String pseudo);
 }

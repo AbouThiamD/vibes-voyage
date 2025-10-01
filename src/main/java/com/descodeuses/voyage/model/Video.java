@@ -9,6 +9,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
@@ -34,7 +35,10 @@ public class Video {
 
     private Date date;
 
-    private String Categorie;
+    @ManyToOne
+    @JoinColumn(name = "categorie_id") 
+    private Categorie categorie;
+
     private String url;
 
     @OneToMany(mappedBy = "video")

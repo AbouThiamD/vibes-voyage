@@ -6,9 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import com.descodeuses.voyage.model.Utilisateur;
 import com.descodeuses.voyage.service.UtilisateurService;
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class UtilisateurController {
@@ -28,6 +29,12 @@ public class UtilisateurController {
         return "login_page";
     }
 
+       @GetMapping("error")
+    public String ShowError(Model model){
+        model.addAttribute("ShowError", new Utilisateur());
+        return "error";
+    }
+
     @GetMapping("/")
     public String getHome(){
         return "register1";
@@ -43,20 +50,27 @@ public class UtilisateurController {
       
 
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute Utilisateur utilisateur, Model model) {
-        System.out.println("login request: " + utilisateur);
-        Utilisateur authenticated = utilisateurService.authenticate(utilisateur.getPseudo(), utilisateur.getMdp());
-        // Vérification des champs vides
-        if (authenticated != null) {
-            model.addAttribute("utilisateurPseudo",authenticated.getPseudo());
-            return "/card"; 
-        }else{
-            return "error_page";
-        }
-    
-       
+  @PostMapping("/login")
+public String login(@ModelAttribute Utilisateur utilisateur, HttpSession session) {
+    Utilisateur authenticated = utilisateurService.authenticate(utilisateur.getPseudo(), utilisateur.getMdp());
+
+    if (authenticated == null) {
+        // Gérer le cas où l'authentification échoue
+        return "redirect:/error";
     }
+
+    // ✅ Stocker l'utilisateur authentifié (avec son rôle) dans la session
+    session.setAttribute("authenticatedUser", authenticated);
+
+    // Vérifier si l'utilisateur a le rôle d'administrateur
+    if (authenticated.getRole() != null && "ROLE_ADMIN".equals(authenticated.getRole().getNom())) {
+        return "redirect:/Admin";
+    }
+
+    // Redirection pour les utilisateurs non-admins
+    return "redirect:/card";
+}
+
 
     
     

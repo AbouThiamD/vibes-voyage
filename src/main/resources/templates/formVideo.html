@@ -21,7 +21,7 @@
         </th:block>
             <header>Ajouter video</header>
         </div>
-        <form action="/saveVideo" method="post" enctype="multipart/form-data">
+        <form action="/private/video/add" method="post" enctype="multipart/form-data">
         <div class="input-box">
             <input type="text" name="nomVideo" class="input-field" placeholder="Nom de la video" autocomplete="off" required>
         </div>
@@ -31,11 +31,14 @@
 
         <div>
 
-            <select name="categorie" id="#">
-              <option>Categorie</option>
-              <option th:each="c:${categories}">[[${c.nomCategorie}]]</option>
-           
-            </select>
+          <select name="categorieId" required>
+         <option value="" disabled selected>Choisir une catégorie </option>
+         <option th:each="c : ${categories}"
+          th:value="${c.id}"
+          th:text="${c.nomCategorie}">
+        </option>
+        </select>
+
             
             
         </div>
@@ -46,15 +49,25 @@
             <label for="images">
                 <span>Choisir une video</span>
                 
-                <input type="file"  name="file" id="images"/>
+                <input type="file"  name="fichier" id="images"/>
               </label>
         </div> 
        
         <div class="input-submit">
             <button class="submit-btn" id="submit"></button>
+               <div th:if="${succMsg}" class="alert alert-success">
+            <span th:text="${succMsg}"></span>
+        </div>
+
+        <div th:if="${errorMsg}" class="alert alert-danger">
+        <span th:text="${errorMsg}"></span>
+        </div>
+
             <label for="submit">Ajouter video</label>
         </div>
     </form>
+     
+
 
         <a href="/Admin" id="homeTableauBord">Revenir tableau de bord</a>
        

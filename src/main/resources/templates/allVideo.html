@@ -1,62 +1,77 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" th:href="@{CSS/all.css}">
-
-    <title>Toutes les vidéos</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/CSS/tableauALLvideo.css}">
+  <title>Toutes les vidéos</title>
 </head>
 <body>
-  <section>
+  <!-- conteneur plein-largeur pour contrer le body en flex/centré -->
+  <div style="width:100%; align-self:stretch; display:block;">
+
     <header>
-      VIDEO DE VIBES VOYAGE
+      VIDÉOS DE VIBES VOYAGE
     </header>
 
-    <div class="wrapper">
-      <table class="table">
-        
-        <thead>
-          <tr>
-            <th>Nom de la vidéo</th>
-            <th>Date</th>
-            <th>Catégorie</th>
-            <th>Description</th>
-            <th>Vidéo</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        
-        <tbody>
-          <!-- Affichage dynamique des vidéos -->
-          <tr th:each="v : ${video}">
-            <td th:text="${v.nomVideo}"></td>
-            <td th:text="${v.date}"></td>
-            <td th:text="${v.categorie}"></td>
-            <td th:text="${v.description}"></td>
-            <td>
-              <!-- Affichage de la vidéo -->
-              <video th:src="@{'/IMAGES/video_img/' + ${v.vid}}" width="150" height="100" controls></video>
-            </td>
-            <td class="lienBlanc">
-              <a>
-              <i class="fa-solid fa-pen-to-square"></i></a>
+    <section>
+      <div class="wrapper">
 
-              <a th:hred="@{'/deleteVideo/'+${v.id}}">
-               
-                <i class="fa-solid fa-trash"></i>
-              </a>
-            </td>
+        <!-- zone scrollable horizontalement, aucun renommage de classe -->
+        <div role="region" aria-label="Liste des vidéos" tabindex="0"
+             style="overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; width:100%; max-width:100%;">
+          <table class="table" style="width:100%; min-width:680px;">
+            <thead>
+              <tr>
+                <th>Nom de la vidéo</th>
+                <th>Date</th>
+                <th>Catégorie</th>
+                <th>Description</th>
+                <th>Vidéo</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
-          </tr>
-        </tbody>
-      </table>
-    </div>
+            <tbody>
+              <tr th:each="v : ${video}">
+                <td th:text="${v.nomVideo}"></td>
+                <td th:text="${v.date}"></td>
+                <td th:text="${v.categorie != null ? v.categorie.nomCategorie : '—'}"></td>
+                <td th:text="${v.description}"></td>
+                <td>
+                  <video th:src="@{/files/{file}(file=${v.url})}" controls width="150" height="100"></video>
+                </td>
+                <td class="lienBlanc">
+                  <!-- Bouton modifier -->
+                  <a th:href="@{/videos/{id}/edit(id=${v.id})}" title="Éditer">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </a>
+                  <!-- Bouton supprimer -->
+                  <a th:href="@{/deleteVideo/{id}(id=${v.id})}"
+                     onclick="return confirm('Voulez-vous vraiment supprimer cette vidéo ?');">
+                    <i class="fa-solid fa-trash" style="color:red;"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Messages flash (inchangés) -->
+    <center>
+      <p th:if="${succMsg}" style="color:green;font-weight:bold" th:text="${succMsg}"></p>
+      <p th:if="${errorMsg}" style="color:red;font-weight:bold" th:text="${errorMsg}"></p>
+    </center>
 
     <footer>
-      <a href="/Admin" id="homeTableauBord">Revenir au tableau de bord</a>
+      <a href="/Admin">Revenir au tableau de bord</a>
     </footer>
-  </section>
+
+  </div>
 </body>
 </html>

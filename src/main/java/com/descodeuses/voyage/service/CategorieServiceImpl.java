@@ -37,11 +37,7 @@ public class CategorieServiceImpl implements CategorieService {
     }
     
    
-    // @Override
-    // public List<Categorie> findByNomDeCategorie(String nomCategorie) {
-    //     return categorieRepository.findByNomDeCategorie(nomCategorie);
-    // }
-
+   
     @Override
     public Boolean deleteCategorie(long id) {
         Categorie categorie = categorieRepository.findById(id).orElse(null);

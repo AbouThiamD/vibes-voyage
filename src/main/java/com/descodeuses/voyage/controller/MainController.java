@@ -54,10 +54,16 @@ public class MainController {
         return "amerique2";
     }
 
-    // @GetMapping("/Tableau")
-    // public String tableaudebord(){
-    // return "tableaudebord";
+    @GetMapping("/Tableau")
+    public String tableaudebord(){
+    return "tableaudebord";
+    }
+
+    // @GetMapping("/EditVideo")
+    // public String editVideo(){
+    // return "editVideo";
     // }
+    
 
     // @GetMapping("/role-list")
     // public String role(Model model) {
@@ -76,4 +82,5 @@ public class MainController {
     // roleService.save(role);
     // return "redirect:/role-list";
     // }
+    
 }

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+   <link rel="stylesheet" th:href="@{/CSS/edit.css}">
+  <title>Modifier la vidéo</title>
+</head>
+<body>
+
+  <div class="login-box">
+    <div class="login-header">
+   <header>Modifier la video</header>
+    </div>
+
+    <form th:action="@{/videos/{id}(id=*{id})}" th:object="${video}" method="post">
+  <div class="form-container" th:if="${video != null}">
+    <div class="input-box">
+      <input type="hidden" class="input-field" th:field="*{id}">
+     </div>
+
+      <div class="input-box">
+        <label for="nomVideo">Titre</label>
+        <input id="nomVideo" type="text" th:field="*{nomVideo}" required>
+      </div>
+
+      <div class="input-box">
+        <label for="categorie">Catégorie</label>
+        <select id="categorie" th:field="*{categorie.id}" required>
+          <!-- ⚠️ utilise le bon nom de propriété -->
+          <option th:each="c : ${categories}"
+                  th:value="${c.id}"
+                  th:text="${c.nomCategorie}"></option>
+        </select>
+      </div>
+
+      <div class="input-box">
+        <label for="description">Description</label>
+        <textarea id="description" rows="4" th:field="*{description}"></textarea>
+      </div>
+
+      <div class="input-submit">
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+        
+        
+      </div>
+      <br>
+      <br>
+      
+    </form>
+     <a th:href="@{/lesVideos}" class="btn btn-secondary">Retour sur Video</a>
+  </div>
+
+  <div th:unless="${video != null}">
+    <p>Impossible de charger la vidéo. Ouvre via <code>/videos/{id}/edit</code>.</p>
+  </div>
+    </div>
+</body>
+</html>

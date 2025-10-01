@@ -1,211 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact</title>
-    <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>    
-    <link rel="stylesheet" href="CSS/footer.css">
-    <link rel="stylesheet" href="CSS/style.css" />
-    <link rel="stylesheet" href="CSS/destination.css">
-    <link rel="stylesheet" href="CSS/mesvideos.css">
-  </head>
-  <body>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vibes Voyage — Contact</title>
 
-     
-    <nav>
-      <img src="../images/logo-Emmy.png" class="logo">
-   
-      
-     
-      <ul class="menuderoulant">
-          <li class="surTelephone"><a href="/card">Accueil</a></li>
-          <li class="surTelephone"><a href="/destination">Destination</a>
-          <ul class="sousmenu">
-            <li><a href="/Afrique">Afrique</a></li>
-            <li><a href="">Amérique du nord </a></li>
-            <li><a href="">Amérique du sud</a></li>
-            <li><a href="">Asie </a></li>
-            <li><a href="">Europe</a></li>
-            <li><a href="">Océanie</a></li>
-          </ul>
+  <!-- Ton CSS global (même header/footer que l’accueil) -->
+  <link rel="stylesheet" href="/CSS/accueil.css">
+  <!-- CSS spécifique à cette page -->
+  <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+
+  <!-- ===== Header (identique à l’accueil) ===== -->
+  <!-- HEADER (identique à l'accueil) -->
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="/card">
+      <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu">
+        <li><a href="/card">Accueil</a></li>
+
+        <!-- Menu déroulant Destination -->
+          <li class="has-submenu">
+          <a href="/destination" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+         <ul class="submenu" th:if="${categories}">
+      <li th:each="cat : ${categories}">
+        <a th:href="@{|/videos?categorie=${cat.id}|}"
+       th:text="${cat.nomCategorie}">Catégorie</a>
+     </li>
+        </ul>
+
         </li>
-        <li class="surTelephone"><a href="/Tableau">Tableau de bord</a></li>
-        <li class="surTelephone"><a href="/Contact">Contact</a></li>
-       </nav>
-         
-    <main>
-      <div class="box">
-        <div class="inner-box">
-          <div class="forms-wrap">
-            <form action="index.html" autocomplete="off" class="sign-in-form">
-              <div class="logo">
-                <!-- <img src="../images/logo-Emmy.png"easyclass"/> -->
-                <h4>Vibes Voyage</h4>
-              </div>
 
-              <div class="heading">
-                <h2>Contact-nous</h2>
-                <h6>Une question ?</h6>
-              </div>
 
-              <div class="actual-form">
-                <div class="input-wrap">
-                  <input
-                    type="text"
-                    minlength="4"
-                    class="input-field"
-                    autocomplete="off"
-                    required
-                  />
-                  <label>E-mail</label>
-                </div>
+        <li><a href="/Tableau">Tableau de bord</a></li>
+        <li><a href="/Contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-                <div class="input-wrap">
-                  <input type="" class="input-field" />
-                  <label>Message</label>
-                </div>
+  <!-- ===== Image de voyage ===== -->
+  <section class="contact-hero" role="img" aria-label="Image de voyage">
+    <br>
+    <img src="/IMAGES/afrique2.jpg" alt="Panorama de voyage">
+  </section>
 
-                <input type="submit" value="Envoyez" class="sign-btn" />
+  <!-- ===== Carte Contact ===== -->
+  <main class="contact-main">
+    <section class="card container">
+      <header class="contact-header">
+        <div class="logo-line">
+          <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage">
+          <strong>Vibes Voyage</strong>
+        </div>
+        <h1>Contact-nous</h1>
+        <p class="lead">Une question ? Écris-nous, on répond vite.</p>
+      </header>
 
-                <p class="text">
-                  <br />
-                  un problème? une questions ? Nous sommes la pour repondre
-                  <a href="/card">Revenir a l'Accueil</a>
-                </p>
-              </div>
-            </form>
+      <form class="contact-form" action="#" method="post" novalidate>
+        <div class="field">
+          <label for="name">Nom</label>
+          <input id="name" name="name" type="text" placeholder="Votre nom" required>
+        </div>
 
-            <form action="index.html" autocomplete="off" class="sign-up-form">
-              <div class="logo">
-                <img src="./img/logo.png" alt="easyclass" />
-                <h4>easyclass</h4>
-              </div>
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" placeholder="vous@exemple.com" required>
+        </div>
 
-              <div class="heading">
-                <h2>Get Started</h2>
-                <h6>Already have an account?</h6>
-                <a href="#" class="toggle">Sign in</a>
-              </div>
+        <div class="field field--full">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="6" placeholder="Écrivez votre message…" required></textarea>
+        </div>
 
-              <div class="actual-form">
-                <div class="input-wrap">
-                  <input
-                    type="text"
-                    minlength="4"
-                    class="input-field"
-                    autocomplete="off"
-                    required
-                  />
-                  <label>Name</label>
-                </div>
+        <div class="actions">
+          <button type="submit" class="btn-primary">Envoyer</button>
+        </div>
+      </form>
 
-                <div class="input-wrap">
-                  <input
-                    type="email"
-                    class="input-field"
-                    autocomplete="off"
-                    required
-                  />
-                  <label>Email</label>
-                </div>
+      <p class="backline">Besoin d’aide rapide ? <a href="/index.html">Retour à l’accueil</a></p>
+    </section>
+  </main>
 
-                <div class="input-wrap">
-                  <input
-                    type="password"
-                    minlength="4"
-                    class="input-field"
-                    autocomplete="off"
-                    required
-                  />
-                  <label>Password</label>
-                </div>
-
-                <input type="submit" value="Sign Up" class="sign-btn" />
-
-                <p class="text">
-                  By signing up, I agree to the
-                  <a href="#">Terms of Services</a> and
-                  <a href="#">Privacy Policy</a>
-                </p>
-              </div>
-            </form>
-          </div>
-
-          <div class="carousel">
-            <div class="images-wrapper">
-              <img
-                src="./IMAGES/img/image1.png"
-                class="image img-1 show"
-                alt=""
-              />
-              <img src="./IMAGES/img/image2.png" class="image img-2" alt="" />
-              <img src="./IMAGES/img/image3.png" class="image img-3" alt="" />
-            </div>
-
-            <div class="text-slider">
-              <div class="text-wrap">
-                <div class="text-group">
-                  <h2>Bon voyage</h2>
-                  <h2>Avez-vous passez un bon moments ?</h2>
-                  <h2>Invite students to your class</h2>
-                </div>
-              </div>
-
-              <div class="bullets">
-                <span class="active" data-value="1"></span>
-                <span data-value="2"></span>
-              </div>
-            </div>
-          </div>
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Vibes Voyage</h4>
+        <ul>
+          <li><a href="/Contact">Contact</a></li>
+          <li><a href="#">Nos services</a></li>
+          <li><a href="#">Politique</a></li>
+          <li><a href="#">Vibes</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Nos pages</h4>
+        <ul>
+          <li><a href="/card">Accueil</a></li>
+          <li><a href="/destination">Destination</a></li>
+          <li><a href="#">Mes vidéos</a></li>
+          <li><a href="/Contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Continents</h4>
+        <ul>
+          <li><a href="/Afrique">Afrique</a></li>
+          <li><a href="/AmeriqueNord">Amérique du Nord</a></li>
+          <li><a href="/AmeriqueSud">Amérique du Sud</a></li>
+          <li><a href="/Asie">Asie</a></li>
+          <li><a href="/Europe">Europe</a></li>
+          <li><a href="/Oceanie">Océanie</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Suivez-nous</h4>
+        <div class="socials">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
         </div>
       </div>
-    </main>
-    <footer class="footer">
-      <div class="containerfoter">
-        <div class="row">
-          <div class="footer-col">
-            <h4>Vibes Voyage</h4>
-            <ul>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Nos service</a></li>
-              <li><a href="#">Politique</a></li>
-              <li><a href="#">Vibes</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Nos pages</h4>
-            <ul>
-              <li><a href="#">Accueil</a></li>
-              <li><a href="#">Destination</a></li>
-              <li><a href="#">Mes videos</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Vibes Voyage</h4>
-            <ul>
-              <li><a href="/Afrique">Afrique</a></li>
-              <li><a href="#">Amerique</a></li>
-              <li><a href="#">Asie</a></li>
-              <li><a href="#">Europe</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>follow us</h4>
-            <div class="social-links">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-   </footer>
-    <!-- Javascript file -->
+    </div>
+    <div class="footnote">© 2025 Vibes Voyage — Voyager, comprendre, ressentir.</div>
+  </footer>
 
-    <script src="./JS/app.js"></script>
-  </body>
+
+</body>
 </html>

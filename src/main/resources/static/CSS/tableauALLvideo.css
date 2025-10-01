@@ -1,0 +1,193 @@
+/* --- Variables pour les couleurs (Bonne pratique) --- */
+:root {
+  --primary-color: #007bff; /* Bleu principal pour les boutons/actions */
+  --secondary-color: #0056b3; /* Bleu foncé pour l'en-tête du tableau */
+  --text-dark: #3b3b3b;
+  --text-light: #ffffff;
+  --background-dark: #2b2b2b;
+  --table-bg-subtle: rgba(255, 255, 255, 0.1); /* Fond de tableau légèrement transparent */
+  --table-border: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles Généraux pour le Corps de la Page (BODY) --- */
+/* ---------------------------------------------------------------------- */
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  line-height: 1.6; /* Améliore la lisibilité du texte */
+  font-weight: 400;
+  color: var(--text-dark); /* La couleur des éléments en dehors du tableau (si le fond était clair) */
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  background: var(--background-dark); /* Fond très sombre */
+  margin: 0; /* Supprime la marge par défaut */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles de l'En-tête (HEADER) --- */
+/* ---------------------------------------------------------------------- */
+header {
+  color: var(--text-light); /* Texte en blanc ou très clair */
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  padding: 40px 0 30px 0; /* Utilise padding pour un meilleur espacement */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles des Icônes (I) --- */
+/* ---------------------------------------------------------------------- */
+i {
+  color: var(--text-light); /* Les icônes restent blanches */
+  padding: 0 5px; /* Réduit l'espace autour des icônes pour mieux les intégrer */
+  font-size: 18px; /* Taille légèrement augmentée pour être plus visible */
+  margin-left: 5px; /* Marge à gauche */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles de la Mise en Page (Wrapper) --- */
+/* ---------------------------------------------------------------------- */
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Aligne le contenu en haut (si le tableau est grand) */
+  min-height: 80vh; /* Utilise min-height au lieu de height: 100vh pour éviter les barres de défilement */
+  padding: 20px 0;
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles du Tableau (TABLE) --- */
+/* ---------------------------------------------------------------------- */
+table {
+  width: 90%; /* Augmente la largeur du tableau pour mieux utiliser l'espace */
+  max-width: 1200px; /* Limite la largeur sur très grand écran */
+  text-align: center;
+  border-collapse: separate; /* Change to 'separate' to apply border-radius better */
+  border-spacing: 0;
+  margin: 0 auto;
+  background-color: var(--table-bg-subtle);
+  backdrop-filter: blur(5px); /* Ajout d'un léger flou pour un effet moderne */
+  border-radius: .8rem;
+  overflow: hidden; /* Important pour masquer l'arrière-plan des coins du tableau */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ajout d'une ombre subtile */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles des Cellules (TH, TD) --- */
+/* ---------------------------------------------------------------------- */
+th, td {
+  padding: 12px 10px; /* Augmente le padding pour plus d'espace */
+  border: 1px solid var(--table-border); /* Séparateurs clairs */
+  border-width: 0 1px 1px 0; /* Ne met pas de bordure à gauche et en haut */
+}
+/* Supprime les bordures sur les bords extérieurs */
+th:first-child, td:first-child { border-left-width: 0; }
+th:last-child, td:last-child { border-right-width: 0; }
+tr:last-child td { border-bottom-width: 0; }
+
+td {
+  color: var(--text-light); /* Texte des cellules en blanc */
+  vertical-align: middle; /* Centre verticalement le contenu des cellules */
+}
+
+th {
+  background-color: var(--secondary-color); /* Bleu foncé pour l'en-tête */
+  color: var(--text-light); /* Texte de l'en-tête en blanc */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles de l'En-tête Fixe (THEAD) --- */
+/* ---------------------------------------------------------------------- */
+thead th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--secondary-color); /* Reste le même que le th de base */
+  border-top: none; /* Supprime le bord supérieur */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles du Corps du Tableau (TBODY) --- */
+/* ---------------------------------------------------------------------- */
+/* Alternance de couleurs des lignes pour améliorer la lecture */
+tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1); /* Un peu plus sombre que le fond du tableau */
+}
+
+/* Effet de survol amélioré */
+tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Plus visible et plus clair */
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles de la Vidéo (VIDEO) --- */
+/* ---------------------------------------------------------------------- */
+video {
+  border: 1px solid var(--table-border);
+  object-fit: cover;
+  border-radius: 4px; /* Ajout d'un petit bord arrondi */
+  display: block; /* S'assure que la vidéo prend sa propre ligne */
+  margin: 0 auto; /* Centrage de la vidéo dans la cellule */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles du Bouton "Revenir au tableau de bord" --- */
+/* ---------------------------------------------------------------------- */
+#homeTableauBord {
+  display: inline-block;
+  margin: 40px auto 20px auto; /* Centre le lien et augmente la marge supérieure */
+  padding: 12px 25px; /* Augmente la taille du padding */
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  text-decoration: none;
+  border-radius: 25px; /* Forme de pilule */
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+#homeTableauBord:hover {
+  background-color: #0056b3; /* Changement de couleur au survol */
+}
+
+/* ---------------------------------------------------------------------- */
+/* --- Styles des Liens d'Action (dans le <td> Action) --- */
+/* ---------------------------------------------------------------------- */
+.lienBlanc a {
+  text-decoration: none;
+  color: var(--text-light); /* S'assure que le lien est blanc */
+  margin: 0 5px;
+  display: inline-block;
+  /* Utilise le style de l'icône `i` */
+}
+
+/* Règle spécifique pour les icônes dans les liens d'action */
+.lienBlanc a i {
+    padding: 5px;
+    margin: 0;
+    transition: color 0.2s ease;
+}
+
+.lienBlanc a:hover i.fa-pen-to-square {
+    color: #ffd700; /* Jaune or pour l'édition */
+}
+
+.lienBlanc a:hover i.fa-trash {
+    color: #ff4d4d; /* Rouge vif pour la suppression */
+}
+
+
+a{
+  color: #ffffff;
+  text-decoration: none;
+}
+
+
+
+

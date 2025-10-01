@@ -99,3 +99,127 @@ tbody tr:nth-child(even){
 tbody tr:hover{
   background-color: #fff6;
 }
+
+
+
+/* --- Styles Spécifiques pour le Formulaire de Modification de Vidéo --- */
+
+/* Conteneur principal du formulaire */
+.form-container {
+    background-color: var(--table-bg-subtle); /* Fond légèrement transparent */
+    backdrop-filter: blur(5px);
+    border-radius: .8rem;
+    padding: 30px;
+    margin: 40px auto; /* Centre le formulaire et lui donne de l'espace */
+    max-width: 700px; /* Limite la largeur du formulaire */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: var(--text-light); /* Texte par défaut du formulaire en clair */
+}
+
+/* Groupes de champs (Label + Input/Textarea) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block; /* Chaque label prend sa propre ligne */
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: var(--text-light);
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group input[type="file"] {
+    width: calc(100% - 20px); /* Prend presque toute la largeur avec un padding */
+    padding: 10px;
+    border: 1px solid var(--table-border);
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.08); /* Fond des champs légèrement transparent */
+    color: var(--text-light); /* Texte entré en blanc */
+    font-size: 1em;
+    outline: none; /* Supprime le contour bleu au focus */
+    transition: border-color 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="date"]:focus,
+.form-group textarea:focus,
+.form-group input[type="file"]:focus {
+    border-color: var(--primary-color); /* Bordure bleue au focus */
+}
+
+/* Style spécifique pour les champs de type 'file' pour un look cohérent */
+.form-group input[type="file"] {
+    padding: 8px; /* Un peu moins de padding pour les fichiers */
+    /* Cache l'input file par défaut et le remplace par un bouton stylisé */
+    /* Si vous voulez un input file classique mais stylisé, enlevez ces deux lignes et ajustez le padding */
+    /* cursor: pointer; */
+}
+
+/* Informations sur le fichier actuel */
+.current-file-info {
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.7); /* Texte légèrement grisé */
+    margin-top: -10px; /* Remonte un peu pour être plus proche du label */
+    margin-bottom: 10px;
+    display: block;
+}
+
+.current-file-info i {
+    color: #ffd700; /* Icône en jaune */
+    margin-right: 5px;
+    font-size: 1.1em;
+    padding: 0; /* Réinitialise le padding de l'icône globale */
+}
+
+
+/* Actions du formulaire (boutons) */
+.form-actions {
+    text-align: right; /* Aligne les boutons à droite */
+    margin-top: 30px;
+}
+
+/* Styles des boutons */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Pour les boutons de type <a> */
+    display: inline-flex; /* Permet d'aligner l'icône et le texte */
+    align-items: center;
+    justify-content: center;
+    margin-left: 15px; /* Espace entre les boutons */
+}
+
+.btn i {
+    margin-right: 8px; /* Espace entre l'icône et le texte */
+    font-size: 1em;
+    padding: 0; /* Réinitialise le padding de l'icône globale */
+}
+
+.btn-primary {
+    background-color: var(--primary-color); /* Bleu principal */
+    color: var(--text-light);
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Bleu foncé au survol */
+    transform: translateY(-2px); /* Léger effet 3D au survol */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Gris pour le bouton annuler */
+    color: var(--text-light);
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}

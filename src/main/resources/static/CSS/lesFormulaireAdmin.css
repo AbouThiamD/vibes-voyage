@@ -15,6 +15,8 @@ body {
   background-color: #1d2634;
   color: #9e9ea4;
 }
+
+/* --------- Login --------- */
 .login-box {
   display: flex;
   justify-content: center;
@@ -85,14 +87,13 @@ section a {
   border-radius: 30px;
   cursor: pointer;
   transition: 0.3s;
+  color: #fff;
 }
 .input-submit label {
   position: absolute;
   top: 45%;
   left: 50%;
   color: #fff;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   cursor: pointer;
 }
@@ -126,48 +127,20 @@ select {
   outline: none;
 }
 
-/* file {
-  width: 100%;
-  height: 60px;
-  font-size: 17px;
-  padding: 0 25px;
-  margin-bottom: 15px;
-  border-radius: 30px;
-  border: none;
-  box-shadow: 0px 5px 10px 1px rgba(0, 0, 0, 0.05);
-  outline: none;
-}
-
-input[type="file"] {
-  display: none;
-} 
-
-/* On créé un bouton en ciblant un élément dans la balise label */
+/* Bouton file dans label */
 label span {
   padding: 8px 12px;
   background: #084cdf;
   color: #fff;
   cursor: pointer;
 }
+input[type="file"] { display: none; }
+label span:hover { background: #0d45a5; }
+#fileVideo { margin-top: 10px; }
 
-input[type="file"] {
-  display: none;
-} 
+.input-submit { margin-top: 25px; }
 
-
-label span:hover {
-  background: #0d45a5;
-}
-
-#fileVideo {
-  margin-top: 10px;
-}
-
-.input-submit {
-  margin-top: 25px;
-}
-
-
+/* --------- Tableau --------- */
 .tableau{
   width: 350px;
   height: 300px;
@@ -176,6 +149,7 @@ label span:hover {
   margin-bottom: 20%;
 }
 
+/* table responsive en mode “cartes” sur petits écrans */
 .rwd-table {
   margin: 1em 0;
   min-width: 300px;
@@ -184,18 +158,10 @@ label span:hover {
   border-top: 1px solid #ddd;
   border-bottom: 1px solid #ddd;
 }
-.rwd-table th {
-  display: none;
-}
-.rwd-table td {
-  display: block;
-}
-.rwd-table td:first-child {
-  padding-top: 0.5em;
-}
-.rwd-table td:last-child {
-  padding-bottom: 0.5em;
-}
+.rwd-table th { display: none; }
+.rwd-table td { display: block; }
+.rwd-table td:first-child { padding-top: 0.5em; }
+.rwd-table td:last-child { padding-bottom: 0.5em; }
 .rwd-table td:before {
   content: attr(data-th) ": ";
   font-weight: bold;
@@ -203,14 +169,10 @@ label span:hover {
   display: inline-block;
 }
 @media (min-width: 480px) {
-  .rwd-table td:before {
-    display: none;
-  }
+  .rwd-table td:before { display: none; }
 }
 .rwd-table th,
-.rwd-table td {
-  text-align: left;
-}
+.rwd-table td { text-align: left; }
 @media (min-width: 480px) {
   .rwd-table th,
   .rwd-table td {
@@ -218,16 +180,10 @@ label span:hover {
     padding: 0.25em 0.5em;
   }
   .rwd-table th:first-child,
-  .rwd-table td:first-child {
-    padding-left: 0;
-  }
+  .rwd-table td:first-child { padding-left: 0; }
   .rwd-table th:last-child,
-  .rwd-table td:last-child {
-    padding-right: 0;
-  }
+  .rwd-table td:last-child { padding-right: 0; }
 }
-
-
 
 h1 {
   font-weight: normal;
@@ -241,39 +197,170 @@ h1 {
   border-radius: 0.4em;
   overflow: hidden;
 }
-.rwd-table tr {
-  border-color: #46637f;
-}
+.rwd-table tr { border-color: #46637f; }
 .rwd-table th,
-.rwd-table td {
-  margin: 0.5em 1em;
-}
+.rwd-table td { margin: 0.5em 1em; }
 @media (min-width: 480px) {
   .rwd-table th,
-  .rwd-table td {
-    padding: 1em !important;
-  }
+  .rwd-table td { padding: 1em !important; }
 }
 .rwd-table th,
-.rwd-table td:before {
-  color: #dd5;
-}
+.rwd-table td:before { color: #dd5; }
 
-
-.alertVert{
-  color: forestgreen;
-}
-
-.alertRouge{
-  color: firebrick;
-}
-
-.td{
-  color: white;
-}
-
-.lienBlanc a{
+.alertVert { color: forestgreen; }
+.alertRouge { color: firebrick; }
+.td { color: white; }
+.lienBlanc a {
   color: #fff;
   padding: 12px;
   font-size: 15px;
+}
+
+/* ========================= */
+/*        RESPONSIVE         */
+/* ========================= */
+
+/* Mobile d’abord */
+@media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+    padding: 20px 16px;
+  }
+
+  .login-box {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+  }
+
+  /* évite de déborder l’écran au focus */
+  .input-field:focus { width: 100%; }
+
+  .forgot {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  /* Le bloc tableau ne doit pas être en position absolue sur mobile */
+  .tableau {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin: 16px 0 0 0;
+  }
+
+  /* Améliore la lisibilité du tableau empilé */
+  .rwd-table {
+    width: 100%;
+    font-size: 14px;
+  }
+  .rwd-table td { padding: 10px 12px; }
+
+  /* Au besoin, scroll horizontal sécurisé */
+  .rwd-table { display: block; overflow-x: auto; }
+}
+
+/* Petites tablettes */
+@media (min-width: 481px) and (max-width: 767px) {
+  body { padding: 24px; }
+  .login-box { width: 100%; height: auto; }
+  .input-field:focus { width: 102%; } /* petit effet sans casser la mise en page */
+  .tableau {
+    position: static;
+    width: 100%;
+    height: auto;
+    margin: 20px 0 0 0;
+  }
+}
+
+/* Tablettes et petits laptops */
+@media (min-width: 768px) and (max-width: 1023px) {
+  body { padding: 32px; }
+  .login-box { max-width: 520px; }
+  .tableau {
+    position: static; /* côte à côte possible selon ton HTML, sinon reste sous le formulaire */
+    width: 100%;
+    height: auto;
+    margin: 24px 0 0 0;
+  }
+}
+
+/* Desktop ≥ 1024px : on garde ton rendu d’origine */
+@media (min-width: 1024px) {
+  body { padding: 40px; }
+
+  .login-box {
+    width: 440px;
+    height: 480px;
+  }
+
+  /* on remet tes réglages “absolus” si tu les utilises pour la mise en page desktop */
+  .tableau{
+    width: 350px;
+    height: 300px;
+    position: absolute;
+    margin-right: 70%;
+    margin-bottom: 20%;
+  }
+}
+
+/* Accessibilité : réduit les animations si l’utilisateur préfère */
+@media (prefers-reduced-motion: reduce) {
+  .input-field,
+  .submit-btn {
+    transition: none;
+  }
+  .submit-btn:hover { transform: none; }
+}
+/* === PATCH RESPONSIVE (à coller en bas du fichier) ===================== */
+
+/* 1) Autoriser l’empilement sur mobile et le côte-à-côte sur large écran */
+body {
+  flex-wrap: wrap;              /* permet le retour à la ligne */
+  align-content: flex-start;    /* évite le centrage vertical quand il y a 2 blocs */
+  gap: 24px;                    /* espace entre formulaire et tableau */
+  padding: 24px 16px;           /* respiration sur les bords */
+}
+
+/* 2) Chaque bloc prend la place qu’il faut, sans casser ton style */
+.login-box,
+.tableau {
+  flex: 1 1 360px;              /* min ~360px; s’aligne à deux quand il y a de la place */
+  max-width: 600px;             /* limite raisonnable par bloc */
+  width: 100%;
+}
+
+/* 3) IMPORTANT : enlever le position:absolute du tableau et ses tailles figées */
+.tableau {
+  position: static !important;
+  margin: 0 !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* 4) Le formulaire s’adapte en hauteur et en largeur */
+.login-box {
+  width: 100% !important;
+  height: auto;                 /* plus de 480px figés */
+  max-width: 520px;             /* proche de tes 440px mais plus confortable */
+}
+
+/* 5) La table occupe 100% de sa colonne et gère les contenus longs */
+.rwd-table {
+  width: 100%;
+  table-layout: fixed;
+  display: block;               /* autorise le scroll horizontal si trop de colonnes */
+  overflow-x: auto;
+}
+
+.rwd-table th,
+.rwd-table td {
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* 6) Sur petits écrans, éviter que les inputs débordent en :focus */
+@media (max-width: 600px) {
+  .input-field:focus { width: 100% !important; }
 }
