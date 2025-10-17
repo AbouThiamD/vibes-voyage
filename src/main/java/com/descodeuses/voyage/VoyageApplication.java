@@ -2,10 +2,11 @@ package com.descodeuses.voyage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(scanBasePackages = {
   "com.descodeuses.voyage",
-  "com.descodeuses"         // <-- ajoute ce package
+  "com.descodeuses"         
 })
 public class VoyageApplication {
   public static void main(String[] args) {

@@ -119,14 +119,23 @@ a{text-decoration:none;color:inherit}
 
 }
 
-/* Footer (même style que l'accueil) */
-.site-footer{background:#fff;border-top:1px solid var(--line);margin-top:64px}
-.footer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:22px;padding:36px 22px}
-.site-footer h4{margin:0 0 10px}
-.site-footer ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
-.socials a{display:inline-flex;width:38px;height:38px;align-items:center;justify-content:center;border-radius:50%;background:#f3f3f3;margin-right:8px}
-.footnote{border-top:1px solid var(--line);padding:12px 22px;text-align:center;color:var(--muted);font-size:14px}
+.main-footer {
+    background-color: var(--color-background);
+    border-top: 1px solid var(--color-border);
+    padding: 40px 0;
+    margin-top: 40px;
+}
 
+.main-footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-light);
+    font-size: 14px;
+}
+
+.footer-links a { margin-left: 20px; transition: color 0.3s ease; }
+.footer-links a:hover { color: var(--color-accent); }
 
 /* ================= RESPONSIVE ================= */
 @media (max-width:980px){

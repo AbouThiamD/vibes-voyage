@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Lora:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+ 
+   <link rel="stylesheet" href="CSS/header.css" th:href="@{/CSS/header.css}">
+  <title>Vibes Voyage | Afrique</title>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/card" th:href="@{/card}">
+        <img src="/IMAGES/logo-Emmy.png" th:src="@{/IMAGES/logo-Emmy.png}" alt="Vibes Voyage">
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="menu" id="main-menu">
+          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
+
+         <li class="has-submenu">
+  <a th:href="@{/destination}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+
+  <ul class="submenu" th:if="${categories}">
+    <li th:each="cat : ${categories}" th:with="n=${#strings.toLowerCase(#strings.trim(cat.nomCategorie))}">
+      <th:block th:switch="${n}">
+        <!-- Afrique -->
+        <a th:case="'afrique'"
+           th:href="@{/Afrique}" th:text="${cat.nomCategorie}">Afrique</a>
+
+        <!-- Amérique du Nord -->
+        <a th:case="'amérique du nord'" th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amérique du nord</a>
+        <a th:case="'Amerique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amerique du nord</a>
+
+        <!-- Amérique du Sud -->
+        <a th:case="'amérique du sud'" th:href="@{/AmeriqueDuSud}" th:text="${cat.nomCategorie}">Amérique du sud</a>
+        <a th:case="'amerique du sud'"  th:href="@{/AmeriqueDuSud}" th:text="${cat.nomCategorie}">Amerique du sud</a>
+
+        <!-- Europe -->
+        <a th:case="'europe'"
+           th:href="@{/Europe}" th:text="${cat.nomCategorie}">Europe</a>
+
+        <!-- Asie -->
+        <a th:case="'asie'"
+           th:href="@{/Asie}" th:text="${cat.nomCategorie}">Asie</a>
+
+        <!-- Océanie -->
+        <a th:case="'océanie'" th:href="@{/Oceanie}" th:text="${cat.nomCategorie}">Océanie</a>
+        <a th:case="'oceanie'" th:href="@{/Oceanie}" th:text="${cat.nomCategorie}">Oceanie</a>
+
+        <!-- Par défaut (autres catégories) -->
+        <a th:case="*"
+           th:href="@{|/videos?categorie=${cat.id}|}"
+           th:text="${cat.nomCategorie}">Catégorie</a>
+      </th:block>
+    </li>
+  </ul>
+</li>
+
+          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
+          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>

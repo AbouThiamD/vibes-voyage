@@ -2,8 +2,10 @@ package com.descodeuses.voyage.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
@@ -13,10 +15,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import java.util.NoSuchElementException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.descodeuses.voyage.service.UtilisateurService; 
 import com.descodeuses.voyage.form.AdminForm; 
 import com.descodeuses.voyage.model.Categorie;
+import com.descodeuses.voyage.model.Utilisateur;
 import com.descodeuses.voyage.model.Video;
 import com.descodeuses.voyage.service.CategorieService;
 import com.descodeuses.voyage.service.VideoService;
@@ -100,6 +106,24 @@ public String allUtilisateur(Model model) {
     model.addAttribute("utilisateurs", utilisateurService.list()); // <-- ajoute la liste
     return "allUtilisateur";
 }
+
+@GetMapping("/utilisateurs/{id}/delete")
+public String deleteUtilisateur(@PathVariable long id, RedirectAttributes ra) {
+    try {
+        var u = utilisateurService.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Utilisateur introuvable"));
+        utilisateurService.supprimer(u);  // ta méthode existante
+        ra.addFlashAttribute("succMsg", "Utilisateur supprimé avec succès.");
+    } catch (NoSuchElementException e) {
+        ra.addFlashAttribute("errorMsg", "Utilisateur introuvable.");
+    } catch (DataIntegrityViolationException e) {
+        ra.addFlashAttribute("errorMsg", "Impossible de supprimer : utilisateur lié ailleurs.");
+    } catch (Exception e) {
+        ra.addFlashAttribute("errorMsg", "Erreur serveur : " + e.getMessage());
+    }
+    return "redirect:/lesUtilisateurs"; // ta page liste
+}
+
 
     @PostMapping("/saveCategorie")
     public String saveCategorie(@ModelAttribute Categorie categorie, HttpSession session) {

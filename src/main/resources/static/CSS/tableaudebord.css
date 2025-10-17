@@ -24,8 +24,8 @@ body{
 .site-header{ position:fixed; top:0; left:0; right:0; z-index:2000; }
 body.dashboard{ padding-top:var(--header-h); } /* compense le header fixe */
 body.dashboard .site-header{
-  background:rgba(255,255,255,.86);
-  border-bottom:1px solid var(--line);
+ background:#fbf1ef;
+
   backdrop-filter:blur(10px);
 }
 body.dashboard .site-header .menu a{ color:#222; }
@@ -70,172 +70,145 @@ body.dashboard .site-header .menu a{ color:#222; }
 .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{display:block;width:22px;height:2px;background:#333;margin:5px 0;border-radius:2px}
 
+
+.dashboard-container{
+  margin-top: 50px;
+}
 /* ===== Contenu ===== */
-.main{
-  flex:1;
-  padding:18px 22px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-  height: 500px;
+h1 {
+    font-size: 2.2em;
+    font-weight: 600;
+    text-align: center;                 /* Centre le message */
+    padding: 80px 20px 40px 20px;       /* Marge intérieure pour donner de l'espace */
 }
 
-/* 1) VOS VIDÉOS en haut */
-.vosVideos{order:-1;}
-.vosVideos caption{font-weight:800;margin:0 0 10px 2px}
-.vosVideos table{
-  width:100%;
-  border-collapse:separate;border-spacing:0;
-  background:var(--paper);border:1px solid var(--line);
-  border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
-}
-.vosVideos thead th{
-  background:#faf7f3;border-bottom:1px solid var(--line);
-  text-transform:uppercase;letter-spacing:.12em;font-size:12px;padding:12px;color:#444
-}
-.vosVideos tbody td{padding:12px;border-bottom:1px solid #eee}
-.vosVideos tbody tr:nth-child(even){background:#fcfbf9}
-.vosVideos tbody tr:hover{background:#f7f4f0}
-.vosVideos td img{max-height:56px;width:auto;border-radius:8px;object-fit:cover}
 
-/* 2) Carte "Ajouter une vidéo" compacte */
-.main-skills{display:flex;justify-content:flex-start}
-.main-skills .card{
-  background:#fff;color:#222;border:1px solid var(--line);
-  border-radius:16px;padding:18px 20px;box-shadow:var(--shadow);
-  display:flex;align-items:center;gap:10px
-}
-.main-skills .card i{color:#F5951E}
-#txte{border:0;background:transparent;font-weight:800;cursor:pointer}
-
-/* Boutons actions du tableau (ne touche pas aux liens du header) */
-.vosVideos .boutonVideo{
-  display:inline-block;margin:2px 6px 0 0;padding:6px 10px;
-  border-radius:10px;font-weight:700;font-size:12px;text-decoration:none;
-  color:#222;background:#fff;border:1px solid #ddd
-}
-.vosVideos .boutonVideo:hover{background:#f3f3f3}
-.vosVideos .boutonVideo:nth-child(2){color:#a12828;border-color:#f0c7c7;background:#fff5f5}
-.vosVideos .boutonVideo:nth-child(2):hover{background:#ffefef}
-/* ===== Dashboard (scopé à .dashboard, aucun impact sur le header/footer) ===== */
-
-/* Layout général */
-.dashboard .blockBord{
-  display:flex;
-  align-items:flex-start;    /* nécessaire pour sticky */
-  gap:16px;
-  margin:0;
+main button {
+    display: inline-block;              
+    background-color: #F5951E;          /* Fond violet pour le faire ressortir */
+    color: #fff;                        /* Texte blanc */
+    padding: 14px 28px;                 /* Marge intérieure pour un bouton plus gros */
+    border-radius: 50px;                /* Bords complètement arrondis */
+    text-decoration: none;              /* Pas de soulignement */
+    font-weight: 600;
+    margin-left: 5%;                    /* Aligne avec le contenu du header */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre discrète pour un effet de profondeur */
+    transition: transform 0.2s ease;    /* Animation au survol */
 }
 
-/* Sidebar (s'arrête avant le footer) */
-.dashboard #nav{
-  position:sticky;                   /* colle sous le header, puis s'arrête */
-  top: var(--headerH, 70px);         /* hauteur du header (utilise celle d'accueil) */
-  width: 240px;
-  max-height: calc(100vh - var(--headerH, 70px));
-  overflow:auto;
-  background:#fff;
-  border-right:1px solid var(--line, #E6E0D8);
-  box-shadow:0 10px 24px rgba(0,0,0,.10);
-}
-.dashboard #nav ul{ list-style:none; margin:0; padding:10px }
-.dashboard #nav li{ margin:2px 0 }
-.dashboard #nav a{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px; border-radius:10px;
-  color:#444; text-decoration:none; font-weight:600;
-}
-.dashboard #nav a:hover{ background:#f6f6f6 }
-.dashboard #nav a.active{ background:#fff3e6; border:1px solid #ffd7a8 }
-.dashboard #nav i{ width:22px; text-align:center; color:#777 }
-.dashboard #bord{
-  display:block; font-size:12px; font-weight:800; color:#888;
-  letter-spacing:.18em; text-transform:uppercase; padding:8px 12px;
-  height: 50px;
+main button:hover {
+    transform: translateY(-3px);        /* Le bouton se soulève légèrement */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Contenu */
-.dashboard .main{
-  flex:1;
-  padding:18px 22px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
+
+
+/* --- 1. La structure principale du tableau de bord --- */
+.dashboard-container {
+    display: flex;         /* La magie opère ici : aligne les enfants (sidebar et main) côte à côte */
+    padding: 30px 5%;      /* Espace autour de la zone du tableau de bord */
+    gap: 30px;             /* Crée un espace entre la sidebar et le contenu principal */
 }
 
-/* 1) VOS VIDÉOS en haut */
-.dashboard .vosVideos{ order:-1; }
-.dashboard .vosVideos caption{
-  font-weight:800; margin:0 0 10px 2px; color:#333; text-align:left;
-}
-.dashboard .vosVideos table{
-  width:100%;
-  border-collapse:separate; border-spacing:0;
-  background:#fff;
-  border:1px solid var(--line, #E6E0D8);
-  border-radius:16px; overflow:hidden;
-  box-shadow:0 10px 24px rgba(0,0,0,.10);
-  height: 150px;
-}
-.dashboard .vosVideos thead th{
-  background:#faf7f3; color:#444;
-  text-transform:uppercase; letter-spacing:.12em; font-size:12px;
-  padding:12px; border-bottom:1px solid var(--line, #E6E0D8);
-  position:sticky; top:0; z-index:1;
-}
-.dashboard .vosVideos tbody td{
-  padding:12px; border-bottom:1px solid #eee; color:#333; vertical-align:middle;
-}
-.dashboard .vosVideos tbody tr:nth-child(even){ background:#fcfbf9 }
-.dashboard .vosVideos tbody tr:hover{ background:#f7f4f0 }
-.dashboard .vosVideos td img{ max-height:56px; width:auto; border-radius:8px; object-fit:cover }
-
-/* Boutons actions */
-.dashboard .vosVideos .boutonVideo{
-  display:inline-block; margin:2px 6px 0 0; padding:6px 10px;
-  border-radius:10px; font-weight:700; font-size:12px; text-decoration:none;
-  color:#222; background:#fff; border:1px solid #ddd;
-}
-.dashboard .vosVideos .boutonVideo:hover{ background:#f3f3f3 }
-.dashboard .vosVideos .boutonVideo:nth-child(2){
-  color:#a12828; border-color:#f0c7c7; background:#fff5f5;
-}
-.dashboard .vosVideos .boutonVideo:nth-child(2):hover{ background:#ffefef }
-
-/* 2) Carte "Ajouter une vidéo" (compacte) */
-.dashboard .main-skills{ display:flex; justify-content:flex-start }
-.dashboard .main-skills .card{
-  background:#fff; color:#222;
-  border:1px solid var(--line, #E6E0D8);
-  border-radius:16px; padding:18px 20px;
-  box-shadow:0 10px 24px rgba(0,0,0,.10);
-  display:flex; align-items:center; gap:10px;
-}
-.dashboard .main-skills .card i{ color:var(--brand, #F5951E) }
-.dashboard #txte{ border:0; background:transparent; font-weight:800; cursor:pointer }
-
-/* Responsive */
-@media (max-width:980px){
-  .dashboard #nav{ display:none }       /* on masque la sidebar en mobile */
-  .dashboard .main{ padding:16px }
-
-  /* table en mode “cartes” */
-  .dashboard .vosVideos thead{ display:none }
-  .dashboard .vosVideos tbody tr{ display:block; border-bottom:1px solid #eee }
-  .dashboard .vosVideos tbody td{
-    display:flex; justify-content:space-between; gap:12px; padding:10px 12px;
-  }
-  .dashboard .vosVideos tbody td::before{
-    content: attr(data-label); font-weight:700; color:#555;
-  }
+/* --- 2. Le style de la barre latérale (sidebar) --- */
+.sidebar-nav {
+    flex-basis: 240px;     /* Définit une largeur fixe pour la sidebar */
+    flex-shrink: 0;        /* Empêche la sidebar de rétrécir si la fenêtre est trop petite */
+    background-color: #ffffff; /* Un fond blanc pour la faire ressortir */
+    border-radius: 8px;      /* Bords arrondis pour un look moderne */
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07); /* Ombre très subtile */
+    height: fit-content;   /* La hauteur s'adapte au contenu */
 }
 
-/* ===== Responsive ===== */
-@media (max-width:980px){
-  :root{ --headerH:64px; --sidebar:0px; }
-  #nav{display:none}
-  .main{padding:16px}
+/* --- 3. Le style des liens dans la sidebar --- */
+.sidebar-nav ul {
+    list-style: none;      /* Enlève les puces de la liste */
+    padding: 0;
+    margin: 0;
+}
 
- 
+.sidebar-nav a {
+    display: block;        /* Fait en sorte que le lien occupe toute la largeur de son conteneur */
+    text-decoration: none;
+    color: #444;
+    font-weight: 600;
+    padding: 12px 15px;    /* Espace intérieur pour des liens plus aérés */
+    border-radius: 5px;
+    margin-bottom: 5px;    /* Espace entre les liens */
+    transition: all 0.3s ease;
+}
 
+/* Style pour le lien survolé */
+.sidebar-nav a:hover {
+    background-color: #f4eef8;
+    color: #8a4baf;
+}
+
+/* Style pour le lien de la page active */
+.sidebar-nav a.active {
+    background-color: #8a4baf;
+    color: #fff;
+}
+
+/* --- 4. La zone de contenu principal --- */
+.main-content {
+    flex-grow: 1;          /* Fait en sorte que cette zone prenne toute la place restante */
+    /* Le style de votre h1 et de votre bouton principal est déjà bon ! */
+}
+
+/* Ajustement pour que le bouton ne soit plus collé à gauche */
+.main-content .bouton-principal {
+    margin-left: 0; /* On retire la marge de 5% qui n'est plus utile */
+}
+
+.main-content h1 {
+    padding-top: 0; /* On retire la grande marge du haut qui n'est plus nécessaire */
+}
+
+/* ================== Style du Bouton d'Action Principal ================== */
+
+.btn-save {
+    /* --- Apparence --- */
+    display: inline-block; /* Permet d'appliquer des marges et un padding */
+    background-color: var(--brand); /* La couleur orange de votre marque */
+    color: var(--paper);            /* Texte en blanc pour un bon contraste */
+    padding: 14px 32px;             /* Marge intérieure pour un bouton plus grand et cliquable */
+    border-radius: 50px;           
+    border: none;                 
+    
+    /* --- Typographie --- */
+    font-family: "DM Sans", sans-serif; /* Assure la cohérence de la police */
+    font-weight: 700;               /* Texte en gras */
+    font-size: 1em;
+    text-decoration: none;          /* Supprime le soulignement par défaut des liens */
+    text-align: center;             /* Centre le texte si jamais il passe sur deux lignes */
+
+    /* --- Effets --- */
+    cursor: pointer;                /* Le curseur se transforme en main au survol */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Ombre discrète pour un effet de profondeur */
+    transition: all 0.3s ease;      /* Animation fluide pour toutes les transitions */
+}
+
+/* --- Style au survol de la souris --- */
+.btn-save:hover {
+    transform: translateY(-3px);    /* Le bouton se soulève légèrement */
+    box-shadow: 0 7px 20px rgba(245, 149, 30, 0.2); /* Ombre plus prononcée et colorée */
+}
+
+
+/* ================== FOOTER ================== */
+.main-footer{
+  background:#fbf1ef;border-top:1px solid var(--line);padding:36px 0;margin-top:40px
+}
+.main-footer .container{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  color:var(--text-muted);font-size:14px;
+}
+.footer-links a{margin-left:18px}
+.footer-links a:hover{color:var(--accent)}
+
+/* ================== ACCESSIBILITÉ ================== */
+a:focus-visible, .btn:focus-visible{
+  outline:3px solid rgba(0,77,64,.35); outline-offset:2px; border-radius:12px;
 }

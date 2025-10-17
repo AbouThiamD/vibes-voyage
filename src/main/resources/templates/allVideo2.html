@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Toutes les vidéos</title>
+
+  <!-- Font Awesome (icônes) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- TON fichier CSS (place-le bien dans /static/CSS/) -->
+  <link rel="stylesheet" th:href="@{/CSS/tableauALLvideo.css}" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="wrap">
+    <header class="hero">
+      <h1>Vidéos de Vibes Voyage</h1>
+    </header>
+
+
+    <section class="card">
+      <!-- (optionnel) mini barre outils -->
+      <div class="toolbar">
+        <input type="search" placeholder="Rechercher une vidéo…" aria-label="Rechercher" />
+        <span class="chip" th:text="${#lists.size(video)} + ' éléments'">0 élément</span>
+      </div>
+
+      <!-- zone scrollable horizontale -->
+      <div class="table-wrap" role="region" aria-label="Liste des vidéos" tabindex="0">
+        <table class="table" role="table" aria-label="Tableau des vidéos">
+          <thead>
+            <tr>
+              <th>Nom de la vidéo</th>
+              <th>Date</th>
+              <th>Catégorie</th>
+              <th>Description</th>
+              <th>Vidéo</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="v : ${video}">
+              <td data-label="Nom de la vidéo" th:text="${v.nomVideo}"></td>
+              <td data-label="Date" th:text="${v.date}"></td>
+              <td data-label="Catégorie" th:text="${v.categorie != null ? v.categorie.nomCategorie : '—'}"></td>
+              <td data-label="Description" th:text="${v.description}"></td>
+
+              <!-- Aperçu vidéo -->
+              <td data-label="Vidéo">
+                <video class="mini" th:src="@{/files/{file}(file=${v.url})}"
+                       preload="metadata" controls></video>
+              </td>
+
+              <!-- Actions -->
+              <td data-label="Action" class="actions">
+                <a class="btn" th:href="@{/videos/{id}/edit(id=${v.id})}" title="Éditer">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                <a class="btn danger"
+                   th:href="@{/deleteVideo/{id}(id=${v.id})}"
+                   title="Supprimer"
+                   onclick="return confirm('Voulez-vous vraiment supprimer cette vidéo ?');">
+                  <i class="fa-solid fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Messages flash -->
+    <div class="flash">
+      <p th:if="${succMsg}" class="ok" th:text="${succMsg}"></p>
+      <p th:if="${errorMsg}" class="err" th:text="${errorMsg}"></p>
+    </div>
+
+    <footer class="foot">
+      <a class="btn link" href="/Admin">Revenir au tableau de bord</a>
+    </footer>
+  </div>
+</body>
+</html>

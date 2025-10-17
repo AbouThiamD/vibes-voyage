@@ -1,3 +1,14 @@
+:root{
+  --bg:#0f1115;
+  --card:#151923;
+  --muted:#8b91a1;
+  --text:#e8ecf3;
+  --brand:#8b5cf6;
+  --line:#212634;
+  --radius:16px;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
 body {
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
@@ -223,3 +234,6 @@ tbody tr:hover{
     background-color: #5a6268;
     transform: translateY(-2px);
 }
+
+
+

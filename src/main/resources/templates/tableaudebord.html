@@ -1,198 +1,101 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security6">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vibes Voyage — Tableau de bord</title>
 
-  <!-- Icônes -->
   <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>
-
-  <!-- Styles -->
   <link rel="stylesheet" href="/CSS/accueil.css">
   <link rel="stylesheet" href="/CSS/tableaudebord.css">
 </head>
 <body class="dashboard">
-  <!-- ===== Header (identique à l’accueil) ===== -->
-      <!-- HEADER (identique à l'accueil) -->
+
 <header class="site-header">
-    <div class="container">
-      <a class="brand" href="/card">
-        <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
-      </a>
-  
-      <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-        <ul class="menu">
-          <li><a href="/card">Accueil</a></li>
-  
-          <!-- Menu déroulant Destination -->
-           <li class="has-submenu">
-          <a href="/destination" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-         <ul class="submenu" th:if="${categories}">
-  <li th:each="cat : ${categories}">
-    <a th:href="@{|/videos?categorie=${cat.id}|}"
-       th:text="${cat.nomCategorie}">Catégorie</a>
-  </li>
-</ul>
+  <div class="container">
+    <a class="brand" href="/card">
+      <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
+    </a>
 
+    <nav class="nav" aria-label="Navigation principale">
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="menu" id="main-menu">
+        <li><a href="/card">Accueil</a></li>
+
+        <li class="has-submenu">
+          <a th:href="@{/destination}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+          <ul class="submenu" th:if="${categories}">
+            <li th:each="cat : ${categories}" th:with="n=${#strings.toLowerCase(#strings.trim(cat.nomCategorie))}">
+              <th:block th:switch="${n}">
+                <a th:case="'afrique'"           th:href="@{/Afrique}"        th:text="${cat.nomCategorie}">Afrique</a>
+                <a th:case="'amérique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amérique du Nord</a>
+                <a th:case="'amerique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amerique du Nord</a>
+                <a th:case="'amérique du sud'"   th:href="@{/AmeriqueDuSud}"  th:text="${cat.nomCategorie}">Amérique du Sud</a>
+                <a th:case="'amerique du sud'"   th:href="@{/AmeriqueDuSud}"  th:text="${cat.nomCategorie}">Amerique du Sud</a>
+                <a th:case="'europe'"            th:href="@{/Europe}"         th:text="${cat.nomCategorie}">Europe</a>
+                <a th:case="'asie'"              th:href="@{/Asie}"           th:text="${cat.nomCategorie}">Asie</a>
+                <a th:case="'océanie'"           th:href="@{/Oceanie}"        th:text="${cat.nomCategorie}">Océanie</a>
+                <a th:case="'oceanie'"           th:href="@{/Oceanie}"        th:text="${cat.nomCategorie}">Oceanie</a>
+                <a th:case="*"                   th:href="@{|/videos?categorie=${cat.id}|}" th:text="${cat.nomCategorie}">Catégorie</a>
+              </th:block>
+            </li>
+          </ul>
         </li>
 
-  
-          <li><a href="/Tableau">Tableau de bord</a></li>
-          <li><a href="/Contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ===== Layout Dashboard ===== -->
-  <div class="blockBord">
-    <!-- Sidebar -->
-    <aside id="nav">
-      <ul>
-        <li><span id="bord">Tableau de bord</span></li>
-        <li>
-          <a href="#" class="active">
-            <i class="fas fa-house"></i>
-            <span class="nav-item">Home</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fas fa-user"></i>
-            <span class="nav-item">Profil</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class="fas fa-tasks"></i>
-            <span class="nav-item">Vidéos</span>
-          </a>
-        </li>
-        <li>
-          <a href="/video/new">
-            <i class="fas fa-plus"></i>
-            <span class="nav-item">Ajouter une vidéo</span>
-          </a>
-        </li>
+        <li><a href="/Tableau">Tableau de bord</a></li>
+        <li><a href="/Contact">Contact</a></li>
       </ul>
-    </aside>
-
-    <!-- Contenu -->
-    <main class="main">
-      <section class="main-skills">
-        <div class="card">
-          <i class="fa-solid fa-circle-plus"></i>
-          <button onclick="window.location.href='/video/new'" id="txte">Ajouter une vidéo</button>
-        </div>
-      </section>
-
-      <section class="vosVideos">
-        <table>
-          <caption>Vos vidéos</caption>
-          <thead>
-            <tr>
-              <th scope="col">Nom de la vidéo</th>
-              <th scope="col">Description</th>
-              <th scope="col">Date</th>
-              <th scope="col">Image</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Thymeleaf -->
-            <tr th:each="video, status : ${videos}">
-              <td data-label="Nom" th:text="${video.nomVideo}">Nom</td>
-              <td data-label="Description" th:text="${video.description}">Desc</td>
-              <td data-label="Date" th:text="${#dates.format(video.date, 'dd/MM/yyyy')}">01/01/2025</td>
-              <td data-label="Image"><img th:src="${video.url}" alt=""></td>
-              <td data-label="Actions">
-                <a th:href="@{/video/edit/{id}(id=${video.id})}" class="boutonVideo">Modifier</a>
-                <a th:href="@{/video/delete/{id}(id=${video.id})}" class="boutonVideo"
-                   onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?');">Supprimer</a>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-    </main>
+    </nav>
   </div>
+</header>
 
-  <!-- ===== Footer (identique à l’accueil) ===== -->
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>Vibes Voyage</h4>
-        <ul>
-          <li><a href="/Contact">Contact</a></li>
-          <li><a href="#">Nos services</a></li>
-          <li><a href="#">Politique</a></li>
-          <li><a href="#">Vibes</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Nos pages</h4>
-        <ul>
-          <li><a href="/card">Accueil</a></li>
-          <li><a href="/destination">Destination</a></li>
-          <li><a href="#">Mes vidéos</a></li>
-          <li><a href="/Contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Continents</h4>
-        <ul>
-          <li><a href="/Afrique">Afrique</a></li>
-          <li><a href="/AmeriqueNord">Amérique du Nord</a></li>
-          <li><a href="/AmeriqueSud">Amérique du Sud</a></li>
-          <li><a href="/Asie">Asie</a></li>
-          <li><a href="/Europe">Europe</a></li>
-          <li><a href="/Oceanie">Océanie</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Suivez-nous</h4>
-        <div class="socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
+
+    <div class="dashboard-container">
+
+        <aside class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="active">Tableau de bord</a></li>
+                <li><a href="#">Voir toutes mes vidéos</a></li>
+                <li><a href="#">Mon profil</a></li>
+                <li><a href="#">Ajouter une vidéo</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <h1>
+                Bonjour <span th:text="${session.authenticatedUser.pseudo}">Utilisateur</span>,
+                que voulez-vous créer aujourd’hui ?
+            </h1>
+            
+            <center>
+              <a href="/FormulairePage" class="btn-save">Enregistrer ma vidéo</a>
+          </center>
+        </main>
+
     </div>
-    <div class="footnote">© 2025 Vibes Voyage — Voyager, comprendre, ressentir.</div>
+
+     <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2025 Vibes Voyage. Tous droits réservés.</p>
+      <div class="footer-links"><a href="#">À propos</a><a href="#">Aide</a><a href="#">Conditions d'utilisation</a></div>
+    </div>
   </footer>
- 
 
-  <!-- ===== JS minimal ===== -->
-  <script>
-    // header blanc au scroll (déjà blanc au chargement grâce à .scrolled)
-    const header = document.querySelector('.site-header');
-    function onScroll(){ header.classList.toggle('scrolled', window.scrollY > 4); }
-    onScroll(); window.addEventListener('scroll', onScroll);
 
-    // burger mobile
-    const burger = document.querySelector('.burger');
-    const menu = document.querySelector('.menu');
-    burger?.addEventListener('click', () => {
+<script>
+  const burger = document.querySelector('.burger');
+  const menu = document.getElementById('main-menu');
+  if (burger && menu) {
+    burger.addEventListener('click', () => {
       const open = menu.classList.toggle('open');
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
+  }
+</script>
 
-    // sous-menu mobile
-    const sub = document.querySelector('.has-submenu > .menu-link');
-    sub?.addEventListener('click', (e) => {
-      if (window.innerWidth <= 900) {
-        e.preventDefault();
-        sub.parentElement.classList.toggle('open');
-      }
-    });
-    
-  </script>
 </body>
 </html>
-
-  

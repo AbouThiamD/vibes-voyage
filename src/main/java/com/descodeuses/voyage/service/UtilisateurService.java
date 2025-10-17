@@ -14,7 +14,8 @@ public interface UtilisateurService {
   Optional<Utilisateur> findByPseudo(String pseudo);
 
   List<Utilisateur> list();
-
+  
+  Optional<Utilisateur> findById(long id);
   void supprimer(Utilisateur utilisateur);
 
   void modifier(Utilisateur utilisateur);

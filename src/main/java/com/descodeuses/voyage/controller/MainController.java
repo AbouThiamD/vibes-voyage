@@ -39,6 +39,43 @@ public class MainController {
         return "Afrique";
     }
 
+    @GetMapping("/Asie")
+    public String Asie() {
+        return "Asie";
+    }
+  @GetMapping({"/AmeriqueDuNord", "/AmeriqueduNord", "/Amerique-du-Nord"})
+    public String ameriqueDuNord() {
+    return "AmeriqueDuNord";
+}
+
+
+    @GetMapping("/AmeriqueDuSud")
+    public String AmeriqueDuSud() {
+        return "AmeriqueDuSud";
+    }
+
+    
+    @GetMapping("/Europe")
+    public String Europe() {
+        return "Europe";
+    }
+
+     @GetMapping("/Oceanie")
+    public String Oceanie() {
+        return "Oceanie";
+    }
+     @GetMapping("/header")
+    public String header() {
+        return "header";
+    }
+
+    @GetMapping("/FormulairePage")
+    public String formulairePage(){
+        return "formulairePage";
+    }
+
+
+
     @GetMapping("/PlayVideos")
     public String MesVideos() {
         return "MesVideos";

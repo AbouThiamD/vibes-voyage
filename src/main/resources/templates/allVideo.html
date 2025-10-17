@@ -1,77 +1,142 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" th:href="@{/CSS/tableauALLvideo.css}">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Toutes les vidéos</title>
+
+  <!-- Font Awesome (icônes crayon/poubelle conservées) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Nouveau CSS (même chemin que tu avais) -->
+  <link rel="stylesheet" th:href="@{/CSS/tableauALLvideo.css}">
 </head>
 <body>
-  <!-- conteneur plein-largeur pour contrer le body en flex/centré -->
-  <div style="width:100%; align-self:stretch; display:block;">
-
-    <header>
-      VIDÉOS DE VIBES VOYAGE
+  <div class="wrap">
+    <header class="hero">
+      <h1>Vidéos de Vibes Voyage</h1>
+      <p class="subtitle">Votre bibliothèque ✨</p>
     </header>
 
-    <section>
-      <div class="wrapper">
+    <section class="card">
+      <!-- Toolbar -->
+      <div class="toolbar">
+        <input type="search" placeholder="Rechercher une vidéo…" aria-label="Rechercher" class="search-input"/>
+        <span class="chip" id="count">—</span>
+      </div>
 
-        <!-- zone scrollable horizontalement, aucun renommage de classe -->
-        <div role="region" aria-label="Liste des vidéos" tabindex="0"
-             style="overflow-x:auto; overflow-y:hidden; -webkit-overflow-scrolling:touch; width:100%; max-width:100%;">
-          <table class="table" style="width:100%; min-width:680px;">
-            <thead>
-              <tr>
-                <th>Nom de la vidéo</th>
-                <th>Date</th>
-                <th>Catégorie</th>
-                <th>Description</th>
-                <th>Vidéo</th>
-                <th>Action</th>
-              </tr>
-            </thead>
+      <!-- Table -->
+      <div class="table-wrap">
+        <table class="table" role="table" aria-label="Liste des vidéos">
+          <thead>
+            <tr>
+              <th scope="col">Nom de la vidéo</th>
+              <th scope="col">Date</th>
+              <th scope="col">Catégorie</th>
+              <th scope="col">Description</th>
+              <th scope="col">Vidéo</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
 
-            <tbody>
-              <tr th:each="v : ${video}">
-                <td th:text="${v.nomVideo}"></td>
-                <td th:text="${v.date}"></td>
-                <td th:text="${v.categorie != null ? v.categorie.nomCategorie : '—'}"></td>
-                <td th:text="${v.description}"></td>
-                <td>
-                  <video th:src="@{/files/{file}(file=${v.url})}" controls width="150" height="100"></video>
-                </td>
-                <td class="lienBlanc">
-                  <!-- Bouton modifier -->
-                  <a th:href="@{/videos/{id}/edit(id=${v.id})}" title="Éditer">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                  </a>
-                  <!-- Bouton supprimer -->
-                  <a th:href="@{/deleteVideo/{id}(id=${v.id})}"
-                     onclick="return confirm('Voulez-vous vraiment supprimer cette vidéo ?');">
-                    <i class="fa-solid fa-trash" style="color:red;"></i>
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+          <tbody>
+            <tr th:each="v : ${video}">
+              <!-- Nom -->
+              <td>
+                <div class="cell cell-name">
+                  <span class="avatar" aria-hidden="true"></span>
+                  <span th:text="${v.nomVideo}">Nom</span>
+                </div>
+              </td>
 
+              <!-- Date -->
+              <td class="num">
+                <div class="cell" th:text="${v.date}">00/00/0000</div>
+              </td>
+
+              <!-- Catégorie -->
+              <td>
+                <div class="cell" th:text="${v.categorie != null ? v.categorie.nomCategorie : '—'}">Catégorie</div>
+              </td>
+
+              <!-- Description -->
+              <td>
+                <div class="cell" th:text="${v.description}">Description…</div>
+              </td>
+
+              <!-- Vidéo -->
+              <td>
+                <div class="cell">
+                  <video th:src="@{/files/{file}(file=${v.url})}" controls width="180" height="110"></video>
+                </div>
+              </td>
+
+              <!-- Actions -->
+              <td class="lienBlanc">
+                <a class="icon-btn edit" th:href="@{/videos/{id}/edit(id=${v.id})}" title="Modifier" aria-label="Modifier">
+                  <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+                </a>
+
+                <a class="icon-btn danger"
+                   th:href="@{/deleteVideo/{id}(id=${v.id})}"
+                   title="Supprimer" aria-label="Supprimer"
+                   onclick="return confirm('Voulez-vous vraiment supprimer cette vidéo ?');">
+                  <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
-    <!-- Messages flash (inchangés) -->
-    <center>
-      <p th:if="${succMsg}" style="color:green;font-weight:bold" th:text="${succMsg}"></p>
-      <p th:if="${errorMsg}" style="color:red;font-weight:bold" th:text="${errorMsg}"></p>
-    </center>
+    <!-- Messages flash -->
+    <div class="flash">
+      <p th:if="${succMsg}" class="flash-success" th:text="${succMsg}"></p>
+      <p th:if="${errorMsg}" class="flash-error" th:text="${errorMsg}"></p>
+    </div>
 
-    <footer>
-      <a href="/Admin">Revenir au tableau de bord</a>
+    <footer class="page-footer">
+      <a href="/Admin" class="back-link">Revenir au tableau de bord</a>
     </footer>
-
   </div>
+
+  <!-- JS léger : labels mobiles + recherche + compteur -->
+  <script>
+    (function(){
+      const table = document.querySelector('table.table');
+      if(!table) return;
+
+      // 1) data-label pour mobile à partir des en-têtes
+      const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+      table.querySelectorAll('tbody tr').forEach(tr => {
+        Array.from(tr.children).forEach((td, i) => {
+          td.setAttribute('data-label', headers[i] || '');
+        });
+      });
+
+      // 2) Filtre recherche
+      const input = document.querySelector('.search-input');
+      const rows = Array.from(table.querySelectorAll('tbody tr'));
+      const chip = document.getElementById('count');
+
+      function updateCount(){
+        const visible = rows.filter(r => r.style.display !== 'none').length;
+        chip.textContent = visible + (visible > 1 ? ' éléments' : ' élément');
+      }
+
+      if(input){
+        input.addEventListener('input', () => {
+          const q = input.value.trim().toLowerCase();
+          rows.forEach(r => {
+            const text = r.innerText.toLowerCase();
+            r.style.display = text.includes(q) ? '' : 'none';
+          });
+          updateCount();
+        });
+      }
+      updateCount();
+    })();
+  </script>
 </body>
 </html>

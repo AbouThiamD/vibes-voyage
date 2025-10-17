@@ -1,62 +1,110 @@
 <!DOCTYPE html>
 <html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Tous les utilisateurs</title>
 
-  <!-- Garde ton CSS existant -->
-  <link rel="stylesheet" th:href="@{/CSS/all.css}">
-  <!-- Si tu utilises des icônes (facultatif) -->
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" th:href="@{/CSS/alltable.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 </head>
 <body>
+  <div class="wrap">
+    <header class="hero">
+      <h1>Liste des utilisateurs</h1>
+      <p class="subtitle">Gestion des comptes</p>
+    </header>
 
-  <header>
-    <h1>Liste des utilisateurs</h1>
-  </header>
+    <section class="card">
+      <div class="toolbar">
+        <input class="search-input" type="search" placeholder="Rechercher un utilisateur…" aria-label="Rechercher" />
+        <span class="chip" id="count">—</span>
+      </div>
 
-  <main>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom d’utilisateur</th>
-          <th>Email</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+      <div class="table-wrap">
+        <table class="table" role="table" aria-label="Liste des utilisateurs">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nom d’utilisateur</th>
+              <th scope="col">Email</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
 
-      <tbody>
-        <!-- IMPORTANT : on boucle sur 'utilisateurs' (pas 'video') -->
-        <tr th:each="u : ${utilisateurs}">
-          <td th:text="${u.id}">1</td>
+          <tbody>
+            <tr th:each="u : ${utilisateurs}">
+              <td><div class="cell num" th:text="${u.id}">1</div></td>
 
-          <!-- Adapte ce champ au nom réel dans ta classe Utilisateur :
-               le plus courant est 'username'. Si chez toi c'est 'login' ou 'nomUtilisateur',
-               remplace juste 'username' ci-dessous. -->
-          <td th:text="${u.username}">jdupont</td>
+              <td>
+                <div class="cell cell-name">
+                  <span class="avatar" aria-hidden="true"></span>
+                  <span th:text="${u.pseudo}">jdupont</span>
+                </div>
+              </td>
 
-          <!-- Idem pour l'email : 'email' est courant. S'il s'appelle autrement,
-               remplace simplement 'email'. -->
-          <td th:text="${u.email}">jd@example.com</td>
+              <td><div class="cell" th:text="${u.email}">jd@example.com</div></td>
+<td class="lienBlanc">
+  <!-- Supprimer (poubelle) -->
+  <a class="icon-btn danger"
+     th:href="@{/utilisateurs/{id}/delete(id=${u.id})}"
+     title="Supprimer" aria-label="Supprimer"
+     onclick="return confirm('Supprimer cet utilisateur ?')">
+    <i class="fa-solid fa-trash" aria-hidden="true"></i>
+  </a>
+</td>
 
-          <td class="lienBlanc">
-          
-            <a th:href="@{/utilisateurs/{id}/delete(id=${u.id})}"
-               onclick="return confirm('Supprimer cet utilisateur ?')" title="Supprimer">
-              <i class="fa-solid fa-trash" style="color:red;"></i>
-            </a>
-          </td>
-        </tr>
+              </td>
+            </tr>
 
-        <!-- Optionnel : message si liste vide -->
-        <tr th:if="${#lists.isEmpty(utilisateurs)}">
-          <td colspan="4">Aucun utilisateur.</td>
-        </tr>
-      </tbody>
-    </table>
-  </main>
+            <tr th:if="${#lists.isEmpty(utilisateurs)}">
+              <td colspan="4"><div class="cell">Aucun utilisateur.</div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <footer class="page-footer">
+      <a href="/Admin" class="back-link">Revenir au tableau de bord</a>
+    </footer>
+  </div>
 
+  <!-- JS : labels mobiles + recherche + compteur -->
+  <script>
+    (function(){
+      const table = document.querySelector('table.table');
+      if(!table) return;
+
+      // 1) data-label pour mobile (copie les en-têtes)
+      const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+      table.querySelectorAll('tbody tr').forEach(tr => {
+        Array.from(tr.children).forEach((td, i) => td.setAttribute('data-label', headers[i] || ''));
+      });
+
+      // 2) Filtre + compteur
+      const input = document.querySelector('.search-input');
+      const rows = Array.from(table.querySelectorAll('tbody tr')).filter(r => !r.hasAttribute('th:if')); // évite la ligne "vide"
+      const chip = document.getElementById('count');
+
+      function updateCount(){
+        const visible = rows.filter(r => r.style.display !== 'none').length;
+        if (chip) chip.textContent = visible + (visible > 1 ? ' utilisateurs' : ' utilisateur');
+      }
+
+      if(input){
+        input.addEventListener('input', () => {
+          const q = input.value.trim().toLowerCase();
+          rows.forEach(r => {
+            // ignore la ligne "Aucun utilisateur." si présente
+            if (r.querySelector('[th\\:if]')) return;
+            const text = r.innerText.toLowerCase();
+            r.style.display = text.includes(q) ? '' : 'none';
+          });
+          updateCount();
+        });
+      }
+      updateCount();
+    })();
+  </script>
 </body>
 </html>

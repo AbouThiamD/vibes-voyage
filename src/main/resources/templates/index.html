@@ -7,6 +7,7 @@
 
   <!-- Ton CSS global (même header/footer que l’accueil) -->
   <link rel="stylesheet" href="/CSS/accueil.css">
+  
   <!-- CSS spécifique à cette page -->
   <link rel="stylesheet" href="/CSS/style.css">
 </head>
@@ -27,16 +28,44 @@
       <ul class="menu">
         <li><a href="/card">Accueil</a></li>
 
-        <!-- Menu déroulant Destination -->
-          <li class="has-submenu">
-          <a href="/destination" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-         <ul class="submenu" th:if="${categories}">
-      <li th:each="cat : ${categories}">
-        <a th:href="@{|/videos?categorie=${cat.id}|}"
-       th:text="${cat.nomCategorie}">Catégorie</a>
-     </li>
-        </ul>
+       <li class="has-submenu">
+  <a th:href="@{/destination}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
 
+  <ul class="submenu" th:if="${categories}">
+    <li th:each="cat : ${categories}" th:with="n=${#strings.toLowerCase(#strings.trim(cat.nomCategorie))}">
+      <th:block th:switch="${n}">
+        <!-- Afrique -->
+        <a th:case="'afrique'"
+           th:href="@{/Afrique}" th:text="${cat.nomCategorie}">Afrique</a>
+
+        <!-- Amérique du Nord -->
+        <a th:case="'amérique du nord'" th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amérique du nord</a>
+        <a th:case="'Amerique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amerique du nord</a>
+
+        <!-- Amérique du Sud -->
+        <a th:case="'amérique du sud'" th:href="@{/AmeriqueDuSud}" th:text="${cat.nomCategorie}">Amérique du sud</a>
+        <a th:case="'amerique du sud'"  th:href="@{/AmeriqueDuSud}" th:text="${cat.nomCategorie}">Amerique du sud</a>
+
+        <!-- Europe -->
+        <a th:case="'europe'"
+           th:href="@{/Europe}" th:text="${cat.nomCategorie}">Europe</a>
+
+        <!-- Asie -->
+        <a th:case="'asie'"
+           th:href="@{/Asie}" th:text="${cat.nomCategorie}">Asie</a>
+
+        <!-- Océanie -->
+        <a th:case="'océanie'" th:href="@{/Oceanie}" th:text="${cat.nomCategorie}">Océanie</a>
+        <a th:case="'oceanie'" th:href="@{/Oceanie}" th:text="${cat.nomCategorie}">Oceanie</a>
+
+        <!-- Par défaut (autres catégories) -->
+        <a th:case="*"
+           th:href="@{|/videos?categorie=${cat.id}|}"
+           th:text="${cat.nomCategorie}">Catégorie</a>
+      </th:block>
+    </li>
+  </ul>
+</li>
         </li>
 
 
@@ -90,48 +119,11 @@
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-grid">
-      <div>
-        <h4>Vibes Voyage</h4>
-        <ul>
-          <li><a href="/Contact">Contact</a></li>
-          <li><a href="#">Nos services</a></li>
-          <li><a href="#">Politique</a></li>
-          <li><a href="#">Vibes</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Nos pages</h4>
-        <ul>
-          <li><a href="/card">Accueil</a></li>
-          <li><a href="/destination">Destination</a></li>
-          <li><a href="#">Mes vidéos</a></li>
-          <li><a href="/Contact">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Continents</h4>
-        <ul>
-          <li><a href="/Afrique">Afrique</a></li>
-          <li><a href="/AmeriqueNord">Amérique du Nord</a></li>
-          <li><a href="/AmeriqueSud">Amérique du Sud</a></li>
-          <li><a href="/Asie">Asie</a></li>
-          <li><a href="/Europe">Europe</a></li>
-          <li><a href="/Oceanie">Océanie</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Suivez-nous</h4>
-        <div class="socials">
-          <a href="#"><i class="fab fa-facebook-f"></i></a>
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-      </div>
+    <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2025 Vibes Voyage. Tous droits réservés.</p>
+      <div class="footer-links"><a href="#">À propos</a><a href="#">Aide</a><a href="#">Conditions d'utilisation</a></div>
     </div>
-    <div class="footnote">© 2025 Vibes Voyage — Voyager, comprendre, ressentir.</div>
   </footer>
 
 

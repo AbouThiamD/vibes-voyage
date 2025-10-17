@@ -1,252 +1,235 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="CSS/card.css">
-    <title>Vibes Voyage-Accueil</title>
-    <link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-  crossorigin=""
-/>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="crossorigin=""></script>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vibes Voyage - Accueil</title>
 
-    </head>
-    <body>
-      
-  
- <!-- ===== Header ===== -->
- <!-- <header class="site-header">
-  <div class="container">
-    <a class="brand" href="/card">
-      <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
-    </a>
+  <!-- Styles -->
+  <link rel="stylesheet" href="CSS/card.css" th:href="@{/CSS/card.css}">
 
-    <nav class="nav" aria-label="Navigation principale">
-      <button class="burger" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="menu">
-        <li><a href="/card" class="active">Accueil</a></li>
-        <li><a href="/destination">Destination</a></li>
-        <li><a href="/Tableau">Tableau de bord</a></li>
-        <li><a href="/Contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  <!-- Leaflet -->
+  <link rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+          integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+          crossorigin=""></script>
+</head>
 
-<!-- ===== Hero (image de fond) ===== -->
-<!-- <section class="hero">
-  <div class="hero-inner container">
-    <h1>De beaux endroits<br> à découvrir</h1>
-    <p>Explore le monde depuis ton écran : lieux mythiques, cultures, cuisine et histoires. Avec Vibes Voyage, chaque clic est une nouvelle escale.</p>
-    <div class="hero-ctas">
-      <a href="#destinations" class="btn btn-primary">Explorer</a>
-      <a href="#map" class="btn btn-ghost">Voir la carte du monde</a>
+<body>
+
+  <!-- ===== Header ===== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="/card" th:href="@{/card}">
+        <img src="/IMAGES/logo-Emmy.png" th:src="@{/IMAGES/logo-Emmy.png}" alt="Vibes Voyage" />
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="menu" id="main-menu">
+          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
+
+          
+    <!-- Menu déroulant Destination -->
+<li class="has-submenu">
+  <a th:href="@{/destination}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+
+  <ul class="submenu" th:if="${categories}">
+    <li th:each="cat : ${categories}" th:with="n=${#strings.toLowerCase(#strings.trim(cat.nomCategorie))}">
+      <th:block th:switch="${n}">
+        <!-- Afrique -->
+        <a th:case="'afrique'"
+           th:href="@{/Afrique}" th:text="${cat.nomCategorie}">Afrique</a>
+
+        <!-- Amérique du Nord -->
+        <a th:case="'amérique du nord'" th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amérique du nord</a>
+        <a th:case="'Amerique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amerique du nord</a>
+
+        <!-- Amérique du Sud -->
+        <a th:case="'amérique du sud'" th:href="@{/AmeriqueDuSud}" th:text="${cat.nomCategorie}">Amérique du sud</a>
+        <a th:case="'amerique du sud'"  th:href="@{/AmeriqueDuSud}" th:text="${cat.nomCategorie}">Amerique du sud</a>
+
+        <!-- Europe -->
+        <a th:case="'europe'"
+           th:href="@{/Europe}" th:text="${cat.nomCategorie}">Europe</a>
+
+        <!-- Asie -->
+        <a th:case="'asie'"
+           th:href="@{/Asie}" th:text="${cat.nomCategorie}">Asie</a>
+
+        <!-- Océanie -->
+        <a th:case="'océanie'" th:href="@{/Oceanie}" th:text="${cat.nomCategorie}">Océanie</a>
+        <a th:case="'oceanie'" th:href="@{/Oceanie}" th:text="${cat.nomCategorie}">Oceanie</a>
+
+        <!-- Par défaut (autres catégories) -->
+        <a th:case="*"
+           th:href="@{|/videos?categorie=${cat.id}|}"
+           th:text="${cat.nomCategorie}">Catégorie</a>
+      </th:block>
+    </li>
+  </ul>
+</li>
+
+
+
+          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
+          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-  </div>
-</section> --> 
- <!-- HEADER (identique à l'accueil) -->
- <header class="site-header">
-  <div class="container">
-    <a class="brand" href="/card">
-      <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
-    </a>
+  </header>
 
-    <nav class="nav" aria-label="Navigation principale">
-      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="menu">
-        <li><a href="/card">Accueil</a></li>
-
-        <!-- Menu déroulant Destination -->
-        <li class="has-submenu">
-          <a href="/destination" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-         <ul class="submenu" th:if="${categories}">
-  <li th:each="cat : ${categories}">
-    <a th:href="@{|/videos?categorie=${cat.id}|}"
-       th:text="${cat.nomCategorie}">Catégorie</a>
-  </li>
-</ul>
-
-        </li>
-
-        <li><a href="/Tableau">Tableau de bord</a></li>
-        <li><a href="/Contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-<section class="hero">
-  <div class="hero-inner container">
-    <h1>De beaux endroits<br> à découvrir</h1>
-    <p>Explore le monde depuis ton écran : lieux mythiques, cultures, cuisine et histoires. Avec Vibes Voyage, chaque clic est une nouvelle escale.</p>
-    <div class="hero-ctas">
-      <a href="#destinations" class="btn btn-primary">Explorer</a>
-      <a href="#map" class="btn btn-ghost">Voir la carte du monde</a>
-    </div>
-  </div>
-</section> 
-<!-- ===== Carte du monde ===== -->
-<section id="map" class="section map-section">
-  <div class="container">
-    <h2>Le monde avec Vibes Voyage</h2>
-    <p class="section-sub">Choisis un continent pour commencer l’aventure.</p>
-
-    <div class="chips">
-      <button class="chip is-active">Afrique</button>
-      <button class="chip">Amérique du Nord</button>
-      <button class="chip">Amérique du Sud</button>
-      <button class="chip">Asie</button>
-      <button class="chip">Europe</button>
-      <button class="chip">Océanie</button>
-    </div>
-
-    <!-- Colle ici ton SVG SANS la ligne <?xml ...?> -->
-    <div class="world-map">
-      <div id="mapCanvas" aria-label="Carte du monde interactive"></div>
-
-    
-  </div>
-</section>
-
-<!-- ===== Destinations à la une ===== -->
-<section id="destinations" class="section cards-section">
-  <div class="container">
-    <h2>Venez découvrir les beaux paysages avec Vibes Voyage</h2>
-
-    <div class="card-grid">
-      <article class="card">
-        <img src="/IMAGES/2.jpg" alt="Afrique" loading="lazy">
-        <div class="overlay"><h3>AFRIQUE</h3><a href="/Afrique" class="pill">Voir plus</a></div>
-      </article>
-
-      <article class="card">
-        <img src="/IMAGES/3.jpg" alt="Asie" loading="lazy">
-        <div class="overlay"><h3>ASIE</h3><a href="/Asie" class="pill">Voir plus</a></div>
-      </article>
-
-      <article class="card">
-        <img src="/IMAGES/4.jpg" alt="Océanie" loading="lazy">
-        <div class="overlay"><h3>OCÉANIE</h3><a href="/Oceanie" class="pill">Voir plus</a></div>
-      </article>
-
-      <article class="card">
-        <img src="/IMAGES/5.jpg" alt="Europe" loading="lazy">
-        <div class="overlay"><h3>EUROPE</h3><a href="/Europe" class="pill">Voir plus</a></div>
-      </article>
-
-      <article class="card">
-        <img src="/IMAGES/vitor-rossetto-JFO3WXH724c-unsplash.jpg" alt="Amérique du Sud" loading="lazy">
-        <div class="overlay"><h3>AMÉRIQUE DU SUD</h3><a href="/AmeriqueSud" class="pill">Voir plus</a></div>
-      </article>
-
-      <article class="card">
-        <img src="/IMAGES/nikolaj-habib-JD1fUpTJb8I-unsplash.jpg" alt="Amérique du Nord" loading="lazy">
-        <div class="overlay"><h3>AMÉRIQUE DU NORD</h3><a href="/AmeriqueNord" class="pill">Voir plus</a></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Bénéfices ===== -->
-<section class="section benefits alt">
-  <div class="container">
-    <h2>NON, vous ne perdez pas votre temps</h2>
-    <div class="benefit-grid">
-      <div class="benefit">
-        <i class="fa-solid fa-compass"></i>
-        <h3>Soyez libre</h3>
-        <p>Choisis ton rythme : découvre un pays en 3 minutes ou perds-toi pendant des heures.</p>
-      </div>
-      <div class="benefit">
-        <i class="fa-solid fa-face-smile"></i>
-        <h3>Soyez heureux</h3>
-        <p>Des vidéos lumineuses et des récits positifs pour t’évader sans billet d’avion.</p>
-      </div>
-      <div class="benefit">
-        <i class="fa-solid fa-book-open"></i>
-        <h3>Apprenez</h3>
-        <p>Contexte historique, culture et cuisine locale expliqués simplement.</p>
+  <!-- ===== Hero ===== -->
+  <section class="hero">
+    <div class="hero-inner container">
+      <h1>De beaux endroits<br> à découvrir</h1>
+      <p>
+        Explore le monde depuis ton écran : lieux mythiques, cultures, cuisine et histoires.
+        Avec Vibes Voyage, chaque clic est une nouvelle escale.
+      </p>
+      <div class="hero-ctas">
+        <a href="#destinations" class="btn btn-primary">Explorer</a>
+        <a href="#map" class="btn btn-ghost">Voir la carte du monde</a>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== Feature (image + texte) ===== -->
-<section class="feature section">
-  <div class="container feature-grid">
-    <div class="feature-media">
-      <img src="/IMAGES/pexels-koolshooters-6977381.jpg" alt="Regarder des vidéos de voyage">
-    </div>
-    <div class="feature-copy">
-      <h2>Voyagez de chez vous !</h2>
-      <p>Vibes Voyage réunit cartes interactives, mini-documentaires et itinéraires inspirants pour t’emmener au-delà des photos.</p>
-      <ul class="bullets">
-        <li>Mini-vidéos 1–3 min</li>
-        <li>Lieux vérifiés</li>
-        <li>Conseils pratiques rapides</li>
-      </ul>
-      <a href="/destination" class="btn btn-primary">Regarder les vidéos</a>
-    </div>
-  </div>
-</section>
+  <!-- ===== Carte du monde ===== -->
+  <section id="map" class="section map-section">
+    <div class="container">
+      <h2>Le monde avec Vibes Voyage</h2>
+      <p class="section-sub">Choisis un continent pour commencer l’aventure.</p>
 
+      <div class="chips">
+        <button class="chip is-active">Afrique</button>
+        <button class="chip">Amérique du Nord</button>
+        <button class="chip">Amérique du Sud</button>
+        <button class="chip">Asie</button>
+        <button class="chip">Europe</button>
+        <button class="chip">Océanie</button>
+      </div>
 
-<<footer class="site-footer">
-  <div class="container footer-grid">
-    <div>
-      <h4>Vibes Voyage</h4>
-      <ul>
-        <li><a href="/Contact">Contact</a></li>
-        <li><a href="#">Nos services</a></li>
-        <li><a href="#">Politique</a></li>
-        <li><a href="#">Vibes</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Nos pages</h4>
-      <ul>
-        <li><a href="/card">Accueil</a></li>
-        <li><a href="/destination">Destination</a></li>
-        <li><a href="#">Mes vidéos</a></li>
-        <li><a href="/Contact">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Continents</h4>
-      <ul>
-        <li><a href="/Afrique">Afrique</a></li>
-        <li><a href="/AmeriqueNord">Amérique du Nord</a></li>
-        <li><a href="/AmeriqueSud">Amérique du Sud</a></li>
-        <li><a href="/Asie">Asie</a></li>
-        <li><a href="/Europe">Europe</a></li>
-        <li><a href="/Oceanie">Océanie</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>Suivez-nous</h4>
-      <div class="socials">
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      <div class="world-map">
+        <div id="mapCanvas" aria-label="Carte du monde interactive"></div>
       </div>
     </div>
-  </div>
-  <div class="footnote">© 2025 Vibes Voyage — Voyager, comprendre, ressentir.</div>
-</footer>
+  </section>
 
-<script src="/JS/jsaccueil.js"></script>
-<script defer src="/JS/vibes.js"></script>
+  <!-- ===== Destinations à la une ===== -->
+  <section id="destinations" class="section cards-section">
+    <div class="container">
+      <h2>Venez découvrir les beaux paysages avec Vibes Voyage</h2>
+
+      <div class="card-grid">
+        <article class="card">
+          <img src="/IMAGES/2.jpg" alt="Afrique" loading="lazy">
+          <div class="overlay"><h3>AFRIQUE</h3><a href="/Afrique" class="pill">Voir plus</a></div>
+        </article>
+
+        <article class="card">
+          <img src="/IMAGES/3.jpg" alt="Asie" loading="lazy">
+          <div class="overlay"><h3>ASIE</h3><a href="/Asie" class="pill">Voir plus</a></div>
+        </article>
+
+        <article class="card">
+          <img src="/IMAGES/4.jpg" alt="Océanie" loading="lazy">
+          <div class="overlay"><h3>OCÉANIE</h3><a href="/Oceanie" class="pill">Voir plus</a></div>
+        </article>
+
+        <article class="card">
+          <img src="/IMAGES/5.jpg" alt="Europe" loading="lazy">
+          <div class="overlay"><h3>EUROPE</h3><a href="/Europe" class="pill">Voir plus</a></div>
+        </article>
+
+        <article class="card">
+          <img src="/IMAGES/vitor-rossetto-JFO3WXH724c-unsplash.jpg" alt="Amérique du Sud" loading="lazy">
+          <div class="overlay"><h3>AMÉRIQUE DU SUD</h3><a href="/AmeriqueSud" class="pill">Voir plus</a></div>
+        </article>
+
+        <article class="card">
+          <img src="/IMAGES/nikolaj-habib-JD1fUpTJb8I-unsplash.jpg" alt="Amérique du Nord" loading="lazy">
+          <div class="overlay"><h3>AMÉRIQUE DU NORD</h3><a href="/AmeriqueNord" class="pill">Voir plus</a></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Bénéfices ===== -->
+  <section class="section benefits alt">
+    <div class="container">
+      <h2>NON, vous ne perdez pas votre temps</h2>
+      <div class="benefit-grid">
+        <div class="benefit">
+          <i class="fa-solid fa-compass"></i>
+          <h3>Soyez libre</h3>
+          <p>Choisis ton rythme : découvre un pays en 3 minutes ou perds-toi pendant des heures.</p>
+        </div>
+        <div class="benefit">
+          <i class="fa-solid fa-face-smile"></i>
+          <h3>Soyez heureux</h3>
+          <p>Des vidéos lumineuses et des récits positifs pour t’évader sans billet d’avion.</p>
+        </div>
+        <div class="benefit">
+          <i class="fa-solid fa-book-open"></i>
+          <h3>Apprenez</h3>
+          <p>Contexte historique, culture et cuisine locale expliqués simplement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Feature ===== -->
+  <section class="feature section">
+    <div class="container feature-grid">
+      <div class="feature-media">
+        <img src="/IMAGES/pexels-koolshooters-6977381.jpg" alt="Regarder des vidéos de voyage">
+      </div>
+      <div class="feature-copy">
+        <h2>Voyagez de chez vous !</h2>
+        <p>Vibes Voyage réunit cartes interactives, mini-documentaires et itinéraires inspirants pour t’emmener au-delà des photos.</p>
+        <ul class="bullets">
+          <li>Mini-vidéos 1–3 min</li>
+          <li>Lieux vérifiés</li>
+          <li>Conseils pratiques rapides</li>
+        </ul>
+        <a href="/destination" th:href="@{/destination}" class="btn btn-primary">Regarder les vidéos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2025 Vibes Voyage. Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="#">À propos</a>
+        <a href="#">Aide</a>
+        <a href="#">Conditions d'utilisation</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="/JS/jsaccueil.js" th:src="@{/JS/jsaccueil.js}"></script>
+  <script defer src="/JS/vibes.js" th:src="@{/JS/vibes.js}"></script>
+
+  <!-- Burger toggle minimal (si besoin) -->
+  <script>
+    const burger = document.querySelector('.burger');
+    const menu = document.getElementById('main-menu');
+    if (burger && menu) {
+      burger.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+  </script>
 </body>
 </html>
-    
- 

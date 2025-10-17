@@ -29,63 +29,70 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
   @Override
   public Utilisateur registerUtilisateur(String pseudo, String mdp, String email) {
-    if (pseudo == null || mdp == null || email == null) return null;
+    if (pseudo == null || pseudo.isBlank() ||
+        mdp == null || mdp.isBlank() ||
+        email == null || email.isBlank()) {
+      throw new IllegalArgumentException("Champs requis manquants");
+    }
 
-    // vérifie l’unicité du pseudo
-    if (utilisateurRepository.findByPseudo(pseudo).isPresent()) {
-      return null;
+    if (utilisateurRepository.existsByPseudoIgnoreCase(pseudo)) {
+      throw new IllegalStateException("Pseudo déjà pris");
     }
 
     Utilisateur u = new Utilisateur();
-    u.setPseudo(pseudo);
-    u.setMdp(passwordEncoder.encode(mdp)); // hash BCrypt
-    u.setEmail(email);
+    u.setPseudo(pseudo.trim());
+    u.setEmail(email.trim());
+    u.setMdp(passwordEncoder.encode(mdp)); // BCrypt
     u.setEnabled(true);
 
-     Role roleUser = roleRepository.findByNom("ROLE_USER")
-        .orElseThrow(() -> new IllegalStateException("ROLE_USER manquant en base"));
-    u.setRole(roleUser);
 
+    Role roleUser = roleRepository.findByNom("ROLE_USER")
+        .orElseThrow(() -> new IllegalStateException("Rôle USER manquant en base"));
     
+
+    u.setRole(roleUser);
     return utilisateurRepository.save(u);
   }
 
+  /** Utile seulement si tu fais une auth "maison".
+      Si tu utilises Spring Security (formLogin), tu peux ignorer cette méthode. */
   @Override
   public Utilisateur authenticate(String pseudo, String mdp) {
-    // compare le mot de passe avec PasswordEncoder (pas en clair)
-    return utilisateurRepository.findByPseudo(pseudo)
+    return utilisateurRepository.findFirstByPseudoIgnoreCaseOrderByIdAsc(pseudo)
         .filter(u -> passwordEncoder.matches(mdp, u.getMdp()))
         .orElse(null);
   }
 
-  @Override
-public Utilisateur creerAdmin(String pseudo, String mdp, String email) {
-    if (pseudo == null || mdp == null || email == null) return null;
 
-    // 1. Vérification de l'unicité
-    if (utilisateurRepository.findByPseudo(pseudo).isPresent()) {
-        // Idéalement, lancez ici une exception personnalisée (ex: PseudoDejaPrisException)
-        return null; 
+
+
+  @Override
+  public Utilisateur creerAdmin(String pseudo, String mdp, String email) {
+    if (pseudo == null || pseudo.isBlank() ||
+        mdp == null || mdp.isBlank() ||
+        email == null || email.isBlank()) {
+      throw new IllegalArgumentException("Champs requis manquants");
+    }
+    if (utilisateurRepository.existsByPseudoIgnoreCase(pseudo)) {
+      throw new IllegalStateException("Pseudo déjà pris");
     }
 
     Utilisateur u = new Utilisateur();
-    // Le 'login' du formulaire est le 'pseudo' de l'entité
-    u.setPseudo(pseudo);
-    u.setEmail(email);
-    // Le 'motDePasse' du formulaire est haché en 'mdp' pour l'entité
-    u.setMdp(passwordEncoder.encode(mdp)); 
+    u.setPseudo(pseudo.trim());
+    u.setEmail(email.trim());
+    u.setMdp(passwordEncoder.encode(mdp));
     u.setEnabled(true);
 
-    // 2. Récupération du Rôle ADMIN
-    // Assurez-vous que "ROLE_ADMIN" existe dans votre table Role !
-    Role roleAdmin = roleRepository.findByNom("ROLE_ADMIN")
-         .orElseThrow(() -> new IllegalStateException("Le Rôle 'ROLE_ADMIN' est manquant. Vérifiez la base de données."));
-         
-    u.setRole(roleAdmin); 
+    // ➜ Si base = 'ADMIN'/'USER' :
+    Role roleAdmin = roleRepository.findByNom("ADMIN")
+        .orElseThrow(() -> new IllegalStateException("Rôle ADMIN manquant en base"));
+    // ➜ Si base = 'ROLE_ADMIN', adapte en conséquence.
 
-    // 3. Sauvegarde en base de données
-    return utilisateurRepository.save(u); // <-- C'est l'insertion finale !
+    u.setRole(roleAdmin);
+    return utilisateurRepository.save(u);
   }
+
+
   @Override
   public Optional<Utilisateur> findByPseudo(String pseudo) {
     return utilisateurRepository.findByPseudo(pseudo);
@@ -100,6 +107,10 @@ public Utilisateur creerAdmin(String pseudo, String mdp, String email) {
   public void supprimer(Utilisateur utilisateur) {
     utilisateurRepository.delete(utilisateur);
   }
+  @Override
+  public Optional<Utilisateur> findById(long id) {
+  return utilisateurRepository.findById(id);
+}
 
   @Override
   public void modifier(Utilisateur utilisateur) {
