@@ -89,7 +89,9 @@
                 <span class="video-category"
                       th:text="${v.categorie != null ? v.categorie.nomCategorie : 'Catégorie'}">Catégorie</span>
                 <h3 th:text="${v.nomVideo}">Titre</h3>
-                <small th:text="${v.date != null ? #temporals.format(v.date, 'dd/MM/yyyy') : ''}"></small>
+               <small th:if="${v.date != null}" th:text="${#dates.format(v.date, 'dd/MM/yyyy')}"></small>
+
+
               </div>
             </a>
           </article>

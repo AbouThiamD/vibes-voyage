@@ -45,6 +45,6 @@ public class ContinentController {
         model.addAttribute("videos", videos);
         model.addAttribute("cat", cat);
         model.addAttribute("categories", categorieRepository.findAll());
-        return "/Afrique"; // copie/renomme Afrique.html -> continent.html
+        return "Afrique"; // copie/renomme Afrique.html -> continent.html
     }
 }
