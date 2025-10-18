@@ -3,6 +3,7 @@ package com.descodeuses.voyage.model;
 import java.sql.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -39,8 +40,12 @@ public class Video {
     @JoinColumn(name = "categorie_id") 
     private Categorie categorie;
 
+    @Column(name = "video") 
     private String url;
 
+    @Column(name = "image")   
+    private String image;
+     
     @OneToMany(mappedBy = "video")
     private List<Commentaire> commentaire;
 

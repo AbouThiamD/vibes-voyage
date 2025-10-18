@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title th:text="${title} ?: 'Toutes les vidéos'">Toutes les vidéos</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" th:href="@{/CSS/header.css}" />
+  <link rel="stylesheet" th:href="@{/CSS/videoAll.css}" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" th:href="@{/card}">
+        <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
+      </a>
+
+      <nav class="nav" aria-label="Navigation principale">
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+        <ul class="menu" id="main-menu">
+          <li><a th:href="@{/card}">Accueil</a></li>
+
+          <li class="has-submenu">
+            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+            <ul class="submenu" th:if="${categories}">
+              <li th:each="c : ${categories}">
+                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
+              </li>
+            </ul>
+          </li>
+
+          <li><a th:href="@{/Tableau}">Tableau de bord</a></li>
+          <li><a th:href="@{/Contact}">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <header class="page-head">
+      <div class="title">
+        <h1 th:text="${title} ?: 'Toutes les vidéos'">Toutes les vidéos</h1>
+        <small th:if="${selectedCategorieId != null}">• filtrées</small>
+      </div>
+
+      <form class="filters" method="get" th:action="@{/videos}">
+        <div class="select">
+          <select name="categorieId">
+            <option value="">Toutes les catégories</option>
+            <option th:each="c : ${categories}"
+                    th:value="${c.id}"
+                    th:selected="${selectedCategorieId != null} and (c.id == selectedCategorieId)"
+                    th:text="${c.nomCategorie}">
+              Catégorie
+            </option>
+          </select>
+        </div>
+
+        <noscript><button class="btn btn-ghost" type="submit">Filtrer</button></noscript>
+        <a class="btn-reset" th:if="${selectedCategorieId != null}" th:href="@{/videos}">Réinitialiser</a>
+      </form>
+    </header>
+
+    <div class="empty" th:if="${#lists.isEmpty(videos)}">Aucune vidéo trouvée.</div>
+
+    <section class="grid" th:if="${!#lists.isEmpty(videos)}">
+      <article class="card card--media" th:each="v : ${videos}">
+        <div class="thumb">
+          <img th:src="${#strings.isEmpty(v.image) ? '/IMAGES/Continents/afrique-hero.jpg' : v.image}"
+               th:alt="${v.nomVideo} ?: 'Vignette vidéo'">
+
+          <!-- Overlay (titre + boutons) -->
+          <div class="overlay">
+            <h3 class="overlay-title" th:text="${v.nomVideo}">Titre de la vidéo</h3>
+
+            <div class="actions actions-overlay">
+              <!-- Éditer -->
+              <a class="btn btn-glass" th:href="@{/video/edit/{id}(id=${v.id})}">
+                <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+                </svg>
+                <span>Éditer</span>
+              </a>
+
+              <!-- Supprimer -->
+              <form th:action="@{/video/delete/{id}(id=${v.id})}" method="post"
+                    onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?');">
+                <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
+                <button type="submit" class="btn btn-glass btn-glass--danger">
+                  <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 7h12v2H6V7zm2 4h2v7H8v-7zm6 0h2v7h-2v-7zM9 4h6l1 1h3v2H5V5h3l1-1z" fill="currentColor"/>
+                  </svg>
+                  <span>Supprimer</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Meta sous la carte (facultatif) -->
+        <div class="meta-bar">
+          <span th:if="${v.categorie != null}" th:text="${v.categorie.nomCategorie}">Catégorie</span>
+          <span th:if="${v.date != null}" th:text="${#dates.format(v.date,'dd/MM/yyyy')}">01/01/2025</span>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="container">
+      <p>&copy; 2025 Vibes Voyage. Tous droits réservés.</p>
+      <div class="footer-links">
+        <a href="#">À propos</a>
+        <a href="#">Aide</a>
+        <a href="#">Conditions d'utilisation</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      var form = document.querySelector('.filters');
+      if(!form) return;
+      var select = form.querySelector('select[name="categorieId"]');
+      if(select){ select.addEventListener('change', function(){ form.submit(); }); }
+    })();
+  </script>
+</body>
+</html>

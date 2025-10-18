@@ -19,37 +19,29 @@
       <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
     </a>
 
-    <nav class="nav" aria-label="Navigation principale">
-      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <ul class="menu" id="main-menu">
-        <li><a href="/card">Accueil</a></li>
+   <nav class="nav" aria-label="Navigation principale">
+        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
 
-        <li class="has-submenu">
-          <a th:href="@{/destination}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-          <ul class="submenu" th:if="${categories}">
-            <li th:each="cat : ${categories}" th:with="n=${#strings.toLowerCase(#strings.trim(cat.nomCategorie))}">
-              <th:block th:switch="${n}">
-                <a th:case="'afrique'"           th:href="@{/Afrique}"        th:text="${cat.nomCategorie}">Afrique</a>
-                <a th:case="'amérique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amérique du Nord</a>
-                <a th:case="'amerique du nord'"  th:href="@{/AmeriqueDuNord}" th:text="${cat.nomCategorie}">Amerique du Nord</a>
-                <a th:case="'amérique du sud'"   th:href="@{/AmeriqueDuSud}"  th:text="${cat.nomCategorie}">Amérique du Sud</a>
-                <a th:case="'amerique du sud'"   th:href="@{/AmeriqueDuSud}"  th:text="${cat.nomCategorie}">Amerique du Sud</a>
-                <a th:case="'europe'"            th:href="@{/Europe}"         th:text="${cat.nomCategorie}">Europe</a>
-                <a th:case="'asie'"              th:href="@{/Asie}"           th:text="${cat.nomCategorie}">Asie</a>
-                <a th:case="'océanie'"           th:href="@{/Oceanie}"        th:text="${cat.nomCategorie}">Océanie</a>
-                <a th:case="'oceanie'"           th:href="@{/Oceanie}"        th:text="${cat.nomCategorie}">Oceanie</a>
-                <a th:case="*"                   th:href="@{|/videos?categorie=${cat.id}|}" th:text="${cat.nomCategorie}">Catégorie</a>
-              </th:block>
-            </li>
-          </ul>
-        </li>
+        <ul class="menu" id="main-menu">
+          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
 
-        <li><a href="/Tableau">Tableau de bord</a></li>
-        <li><a href="/Contact">Contact</a></li>
-      </ul>
-    </nav>
+          <!-- Destination avec un seul contrôleur /continent?id=... -->
+          <li class="has-submenu">
+            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+
+            <ul class="submenu" th:if="${categories}">
+              <li th:each="c : ${categories}">
+                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
+              </li>
+            </ul>
+          </li>
+
+          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
+          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
+        </ul>
+      </nav>
   </div>
 </header>
 
@@ -58,8 +50,8 @@
 
         <aside class="sidebar-nav">
             <ul>
-                <li><a href="#" class="active">Tableau de bord</a></li>
-                <li><a href="#">Voir toutes mes vidéos</a></li>
+                <li><a href="/Tableau" class="active">Tableau de bord</a></li>
+                <li><a href="/toutes-les-videos">Voir toutes mes vidéos</a></li>
                 <li><a href="#">Mon profil</a></li>
                 <li><a href="#">Ajouter une vidéo</a></li>
             </ul>

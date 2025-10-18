@@ -1,0 +1,143 @@
+/* --- Variables de Design --- */
+:root {
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-title: "Lora", serif;
+  
+  --color-background: #ffffff; /* Un fond blanc pur pour un look net */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555555;
+  --color-border: #eaeaea;
+  
+  /* L'accent de votre marque */
+  --color-accent: #008c7a; /* Un vert-turquoise "voyage" */
+  --color-accent-light: #e0f7fa;
+}
+
+/* --- Styles Globaux --- */
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Conteneur & Grille --- */
+.watch-wrap {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.watch-grid {
+  display: grid;
+  grid-template-columns: 2.3fr 1fr; 
+  gap: 40px; /* Plus d'espace pour un look aéré */
+}
+
+/* --- Responsive : 1 colonne sur mobile --- */
+@media (max-width: 950px) {
+  .watch-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+/* --- Lecteur Vidéo (colonne principale) --- */
+.watch-player video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  background: #000;
+  
+  /* Ombre plus prononcée pour faire "flotter" la vidéo */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 
+              0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Conteneur d'infos (colonne latérale) --- */
+.watch-left {
+  padding: 8px 0; 
+  align-self: start; 
+  
+  /* --- CHANGEMENT --- */
+  text-align: center;
+}
+
+/* --- Titre --- */
+.watch-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  /* Très grand titre pour un impact maximal */
+  font-size: clamp(28px, 4vw, 42px); 
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+
+/* --- Métadonnées (catégorie, date) --- */
+.watch-meta {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  margin: 0 0 24px;
+  
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  gap: 16px;
+  
+  /* Un séparateur subtil au-dessus des métas */
+  border-top: 1px solid var(--color-border);
+  padding-top: 24px;
+
+  /* --- CHANGEMENT --- */
+  /* Centre les éléments flex (badge, date) */
+  justify-content: center;
+}
+
+/* --- Badge de catégorie (le point focus) --- */
+.badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #ffffff;
+  border-radius: 6px; /* Forme "tag" moderne, pas pilule */
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.date {
+  font-style: italic;
+  font-weight: 500;
+  color: #777;
+}
+
+/* --- Description --- */
+.watch-desc {
+  white-space: pre-wrap; 
+  line-height: 1.7; /* Très lisible */
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  
+  /* Séparateur au-dessus de la description */
+  border-top: 1px solid var(--color-border);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+/* --- Message d'erreur --- */
+.watch-error {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 3rem;
+  text-align: center; /* Déjà centré */
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  background: #fafafa;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}

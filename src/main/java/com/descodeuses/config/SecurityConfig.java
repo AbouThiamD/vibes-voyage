@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .requestMatchers(
                     "/", "/login", "/register", "/error",
                     "/CSS/**","/css/**", "/JS/**","/js/**",
-                    "/IMAGES/**","/images/**", "/webjars/**"
+                    "/IMAGES/**","/images/**", "/webjars/**","/uploads/**","/files/**","/IMAGES/**","/CSS/**"
                 ).permitAll()
                 .requestMatchers("/card").authenticated()
                 .anyRequest().authenticated()

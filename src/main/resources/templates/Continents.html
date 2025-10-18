@@ -30,13 +30,13 @@
         <ul class="menu" id="main-menu">
           <li><a href="/card" th:href="@{/card}">Accueil</a></li>
 
-          <!-- Destination avec un seul contrôleur /continent?id=... -->
+          <!-- Destination avec un seul contrôleur /continents?id=... -->
           <li class="has-submenu">
-            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+            <a th:href="@{/continents(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
 
             <ul class="submenu" th:if="${categories}">
               <li th:each="c : ${categories}">
-                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
+                <a th:href="@{/continents(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
               </li>
             </ul>
           </li>
@@ -52,18 +52,17 @@
     <!-- HERO large -->
     <section class="hero">
       <div class="hero-background">
-        <img src="/IMAGES/gros-plan-d-un-elephant-mignon-marchant-sur-l-herbe-seche-dans-le-desert.jpg"
-             alt="Paysage">
+        <img th:src="@{${heroImage}}" th:alt="${heroAlt}" style="width:100%;height:auto;">
       </div>
       <div class="hero-content">
         <h1 th:text="${(cat != null ? cat.nomCategorie : 'Continent') + ', comme vous ne l''avez jamais vue.'}">
           L'Afrique, comme vous ne l'avez jamais vue.
         </h1>
         <p>Explorez des milliers de vidéos immersives et découvrez la richesse d'un continent vibrant.</p>
-        <a href="#" class="btn btn-primary btn-large">Découvrir les vidéos</a>
+        <a href="#videos" class="btn btn-primary btn-large">Découvrir les vidéos</a>
       </div>
     </section>
-
+    
     <!-- Liste des vidéos -->
     <section class="video-section" id="videos">
       <div class="container">
@@ -80,18 +79,21 @@
         <!-- Grille -->
         <div class="video-grid" th:if="${videos != null and !#lists.isEmpty(videos)}">
           <article class="video-card" th:each="v : ${videos}">
-            <!-- Si tu as une page détail: @{/videos/{id}(id=${v.id})}, sinon lien direct -->
-            <a th:href="${v.url}">
+            <!-- Lien : soit page détail, soit lien direct vers le fichier -->
+           <a th:href="@{/videos/{id}(id=${v.id})}">
               <div class="video-thumbnail">
-                <video th:src="${v.url}" preload="metadata" playsinline muted></video>
-              </div>
+  <video preload="metadata" playsinline muted
+         th:src="@{${v.url}}"
+         th:attr="poster=${v.image} != null ? @{${v.image}} : @{${heroImage}}">
+  </video>
+</div>
+
               <div class="video-info">
                 <span class="video-category"
                       th:text="${v.categorie != null ? v.categorie.nomCategorie : 'Catégorie'}">Catégorie</span>
                 <h3 th:text="${v.nomVideo}">Titre</h3>
-               <small th:if="${v.date != null}" th:text="${#dates.format(v.date, 'dd/MM/yyyy')}"></small>
-
-
+                
+                <small th:if="${v.date != null}" th:text="${#dates.format(v.date, 'dd/MM/yyyy')}"></small>
               </div>
             </a>
           </article>
