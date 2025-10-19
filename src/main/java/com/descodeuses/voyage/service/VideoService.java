@@ -18,6 +18,11 @@ public interface VideoService {
 
     Video uploadVideo(MultipartFile file) throws IOException;
 
+    Video getById(Long id);    
+
+    boolean existsById(Long id);
+
     Path getVideoPath(String fileName);
+    
     Video getVideoById(Long id);
 }

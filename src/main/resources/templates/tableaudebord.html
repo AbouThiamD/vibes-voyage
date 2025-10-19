@@ -8,9 +8,13 @@
   <title>Vibes Voyage — Tableau de bord</title>
 
   <script src="https://kit.fontawesome.com/dfa5cba82f.js" crossorigin="anonymous"></script>
+
+  <!-- Conserve ton CSS global -->
   <link rel="stylesheet" href="/CSS/accueil.css">
-  <link rel="stylesheet" href="/CSS/tableaudebord.css">
+  <!-- Nouveau CSS tableau de bord (note le ?v=3 pour forcer le rafraîchissement) -->
+  <link rel="stylesheet" href="/CSS/tableaudebord.css?v=3">
 </head>
+
 <body class="dashboard">
 
 <header class="site-header">
@@ -19,64 +23,89 @@
       <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
     </a>
 
-   <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+    <nav class="nav" aria-label="Navigation principale">
+      <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
 
-        <ul class="menu" id="main-menu">
-          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
+      <ul class="menu" id="main-menu">
+        <li><a href="/card" th:href="@{/card}">Accueil</a></li>
 
-          <!-- Destination avec un seul contrôleur /continent?id=... -->
-          <li class="has-submenu">
-            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+        <!-- Destination -->
+        <li class="has-submenu">
+          <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
+          <ul class="submenu" th:if="${categories}">
+            <li th:each="c : ${categories}">
+              <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
+            </li>
+          </ul>
+        </li>
 
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
+        <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
+        <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
+      </ul>
+    </nav>
   </div>
 </header>
 
+<div class="dashboard-container">
+  <aside class="sidebar-nav">
+    <ul>
+      <li><a href="/Tableau" class="active">Tableau de bord</a></li>
+      <li><a href="/toutes-les-videos">Voir toutes mes vidéos</a></li>
+      <li><a href="/profil">Mon profil</a></li>
+      <li><a href="/FormulairePage">Ajouter une vidéo</a></li>
+    </ul>
+  </aside>
 
-    <div class="dashboard-container">
+  <main class="main-content">
+    <h1>
+      Bonjour <span th:text="${session.authenticatedUser.pseudo}">Utilisateur</span>,
+      que voulez-vous créer aujourd’hui ?
+    </h1>
 
-        <aside class="sidebar-nav">
-            <ul>
-                <li><a href="/Tableau" class="active">Tableau de bord</a></li>
-                <li><a href="/toutes-les-videos">Voir toutes mes vidéos</a></li>
-                <li><a href="#">Mon profil</a></li>
-                <li><a href="#">Ajouter une vidéo</a></li>
-            </ul>
-        </aside>
-
-        <main class="main-content">
-            <h1>
-                Bonjour <span th:text="${session.authenticatedUser.pseudo}">Utilisateur</span>,
-                que voulez-vous créer aujourd’hui ?
-            </h1>
-            
-            <center>
-              <a href="/FormulairePage" class="btn-save">Enregistrer ma vidéo</a>
-          </center>
-        </main>
-
+    <!-- Petits encarts pour remplir la page -->
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>Astuce</h3>
+        <p>Choisis un titre clair et une miniature nette pour augmenter les vues.</p>
+      </div>
+      <div class="info-card">
+        <h3>Raccourci</h3>
+        <p><a href="/FormulairePage">Créer une nouvelle vidéo</a> en quelques clics.</p>
+      </div>
+      <div class="info-card">
+        <h3>Besoin d’aide ?</h3>
+        <p>Demande “comment éditer une vidéo ?” et je t’explique.</p>
+      </div>
+      <div class="info-card">
+        <h3>Organisation</h3>
+        <p>Classe tes vidéos par catégorie pour les retrouver plus vite.</p>
+      </div>
     </div>
 
-     <footer class="main-footer">
-    <div class="container">
-      <p>&copy; 2025 Vibes Voyage. Tous droits réservés.</p>
-      <div class="footer-links"><a href="#">À propos</a><a href="#">Aide</a><a href="#">Conditions d'utilisation</a></div>
+    <!-- Actions rapides -->
+    <div class="quick-actions">
+      <a href="/FormulairePage" class="btn-save">Enregistrer ma vidéo</a>
+      <a href="/toutes-les-videos" class="btn-secondary">Gérer mes vidéos</a>
     </div>
-  </footer>
 
+    <!-- Messages -->
+    <div th:if="${succMsg}" class="alert alert-success" th:text="${succMsg}"></div>
+    <div th:if="${errorMsg}" class="alert alert-danger" th:text="${errorMsg}"></div>
+  </main>
+</div>
+
+<footer class="main-footer">
+  <div class="container">
+    <p>&copy; 2025 Vibes Voyage. Tous droits réservés.</p>
+    <div class="footer-links">
+      <a href="#">À propos</a>
+      <a href="#">Aide</a>
+      <a href="#">Conditions d'utilisation</a>
+    </div>
+  </div>
+</footer>
 
 <script>
   const burger = document.querySelector('.burger');

@@ -1,0 +1,179 @@
+/* ========= Profil – thème doux & mignon ========= */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
+:root{
+  --bg:#fff7f6;
+  --card:#ffffff;
+  --ink:#2a2a2a;
+  --muted:#6f6f6f;
+  --line:#f0e3e2;
+  --brand:#ff7aa2;          /* rose bonbon */
+  --brand-2:#ffb3c7;        /* rose clair */
+  --accent:#ffdfe9;         /* fond accentué */
+  --success:#2e7d32;
+  --error:#c62828;
+  --radius:16px;
+  --shadow: 0 10px 30px rgba(255,122,162,.18);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:"Nunito", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  background: radial-gradient(1200px 600px at 20% -10%, #ffe8ef 0%, transparent 60%),
+              radial-gradient(1000px 500px at 120% 0%, #fff2f6 0%, transparent 60%),
+              var(--bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Conteneur centré */
+.profile-wrap{
+  max-width: 760px;
+  margin: clamp(24px, 5vw, 64px) auto;
+  padding: 0 20px;
+}
+
+/* Carte principale */
+.profile-card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 3.5vw, 34px);
+}
+
+/* Titre */
+.profile-card h1{
+  margin:0 0 10px 0;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height:1.2;
+}
+.profile-sub{
+  color:var(--muted);
+  margin-bottom: 22px;
+  font-size: 0.98rem;
+}
+
+/* Alertes */
+.alert{
+  padding: 12px 14px;
+  border-radius: 12px;
+  border:1px solid transparent;
+  margin-bottom: 16px;
+  font-weight:600;
+}
+.alert-success{ background:#e8f5e9; color:var(--success); border-color:#d6ead8;}
+.alert-error{ background:#ffebee; color:var(--error); border-color:#ffd5d9;}
+
+/* Formulaire */
+.profile-form{
+  display:grid;
+  gap:16px;
+}
+
+.form-row{
+  display:grid;
+  gap:8px;
+}
+
+label{
+  font-weight:700;
+  font-size:0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select{
+  width:100%;
+  padding:12px 14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  color:var(--ink);
+  transition: box-shadow .2s ease, border-color .2s ease, transform .05s ease;
+  outline:none;
+}
+input:focus,
+textarea:focus,
+select:focus{
+  border-color: var(--brand-2);
+  box-shadow: 0 0 0 4px var(--accent);
+  transform: translateY(-1px);
+}
+
+/* Séparateur */
+.hr-cute{
+  height:1px; border:0;
+  background:linear-gradient(90deg, transparent, var(--line), transparent);
+  margin: 6px 0 6px;
+}
+
+/* Pied du formulaire (boutons) */
+.form-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:flex-start;
+  margin-top: 8px;
+  flex-wrap:wrap;
+}
+
+/* Boutons mignons */
+.btn{
+  appearance:none; border:0; cursor:pointer;
+  padding:12px 18px;
+  border-radius: 999px;
+  font-weight:800;
+  letter-spacing:.2px;
+  transition: transform .06s ease, box-shadow .15s ease, background .2s ease, color .2s ease;
+  text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+}
+
+.btn-primary{
+  background: linear-gradient(180deg, var(--brand), #ff6b98);
+  color:#fff;
+  box-shadow: 0 10px 18px rgba(255,122,162,.30);
+}
+.btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 14px 24px rgba(255,122,162,.36);}
+.btn-primary:active{ transform: translateY(0); }
+
+.btn-ghost{
+  background: #fff;
+  color: var(--ink);
+  border:1px solid var(--line);
+}
+.btn-ghost:hover{ background: #fff7fb; border-color: #ffe1ec; }
+
+/* Groupes mot de passe */
+.group-title{
+  font-weight:800;
+  margin-top:6px;
+  background: var(--accent);
+  border:1px dashed #ffd1e0;
+  padding:8px 12px;
+  border-radius: 12px;
+  display:inline-block;
+}
+
+/* Aide textuelle */
+.help{
+  color:var(--muted);
+  font-size:.9rem;
+}
+
+/* Liens */
+a{ color:#e85d8f }
+a:hover{ text-decoration:underline }
+
+/* Responsive */
+@media (min-width:720px){
+  .grid-2{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap:16px;
+  }
+}

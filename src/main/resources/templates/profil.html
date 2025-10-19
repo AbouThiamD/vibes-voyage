@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mon profil</title>
+</head>
+<body>
+    <link rel="stylesheet" th:href="@{/CSS/header.css}" />
+    <link rel="stylesheet" th:href="@{/CSS/profil.css}" />
+<h1>Mon profil</h1>
+
+<div th:if="${succMsg}" th:text="${succMsg}" style="color:green;"></div>
+<div th:if="${errorMsg}" th:text="${errorMsg}" style="color:red;"></div>
+
+<form th:action="@{/profil}" method="post">
+  <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}"/>
+
+ <div class="profile-wrap">
+  <div class="profile-card">
+    <h1>Mon profil</h1>
+    <p class="profile-sub">Modifie tes infos, tout en douceur ✨</p>
+
+    <div th:if="${succMsg}" class="alert alert-success" th:text="${succMsg}"></div>
+    <div th:if="${errorMsg}" class="alert alert-error" th:text="${errorMsg}"></div>
+
+    <form class="profile-form" th:action="@{/profil}" method="post">
+      <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}"/>
+
+      <div class="grid-2">
+        <div class="form-row">
+          <label>Pseudo</label>
+          <input type="text" name="pseudo" th:value="${u.pseudo}" required>
+        </div>
+
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" name="email" th:value="${u.email}" required>
+        </div>
+      </div>
+
+      <hr class="hr-cute">
+
+      <span class="group-title">Changer de mot de passe (optionnel)</span>
+
+      <div class="grid-2">
+        <div class="form-row">
+          <label>Mot de passe actuel</label>
+          <input type="password" name="currentPassword">
+        </div>
+        <div class="form-row">
+          <label>Nouveau mot de passe</label>
+          <input type="password" name="newPassword">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Confirmer le nouveau mot de passe</label>
+        <input type="password" name="confirmPassword">
+        <div class="help">Assure-toi que ça matche 💕</div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-primary" type="submit">Enregistrer</button>
+        <a class="btn btn-ghost" th:href="@{/card}">Annuler</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

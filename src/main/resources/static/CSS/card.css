@@ -95,7 +95,7 @@
 }
 
 .brand img{
-  height: calc(var(--header-h) - 14px);        /* logo proportionné (≈36px) */
+  height: calc(var(--header-h) - 18px);        /* logo proportionné (≈36px) */
   width: auto;
 }
 

@@ -27,6 +27,11 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     this.roleRepository = roleRepository;
   }
 
+     @Override
+    public Utilisateur save(Utilisateur utilisateur) {
+    return utilisateurRepository.save(utilisateur);
+}
+
   @Override
   public Utilisateur registerUtilisateur(String pseudo, String mdp, String email) {
     if (pseudo == null || pseudo.isBlank() ||
@@ -63,7 +68,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
         .orElse(null);
   }
 
-
+  
 
 
   @Override
@@ -116,4 +121,8 @@ public class UtilisateurServiceImpl implements UtilisateurService {
   public void modifier(Utilisateur utilisateur) {
     utilisateurRepository.save(utilisateur);
   }
+  
+
+
+  
 }

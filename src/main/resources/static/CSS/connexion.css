@@ -1,95 +1,316 @@
+/* --- Variables de Design --- */
+:root {
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-title: "Lora", serif;
+  
+  --color-background: #ffffff; /* Un fond blanc pur pour un look net */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #555555;
+  --color-border: #eaeaea;
+  
+  /* L'accent de votre marque */
+  --color-accent: #008c7a; /* Un vert-turquoise "voyage" */
+  --color-accent-light: #e0f7fa;
+}
+
+/* --- Styles Globaux --- */
 body {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-    background: url(https://picsum.photos/3000/2000/?image=1015);
-    background-size: cover;
-    background-repeat: no-repeat;
+  font-family: var(--font-body);
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Conteneur & Grille --- */
+.watch-wrap {
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 0 24px;
+}
+
+.watch-grid {
+  display: grid;
+  grid-template-columns: 2.3fr 1fr; 
+  gap: 40px; /* Plus d'espace pour un look aéré */
+}
+
+/* --- Responsive : 1 colonne sur mobile --- */
+@media (max-width: 950px) {
+  .watch-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
+}
+
+/* --- Lecteur Vidéo (colonne principale) --- */
+.watch-player video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;
+  background: #000;
   
-  body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 25%;
-    height: 100%;
-    background-color: #03a9f4;
-    opacity: 0.8;
-  }
+  /* Ombre plus prononcée pour faire "flotter" la vidéo */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 
+              0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+/* --- Conteneur d'infos (colonne latérale) --- */
+.watch-left {
+  padding: 8px 0; 
+  align-self: start; 
   
-  .form {
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
-    width: 350px;
-    min-height: 400px;
-    background-color: #fff;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
-    padding: 50px;
-    box-sizing: border-box;
-  }
+  /* --- CHANGEMENT --- */
+  text-align: center;
+}
+
+/* --- Titre --- */
+.watch-title {
+  font-family: var(--font-title);
+  font-weight: 700;
+  /* Très grand titre pour un impact maximal */
+  font-size: clamp(28px, 4vw, 42px); 
+  color: var(--color-text-primary);
+  line-height: 1.2;
+  margin: 0 0 20px;
+}
+
+/* --- Métadonnées (catégorie, date) --- */
+.watch-meta {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  margin: 0 0 24px;
   
-  .form h2 {
-    color: #777;
-    margin: 0 0 40px;
-    padding: 0;
-  }
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  gap: 16px;
   
-  .form .input-box {
-    position: relative;
-    margin: 20px 0;
-  }
+  /* Un séparateur subtil au-dessus des métas */
+  border-top: 1px solid var(--color-border);
+  padding-top: 24px;
+
+  /* --- CHANGEMENT --- */
+  /* Centre les éléments flex (badge, date) */
+  justify-content: center;
+}
+
+/* --- Badge de catégorie (le point focus) --- */
+.badge {
+  display: inline-block;
+  background: var(--color-accent);
+  color: #ffffff;
+  border-radius: 6px; /* Forme "tag" moderne, pas pilule */
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.date {
+  font-style: italic;
+  font-weight: 500;
+  color: #777;
+}
+
+/* --- Description --- */
+.watch-desc {
+  white-space: pre-wrap; 
+  line-height: 1.7; /* Très lisible */
+  font-size: 16px;
+  color: var(--color-text-secondary);
   
-  .form .input-box input {
-    width: 100%;
-    font-size: 16px;
-    border: none;
-    border-bottom: 2px solid #777;
-    outline: none;
-    padding: 10px;
-    padding-left: 30px;
-    box-sizing: border-box;
-    font-weight: bold;
-    color: #777;
-  }
-  
-  .form .input-box input:focus,
-  .form .input-box input:valid {
-    border-bottom-color: #03a9f4;
-  }
-  
-  .form .input-box .fa {
-    position: absolute;
-    top: 8px;
-    left: 5px;
-    font-size: 18px;
-    color: #777;
-  }
-  
-  .form .input-box input[type="submit"] {
-    border: none;
-    cursor: pointer;
-    background-color: #03a9f4;
-    color: #fff;
-    font-weight: bold;
-    transition: 0.5s;
-  }
-  
-  .form .input-box input[type="submit"]:hover {
-    background-color: #ff4987;
-  }
-  
-  .form a {
-    text-decoration: none;
-    color: #777;
-    margin-top: 20px;
-    font-weight: bold;
-    display: inline-block;
-    transition: 0.5s;
-  }
-  
-  .form a:hover {
-    color: #ff4987;
-  }
+  /* Séparateur au-dessus de la description */
+  border-top: 1px solid var(--color-border);
+  padding-top: 24px;
+  margin-top: 24px;
+}
+
+/* --- Message d'erreur --- */
+.watch-error {
+  max-width: 1200px;
+  margin: 32px auto;
+  padding: 3rem;
+  text-align: center; /* Déjà centré */
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  background: #fafafa;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+}
+
+
+/**********************************************
+ * --- AJOUTS POUR LE FORMULAIRE --- *
+ **********************************************/
+
+/* Conteneur pour centrer le formulaire */
+.form-wrapper {
+  max-width: 768px; /* Plus étroit, idéal pour les formulaires */
+  margin: 0 auto; /* Centré dans .watch-wrap */
+  padding: 32px 40px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: #fdfdfd;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04);
+}
+
+/* Centrer le titre dans le formulaire */
+.form-wrapper .watch-title {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: clamp(24px, 4vw, 36px); /* Un peu plus petit pour le formulaire */
+}
+
+/* Groupes de formulaire */
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+/* Champs de formulaire (input, textarea, select) */
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: var(--font-body);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  box-sizing: border-box; /* Important! */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-accent-light);
+}
+
+textarea.form-control {
+  min-height: 140px;
+  resize: vertical;
+}
+
+/* Style pour l'input 'file' */
+.form-control-file {
+  display: block;
+  width: 100%;
+  padding: 8px 0;
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--color-text-secondary);
+}
+
+/* Style du bouton "Choisir un fichier" */
+.form-control-file::file-selector-button {
+  padding: 8px 16px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #f4f4f4;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s;
+  margin-right: 16px;
+}
+.form-control-file::file-selector-button:hover {
+  background-color: #eaeaea;
+}
+
+
+/* Aperçu de l'image */
+.image-preview {
+  max-width: 250px;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  margin-bottom: 12px;
+  display: block;
+  background: #f9f9f9;
+}
+
+/* Séparateur */
+hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 32px 0;
+}
+
+/* Conteneur des boutons */
+.form-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Boutons génériques */
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* Bouton principal (style .badge adapté) */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: #007363; /* Un peu plus foncé */
+}
+
+/* Bouton secondaire (Annuler) */
+.btn-secondary {
+  background-color: var(--color-background);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+.btn-secondary:hover {
+  background-color: #f9f9f9;
+  border-color: #dcdcdc;
+  color: var(--color-text-primary);
+}
+
+/* Alertes */
+.alert {
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.alert-success {
+  color: #005248; /* Plus foncé que l'accent */
+  background-color: var(--color-accent-light);
+  border-color: #b3ebee;
+}
+.alert-danger {
+  color: #a91e2c;
+  background-color: #fdeaea;
+  border-color: #f9c9c9;
+}

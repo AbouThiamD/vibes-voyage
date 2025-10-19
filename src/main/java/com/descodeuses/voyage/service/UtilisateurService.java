@@ -11,6 +11,8 @@ public interface UtilisateurService {
   
   Utilisateur creerAdmin(String pseudo, String mdp, String email);
 
+ Utilisateur save(Utilisateur utilisateur);           
+
   Optional<Utilisateur> findByPseudo(String pseudo);
 
   List<Utilisateur> list();

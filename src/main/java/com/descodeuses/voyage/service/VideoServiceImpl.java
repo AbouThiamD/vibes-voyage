@@ -78,14 +78,26 @@ public class VideoServiceImpl implements VideoService {
             return true;
         }).orElse(false);
     }
-    @Override
-    public Video getVideoById(Long id) {
+         @Override
+        public Video getVideoById(Long id) {
         return videoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Video introuvable: " + id));
-    }
 
-    @Override
-    public Video uploadVideo(MultipartFile file) throws IOException {
+    }
+        
+         @Override
+         public Video uploadVideo(MultipartFile file) throws IOException {
         throw new UnsupportedOperationException("Unimplemented method 'uploadVideo'");
     }
+    @Override
+public Video getById(Long id) {
+    return videoRepository.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Vidéo introuvable id=" + id));
+}
+
+@Override
+public boolean existsById(Long id) {
+    return videoRepository.existsById(id);
+}
+
 }

@@ -10,6 +10,8 @@
   <link rel="stylesheet" th:href="@{/CSS/videoAll.css}" />
 </head>
 <body>
+ 
+
   <header class="site-header">
     <div class="container">
       <a class="brand" th:href="@{/card}">
@@ -39,7 +41,10 @@
       </nav>
     </div>
   </header>
-
+  <center>
+      <div th:if="${succMsg}" class="alert alert-success" th:text="${succMsg}"></div>
+      <div th:if="${errorMsg}" class="alert alert-danger" th:text="${errorMsg}"></div>
+</center>
   <main class="page">
     <header class="page-head">
       <div class="title">
@@ -79,7 +84,7 @@
 
             <div class="actions actions-overlay">
               <!-- Éditer -->
-              <a class="btn btn-glass" th:href="@{/video/edit/{id}(id=${v.id})}">
+              <a class="btn btn-glass" th:href="@{|/video/${v.id}/edit|}">
                 <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
                 </svg>
@@ -87,7 +92,8 @@
               </a>
 
               <!-- Supprimer -->
-              <form th:action="@{/video/delete/{id}(id=${v.id})}" method="post"
+               
+              <form th:action="@{|/video/${v.id}/delete|}" method="post"
                     onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette vidéo ?');">
                 <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> -->
                 <button type="submit" class="btn btn-glass btn-glass--danger">
