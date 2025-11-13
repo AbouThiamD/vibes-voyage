@@ -47,7 +47,7 @@ public class ContinentController {
         Categorie cat = null;
         List<Video> videos = Collections.emptyList();
 
-        // 1) Priorité: par ID
+        
         if (id != null) {
             cat = categorieRepository.findById(id).orElse(null);
             if (cat != null) {
@@ -55,7 +55,7 @@ public class ContinentController {
             }
         }
 
-        // 2) Secours: par nom
+        
         if (videos.isEmpty()) {
             String q = nom == null ? "" : nom.trim();
             if (cat == null) {
@@ -66,12 +66,12 @@ public class ContinentController {
             }
         }
 
-        // 3) Image héro & slug
+        
         String label = (cat != null) ? cat.getNomCategorie() : nom;
         String key = (label == null ? "default"
                                     : label.replace('\u00A0',' ').trim().toLowerCase(Locale.ROOT));
 
-        // ⚠️ respecte la casse de TON dossier d’images
+        
         final String HERO_BASE = "/IMAGES/Continents/";
 
         String heroImage;
@@ -82,7 +82,7 @@ public class ContinentController {
             case "asie"    -> { heroImage = HERO_BASE + "asie-hero.jpg";    slug = "asie"; }
             case "europe"  -> { heroImage = HERO_BASE + "europe-hero.jpg";  slug = "europe"; }
 
-            // Amériques — adapte aux noms de fichiers que TU as réellement
+            
             case "amérique du nord", "amerique du nord", "amérique nord", "amerique nord",
                  "amerique-nord", "amérique-nord", "ameriquenord" -> {
                 heroImage = HERO_BASE + "ameriquenord-hero.jpg";      
@@ -109,7 +109,7 @@ public class ContinentController {
         model.addAttribute("heroAlt", "Paysages de " + label);
         model.addAttribute("activeContinent", slug);
 
-        // ✅ retourne EXACTEMENT "Continents" (même casse que ton fichier)
+        
         return "Continents";
     }
 }

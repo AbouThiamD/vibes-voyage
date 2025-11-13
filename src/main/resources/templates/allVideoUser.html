@@ -10,37 +10,8 @@
   <link rel="stylesheet" th:href="@{/CSS/videoAll.css}" />
 </head>
 <body>
- 
+  <header th:replace="~{header :: siteHeader('AllVideoUser')}"></header>
 
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" th:href="@{/card}">
-        <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
-      </a>
-
-      <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-
-        <ul class="menu" id="main-menu">
-          <li><a th:href="@{/card}">Accueil</a></li>
-
-          <li class="has-submenu">
-            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
   <center>
       <div th:if="${succMsg}" class="alert alert-success" th:text="${succMsg}"></div>
       <div th:if="${errorMsg}" class="alert alert-danger" th:text="${errorMsg}"></div>
@@ -52,7 +23,7 @@
         <small th:if="${selectedCategorieId != null}">• filtrées</small>
       </div>
 
-      <form class="filters" method="get" th:action="@{/videos}">
+      <form class="filters" method="get" th:action="@{/dashboard/mes-videos}">
         <div class="select">
           <select name="categorieId">
             <option value="">Toutes les catégories</option>
@@ -75,13 +46,15 @@
     <section class="grid" th:if="${!#lists.isEmpty(videos)}">
       <article class="card card--media" th:each="v : ${videos}">
         <div class="thumb">
-          <img th:src="${#strings.isEmpty(v.image) ? '/IMAGES/Continents/afrique-hero.jpg' : v.image}"
-               th:alt="${v.nomVideo} ?: 'Vignette vidéo'">
+              <img th:src="${#strings.isEmpty(v.image) ? 
+                 '/IMAGES/Continents/afrique-hero.jpg' : 
+                 '/uploads/' + v.image}"
+     th:alt="${v.nomVideo} ?:'Vignette vidéo'">
 
           <!-- Overlay (titre + boutons) -->
           <div class="overlay">
             <h3 class="overlay-title" th:text="${v.nomVideo}">Titre de la vidéo</h3>
-
+            
             <div class="actions actions-overlay">
               <!-- Éditer -->
               <a class="btn btn-glass" th:href="@{|/video/${v.id}/edit|}">
@@ -111,6 +84,12 @@
         <div class="meta-bar">
           <span th:if="${v.categorie != null}" th:text="${v.categorie.nomCategorie}">Catégorie</span>
           <span th:if="${v.date != null}" th:text="${#dates.format(v.date,'dd/MM/yyyy')}">01/01/2025</span>
+          <span class="video-author" 
+                th:if="${v.utilisateur != null}" 
+                th:text="${v.utilisateur.pseudo}">
+            Auteur
+          </span>
+
         </div>
       </article>
     </section>
@@ -127,13 +106,6 @@
     </div>
   </footer>
 
-  <script>
-    (function(){
-      var form = document.querySelector('.filters');
-      if(!form) return;
-      var select = form.querySelector('select[name="categorieId"]');
-      if(select){ select.addEventListener('change', function(){ form.submit(); }); }
-    })();
-  </script>
+    <script defer th:src="@{/JS/header.js}"></script>
 </body>
 </html>

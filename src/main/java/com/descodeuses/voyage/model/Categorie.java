@@ -19,7 +19,4 @@ public class Categorie {
     private String nomCategorie;
     private Boolean isActive;
 
-    // @OneToMany(mappedBy = "categorie")
-    // private List<SousCategorie> sousCategories;
-
 }

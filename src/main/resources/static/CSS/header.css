@@ -1,9 +1,9 @@
-/* ================== VARIABLES ================== */
+
 :root{
   --bg:#F8F8F8;
   --text:#121212;
   --text-muted:#666;
-  --accent:#004D40;         /* vert émeraude */
+  --accent:#004D40;         
   --accent-d:#003329;
   --white:#fff;
   --line:#EAEAEA;
@@ -11,7 +11,7 @@
   --shadow:0 16px 40px rgba(0,0,0,.08);
 }
 
-/* ================== RESET ================== */
+
 *{margin:0;padding:0;box-sizing:border-box}
 body{
   font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
@@ -24,7 +24,7 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .container{max-width:1280px;margin:0 auto;padding:0 40px}
 
-/* ================== HEADER ================== */
+
 .site-header{
   background:#fbf1ef;
  
@@ -41,8 +41,8 @@ a{color:inherit;text-decoration:none}
   list-style:none;display:flex;align-items:center;gap:16px;
 }
 .nav .menu a{
-  font-size:15px;font-weight:600;padding:10px 12px;border-radius:10px;
-  transition:background .2s,color .2s;
+  font-size:15px;font-weight:600;padding:10px 12px;border-radius:30px;
+  
 }
 .nav .menu a:hover{background:#f1f1f1;color:var(--accent)}
 .has-submenu{position:relative}
@@ -74,6 +74,13 @@ a{color:inherit;text-decoration:none}
 
 .footer-links a { margin-left: 20px; transition: color 0.3s ease; }
 .footer-links a:hover { color: var(--color-accent); }
+/* bouton Déconnexion minimal */
+form[action$="/logout"] button {
+  border: 0; padding: .5rem .9rem; border-radius: 999px;
+  background: #e11d48; color: #fff; font-weight: 600; cursor: pointer;
+}
+form[action$="/logout"] button:hover { filter: brightness(1.08); }
+form[action$="/logout"] button:active { transform: translateY(1px); }
 
 /* Burger (mobile) */
 .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer}

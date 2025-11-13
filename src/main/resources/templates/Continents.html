@@ -11,48 +11,19 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="CSS/afrique.css" th:href="@{/CSS/afrique.css}">
+  <link rel="stylesheet" href="CSS/header.css">
   <title th:text="${'Vibes Voyage | ' + (cat != null ? cat.nomCategorie : 'Continent')}">Vibes Voyage | Continent</title>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="/card" th:href="@{/card}">
-        <img src="/IMAGES/logo-Emmy.png" th:src="@{/IMAGES/logo-Emmy.png}" alt="Vibes Voyage">
-      </a>
 
-      <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-
-        <ul class="menu" id="main-menu">
-          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
-
-          <!-- Destination avec un seul contrôleur /continents?id=... -->
-          <li class="has-submenu">
-            <a th:href="@{/continents(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continents(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header th:replace="~{header :: siteHeader('continents')}"></header>
 
   <main>
     <!-- HERO large -->
     <section class="hero">
       <div class="hero-background">
-        <img th:src="@{${heroImage}}" th:alt="${heroAlt}" style="width:100%;height:auto;">
+        <img th:src="@{${heroImage}}" th:alt="${heroAlt}">
       </div>
       <div class="hero-content">
         <h1 th:text="${(cat != null ? cat.nomCategorie : 'Continent') + ', comme vous ne l''avez jamais vue.'}">
@@ -63,7 +34,7 @@
       </div>
     </section>
     
-    <!-- Liste des vidéos -->
+ 
     <section class="video-section" id="videos">
       <div class="container">
         <div class="section-header">
@@ -71,33 +42,38 @@
           <span th:text="${(videos != null ? #lists.size(videos) : 0)} + ' vidéo(s)'">0 vidéo(s)</span>
         </div>
 
-        <!-- Message si aucune vidéo -->
+       
         <div th:if="${videos == null or #lists.isEmpty(videos)}">
           Aucune vidéo pour cette catégorie.
         </div>
 
-        <!-- Grille -->
+      
         <div class="video-grid" th:if="${videos != null and !#lists.isEmpty(videos)}">
-          <article class="video-card" th:each="v : ${videos}">
-            <!-- Lien : soit page détail, soit lien direct vers le fichier -->
-           <a th:href="@{/videos/{id}(id=${v.id})}">
-              <div class="video-thumbnail">
-  <video preload="metadata" playsinline muted
-         th:src="@{${v.url}}"
-         th:attr="poster=${v.image} != null ? @{${v.image}} : @{${heroImage}}">
-  </video>
-</div>
+  <article class="video-card" th:each="v : ${videos}">
+    <a th:href="@{/watch/{id}(id=${v.id})}">
+      <div class="video-thumbnail">
 
-              <div class="video-info">
-                <span class="video-category"
-                      th:text="${v.categorie != null ? v.categorie.nomCategorie : 'Catégorie'}">Catégorie</span>
-                <h3 th:text="${v.nomVideo}">Titre</h3>
-                
-                <small th:if="${v.date != null}" th:text="${#dates.format(v.date, 'dd/MM/yyyy')}"></small>
-              </div>
-            </a>
-          </article>
-        </div>
+        <video preload="metadata" playsinline muted
+               th:src="@{/uploads/{path}(path=${v.url})}"
+               th:attr="poster=${v.image} != null ? @{/uploads/{path}(path=${v.image})} : @{${heroImage}}">
+        </video>
+      </div>
+
+    <div class="video-info">
+        <span class="video-category"
+              th:text="${v.categorie != null ? v.categorie.nomCategorie : 'Catégorie'}">Catégorie</span>
+        <h3 th:text="${v.nomVideo}">Titre</h3>
+        
+        <h4 class="video-author" 
+            th:if="${v.utilisateur != null}" 
+            th:text="${v.utilisateur.pseudo}">
+          Auteur
+        </h4>
+        <small th:if="${v.date != null}" th:text="${#dates.format(v.date, 'dd/MM/yyyy')}"></small>
+      </div>
+    </a>
+  </article>
+</div>
       </div>
     </section>
   </main>
@@ -113,7 +89,7 @@
     </div>
   </footer>
 
-  <!-- Burger -->
+ 
   <script>
     const burger = document.querySelector('.burger');
     const menu = document.getElementById('main-menu');

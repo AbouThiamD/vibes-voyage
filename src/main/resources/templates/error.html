@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymelef.org">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/CSS/login.css">
-    <title>Error page</title>
+  <meta charset="UTF-8">
+  <title>Erreur</title>
+  <link rel="stylesheet" href="/CSS/login.css" th:href="@{/CSS/login.css}">
 </head>
 <body>
-    <h1>Mots de passe ou pseudo incorrect</h1>
-    <a href="/">Retourner a la page d'Accueil</a>
- 
-   
+
+  <!-- Cas 1 : échec de connexion depuis Spring Security -->
+  <div th:if="${param.login != null}" class="alert alert-error">
+    <h1>Oups, une erreur est survenue</h1>
+    Pseudo ou mot de passe incorrect.
+  </div>
+
+  <!-- Cas 2 : inscription -> pseudo déjà pris -->
+  <div th:if="${param.register != null}" class="alert alert-error">
+    <h1>Oups, une erreur est survenue</h1>
+    Ce pseudo est déjà pris.
+  </div>
+
+  <!-- Cas 3 : messages envoyés par flash attributes (autres erreurs applicatives) -->
+  <div th:if="${param.login == null and param.register == null}">
+    <div th:if="${errorTitle != null}" class="alert alert-error-title" th:text="${errorTitle}"></div>
+    <div th:if="${errorMsg != null}"   class="alert alert-error"       th:text="${errorMsg}"></div>
+
+    <!-- Fallback si rien du tout -->
+    <div th:if="${errorTitle == null and errorMsg == null}">
+      <h1>Oups, une erreur est survenue</h1>
+    Ce pseudo est déjà pris.
+    </div>
+  </div>
+
+  <a th:href="@{/}">Retourner à la page d’accueil</a>
 </body>
 </html>

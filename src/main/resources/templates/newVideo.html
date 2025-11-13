@@ -14,14 +14,7 @@
     <form th:action="@{/video}" th:object="${videoForm}" method="post" enctype="multipart/form-data">
         <div>
             <div>
-                <!-- <label for="videoType">Type de vidéo :</label>
-                <select id="videoType" th:field="*{videoType}">
-                    <option value="" disabled selected>Selectionnez le type</option>
-                    <option th:each="type : ${type}" th:value="${type}" th:text="${type}">Type</option>
-                </select> -->
-                <!-- Affichage des erreurs pour le champ "videoType" -->
-                <!-- <div th:if="${#fields.hasErrors('videoType')}" th:errors="*{videoType}">Erreur dans le type de vidéo</div>
-                <br> -->
+              
                 <label for="titre">Titre de la video</label>
             <input type="text" id="nomVideo" th:field=*{nomVideo} required>
         </div>

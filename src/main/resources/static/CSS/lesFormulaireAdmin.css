@@ -16,7 +16,7 @@ body {
   color: #9e9ea4;
 }
 
-/* --------- Login --------- */
+
 .login-box {
   display: flex;
   justify-content: center;
@@ -127,7 +127,7 @@ select {
   outline: none;
 }
 
-/* Bouton file dans label */
+
 label span {
   padding: 8px 12px;
   background: #084cdf;
@@ -140,7 +140,7 @@ label span:hover { background: #0d45a5; }
 
 .input-submit { margin-top: 25px; }
 
-/* --------- Tableau --------- */
+
 .tableau{
   width: 350px;
   height: 300px;
@@ -149,7 +149,7 @@ label span:hover { background: #0d45a5; }
   margin-bottom: 20%;
 }
 
-/* table responsive en mode “cartes” sur petits écrans */
+
 .rwd-table {
   margin: 1em 0;
   min-width: 300px;
@@ -216,11 +216,7 @@ h1 {
   font-size: 15px;
 }
 
-/* ========================= */
-/*        RESPONSIVE         */
-/* ========================= */
 
-/* Mobile d’abord */
 @media (max-width: 480px) {
   body {
     align-items: flex-start;
@@ -233,7 +229,7 @@ h1 {
     padding: 20px;
   }
 
-  /* évite de déborder l’écran au focus */
+ 
   .input-field:focus { width: 100%; }
 
   .forgot {
@@ -242,7 +238,7 @@ h1 {
     align-items: flex-start;
   }
 
-  /* Le bloc tableau ne doit pas être en position absolue sur mobile */
+ 
   .tableau {
     position: static;
     width: 100%;
@@ -250,22 +246,22 @@ h1 {
     margin: 16px 0 0 0;
   }
 
-  /* Améliore la lisibilité du tableau empilé */
+ 
   .rwd-table {
     width: 100%;
     font-size: 14px;
   }
   .rwd-table td { padding: 10px 12px; }
 
-  /* Au besoin, scroll horizontal sécurisé */
+
   .rwd-table { display: block; overflow-x: auto; }
 }
 
-/* Petites tablettes */
+
 @media (min-width: 481px) and (max-width: 767px) {
   body { padding: 24px; }
   .login-box { width: 100%; height: auto; }
-  .input-field:focus { width: 102%; } /* petit effet sans casser la mise en page */
+  .input-field:focus { width: 102%; } 
   .tableau {
     position: static;
     width: 100%;
@@ -274,19 +270,19 @@ h1 {
   }
 }
 
-/* Tablettes et petits laptops */
+
 @media (min-width: 768px) and (max-width: 1023px) {
   body { padding: 32px; }
   .login-box { max-width: 520px; }
   .tableau {
-    position: static; /* côte à côte possible selon ton HTML, sinon reste sous le formulaire */
+    position: static;
     width: 100%;
     height: auto;
     margin: 24px 0 0 0;
   }
 }
 
-/* Desktop ≥ 1024px : on garde ton rendu d’origine */
+
 @media (min-width: 1024px) {
   body { padding: 40px; }
 
@@ -294,8 +290,6 @@ h1 {
     width: 440px;
     height: 480px;
   }
-
-  /* on remet tes réglages “absolus” si tu les utilises pour la mise en page desktop */
   .tableau{
     width: 350px;
     height: 300px;
@@ -305,7 +299,7 @@ h1 {
   }
 }
 
-/* Accessibilité : réduit les animations si l’utilisateur préfère */
+
 @media (prefers-reduced-motion: reduce) {
   .input-field,
   .submit-btn {
@@ -313,25 +307,22 @@ h1 {
   }
   .submit-btn:hover { transform: none; }
 }
-/* === PATCH RESPONSIVE (à coller en bas du fichier) ===================== */
 
-/* 1) Autoriser l’empilement sur mobile et le côte-à-côte sur large écran */
 body {
-  flex-wrap: wrap;              /* permet le retour à la ligne */
-  align-content: flex-start;    /* évite le centrage vertical quand il y a 2 blocs */
-  gap: 24px;                    /* espace entre formulaire et tableau */
-  padding: 24px 16px;           /* respiration sur les bords */
+  flex-wrap: wrap;             
+  align-content: flex-start;    
+  gap: 24px;                    
+  padding: 24px 16px;          
 }
 
-/* 2) Chaque bloc prend la place qu’il faut, sans casser ton style */
+
 .login-box,
 .tableau {
-  flex: 1 1 360px;              /* min ~360px; s’aligne à deux quand il y a de la place */
-  max-width: 600px;             /* limite raisonnable par bloc */
+  flex: 1 1 360px;              
+  max-width: 600px;            
   width: 100%;
 }
 
-/* 3) IMPORTANT : enlever le position:absolute du tableau et ses tailles figées */
 .tableau {
   position: static !important;
   margin: 0 !important;
@@ -339,18 +330,18 @@ body {
   height: auto !important;
 }
 
-/* 4) Le formulaire s’adapte en hauteur et en largeur */
+
 .login-box {
   width: 100% !important;
-  height: auto;                 /* plus de 480px figés */
-  max-width: 520px;             /* proche de tes 440px mais plus confortable */
+  height: auto;               
+  max-width: 520px;            
 }
 
-/* 5) La table occupe 100% de sa colonne et gère les contenus longs */
+
 .rwd-table {
   width: 100%;
   table-layout: fixed;
-  display: block;               /* autorise le scroll horizontal si trop de colonnes */
+  display: block;               
   overflow-x: auto;
 }
 
@@ -360,7 +351,7 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* 6) Sur petits écrans, éviter que les inputs débordent en :focus */
+
 @media (max-width: 600px) {
   .input-field:focus { width: 100% !important; }
 }

@@ -1,61 +1,50 @@
-/* ---------------------------------------------------------------------- */
-/* --- 1. Variables pour les couleurs (Bonne pratique) --- */
-/* ---------------------------------------------------------------------- */
+
 :root {
-  --primary-color: #007bff; /* Bleu principal pour les boutons/actions */
-  --secondary-color: #0056b3; /* Bleu foncé pour l'en-tête du tableau */
-  --text-dark: #3b3b3b;
+  --primary-color: #007bff; 
+  --secondary-color: #0056b3; 
   --text-light: #ffffff;
   --background-dark: #2b2b2b;
-  --table-bg-subtle: rgba(255, 255, 255, 0.1); /* Fond de tableau légèrement transparent */
+  --table-bg-subtle: rgba(255, 255, 255, 0.1); 
   --table-border: rgba(255, 255, 255, 0.2);
 }
 
-/* ---------------------------------------------------------------------- */
-/* --- 2. Styles Généraux pour le Corps de la Page (BODY) --- */
-/* ---------------------------------------------------------------------- */
+
 body {
   font-family: 'Montserrat', sans-serif;
   font-size: 14px;
   line-height: 1.6;
   font-weight: 400;
-  color: var(--text-light); /* Texte par défaut clair sur fond sombre */
+  color: var(--text-light); 
   -webkit-font-smoothing: antialiased;
   font-smoothing: antialiased;
-  background: var(--background-dark); /* Fond très sombre */
+  background: var(--background-dark);
   margin: 0;
-  display: flex; /* Utilisation de flex pour centrer le contenu verticalement/horizontalement */
+  display: flex; 
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
 }
 
-/* ---------------------------------------------------------------------- */
-/* --- 3. Styles du Titre (H1) --- */
-/* ---------------------------------------------------------------------- */
+
 h1 {
-  color: var(--text-light); /* Texte en blanc */
+  color: var(--text-light); 
   font-size: 30px;
   font-weight: 600;
   text-align: center;
   padding: 40px 0 30px 0;
-  width: 90%; /* S'aligne avec la largeur du tableau */
+  width: 90%; 
   max-width: 1200px;
 }
 
-/* ---------------------------------------------------------------------- */
-/* --- 4. Styles du Tableau (Cible les attributs du HTML existant) --- */
-/* ---------------------------------------------------------------------- */
+
 table[border="1"][cellpadding="8"] {
-  /* Réinitialise les styles HTML par défaut */
+
   border: none !important;
   padding: 0 !important;
   
   width: 90%; 
   max-width: 1200px; 
   text-align: center;
-  
-  /* Styles pour l'apparence moderne */
   border-collapse: separate; 
   border-spacing: 0;
   background-color: var(--table-bg-subtle);
@@ -65,54 +54,50 @@ table[border="1"][cellpadding="8"] {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Styles des Cellules (TH et TD) */
+
 table[border="1"][cellpadding="8"] th,
 table[border="1"][cellpadding="8"] td {
   padding: 12px 10px;
   border: 1px solid var(--table-border);
   border-width: 0 1px 1px 0;
   vertical-align: middle;
-  color: var(--text-light); /* Texte des cellules en blanc pour la lisibilité */
+  color: var(--text-light); 
 }
 
-/* Styles de l'En-tête (TH) */
+
 table[border="1"][cellpadding="8"] thead th {
   position: sticky;
   top: 0;
   z-index: 10;
-  background-color: var(--secondary-color); /* Bleu foncé */
+  background-color: var(--secondary-color); 
   color: var(--text-light);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* Styles du Corps du Tableau (TBODY) */
+
 table[border="1"][cellpadding="8"] tbody tr:nth-child(even) {
-  background-color: rgba(0, 0, 0, 0.1); /* Ligne paire subtilement plus sombre */
+  background-color: rgba(0, 0, 0, 0.1); 
 }
 
-/* Effet de survol amélioré */
+
 table[border="1"][cellpadding="8"] tbody tr:hover {
   background-color: rgba(255, 255, 255, 0.2); 
   transition: background-color 0.3s ease;
   cursor: pointer;
 }
 
-/* ---------------------------------------------------------------------- */
-/* --- 5. Styles du Message d'Absence de Données et du Lien Retour --- */
-/* ---------------------------------------------------------------------- */
 
-/* Style pour le message "Aucun utilisateur" */
-p[th\:if] { /* Cible le p avec l'attribut thymeleaf, qui est le message vide */
+p[th\:if] { 
     color: var(--text-light); 
     font-size: 1.2rem;
     text-align: center;
     padding: 20px 0;
 }
 
-/* Style du lien "Retour" */
-p:last-child a[href="/Admin"] { /* Cible le lien dans le dernier paragraphe (Retour) */
+
+p:last-child a[href="/Admin"] { 
     display: inline-block;
     margin-top: 40px;
     margin-bottom: 20px; 

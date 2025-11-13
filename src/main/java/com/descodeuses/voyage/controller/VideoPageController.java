@@ -14,14 +14,14 @@ public class VideoPageController {
 
     private final VideoRepository videoRepository;
 
-    @GetMapping("/videos/{id}")
+    @GetMapping("/watch/{id}")
     public String show(@PathVariable Long id, Model model, RedirectAttributes ra) {
         Video v = videoRepository.findById(id).orElse(null);
         if (v == null) {
             ra.addFlashAttribute("errorMsg", "Vidéo introuvable.");
-            return "redirect:/card"; // ou la page d’accueil que tu veux
+            return "redirect:/card"; 
         }
         model.addAttribute("v", v);
-        return "VideoDetail"; // => templates/VideoDetail.html
+        return "VideoDetail";
     }
 }

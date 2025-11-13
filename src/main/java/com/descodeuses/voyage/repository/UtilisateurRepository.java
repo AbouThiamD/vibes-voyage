@@ -17,6 +17,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
 
    Optional<Utilisateur> findByPseudo(String pseudo);
 
-   boolean existsByPseudoIgnoreCase(String pseudo);
+   boolean existsByPseudoIgnoreCase(String pseudo); 
+
     Optional<Utilisateur> findFirstByPseudoIgnoreCaseOrderByIdAsc(String pseudo);
+
+   
 }

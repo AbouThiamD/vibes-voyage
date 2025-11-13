@@ -1,4 +1,4 @@
-/* ================== Vibes Voyage — Tableau de bord ================== */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap');
 
 :root{
@@ -10,7 +10,7 @@
   --line:#E6E0D8;
   --shadow:0 10px 24px rgba(0,0,0,.10);
   --sidebar-w:240px;
-  --header-h:70px;              /* même hauteur que sur l’accueil */
+  --header-h:70px;              
 }
 
 *{box-sizing:border-box}
@@ -20,75 +20,15 @@ body{
   background:var(--bg); color:var(--ink); line-height:1.55;
 }
 
-.site-header{
-	position:sticky; top:0; z-index:1000;
-	background:var(--bg);
- 
-  }
-  .site-header .container{
-	min-height:var(--header-h);
-	display:flex; align-items:center; justify-content:space-between;
-  }
-  .brand img{ width: 55px;}
-  
-  /* nav desktop */
-  .nav .menu{
-	list-style:none; margin:0; padding:0;
-	display:flex; align-items:center; gap:18px;
-  }
-  .nav .menu > li{position:relative}
-  .nav .menu a{
-	padding:14px; border-radius:999px; font-weight:700;
-  }
-  .nav .menu a:hover, .nav .menu a.active{background:rgba(0,0,0,.06)}
+
   .hero{
-	
 	min-height:60vh;
 	display:flex;align-items:center;justify-content:center;
 	background:url("../IMAGES/asie.jpg") center/cover no-repeat;
 	color:#fff;text-align:center;
   }
-  /* sous-menu (desktop) */
-  .has-submenu > .menu-link::after{content:"▾"; font-size:.85rem; margin-left:6px; opacity:.7}
-  .submenu{
-	position:absolute; top:100%; left:0; display:none; z-index:1200;
-	list-style:none; margin:8px 0 0; padding:8px; min-width:220px;
-	background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow);
-  }
-  .submenu a{display:block; padding:8px 12px; border-radius:8px; color:#222}
-  .submenu a:hover{background:rgba(0,0,0,.06)}
-  .has-submenu:hover > .submenu,
-  .has-submenu:focus-within > .submenu{display:block}
   
-  /* burger + menu mobile */
-  .burger{display:none; background:none; border:0; cursor:pointer; padding:8px}
-  .burger span{display:block; width:22px; height:2px; background:#333; margin:5px 0; border-radius:2px}
-  
-  @media (max-width:820px){
-	.burger{display:block}
-	.nav .menu{
-	  position:fixed; left:0; right:0; top:var(--header-h);
-	  background:var(--bg); border-bottom:1px solid var(--line);
-	  flex-direction:column; gap:12px; padding:16px;
-	  display:none;
-	}
-	.nav .menu.open{display:flex}
-	/* sous-menu visible en pile en mobile */
-	.submenu{position:static; display:none; margin:0; box-shadow:none; border:0; padding:0}
-	.has-submenu.open > .submenu{display:block}
-  }
-  
-  /* header translucide quand on scrolle (optionnel si JS l’ajoute) */
-  .site-header.scrolled{
-	background:rgba(251,241,239,.9);
-	backdrop-filter:blur(10px);
-  }
-/* Burger */
-.burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
-.burger span{display:block;width:22px;height:2px;background:#333;margin:5px 0;border-radius:2px}
 
-
-/* ===== Layout principal ===== */
 .dashboard-container {
   display: grid;
   grid-template-columns: 240px 1fr;
@@ -96,7 +36,7 @@ body{
   padding: 24px;
 }
 
-/* ===== Sidebar ===== */
+
 .sidebar-nav {
   background: #fff;
   border-radius: 8px;
@@ -122,7 +62,7 @@ body{
   color: #0f5fe0;
 }
 
-/* ===== Main ===== */
+
 .main-content {
   background: #fff;
   border-radius: 10px;
@@ -137,7 +77,7 @@ body{
   color: #222;
 }
 
-/* ===== Grille d'infos ===== */
+
 .info-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -163,7 +103,7 @@ body{
   color: #666;
 }
 
-/* ===== Actions rapides ===== */
+
 .quick-actions {
   display: flex;
   gap: 12px;
@@ -181,8 +121,9 @@ body{
 }
 
 .btn-save {
-  background: #0f5fe0;
+  background: orange;
   color: #fff;
+  border-radius:999px;
 }
 
 .btn-save:hover { filter: brightness(0.95); }
@@ -190,11 +131,11 @@ body{
 .btn-secondary {
   background: #eef2f7;
   color: #0f1f3a;
+  border-radius:999px;
 }
 
 .btn-secondary:hover { filter: brightness(0.98); }
 
-/* ===== Alertes ===== */
 .alert {
   padding: 0.8rem 1rem;
   border-radius: 6px;
@@ -211,9 +152,6 @@ body{
   color: #a12d2d;
 }
 
-
-
-/* ===== Responsive ===== */
 @media (max-width: 900px) {
   .dashboard-container {
     grid-template-columns: 1fr;
@@ -221,10 +159,6 @@ body{
 }
 
 
-
-
-
-/* ================== FOOTER ================== */
 .main-footer{
   background:#fbf1ef;border-top:1px solid var(--line);padding:36px 0;margin-top:40px
 }
@@ -235,7 +169,7 @@ body{
 .footer-links a{margin-left:18px}
 .footer-links a:hover{color:var(--accent)}
 
-/* ================== ACCESSIBILITÉ ================== */
+
 a:focus-visible, .btn:focus-visible{
   outline:3px solid rgba(0,77,64,.35); outline-offset:2px; border-radius:12px;
 }

@@ -14,6 +14,7 @@ public interface VideoService {
 
     public List<Video> getAllVideo();
 
+
     public Boolean deleteVideo(Long id);
 
     Video uploadVideo(MultipartFile file) throws IOException;

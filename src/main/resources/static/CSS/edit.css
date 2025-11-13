@@ -153,7 +153,6 @@ select {
 }
 
 
-/* On créé un bouton en ciblant un élément dans la balise label */
 label span {
   padding: 8px 12px;
   background: #084cdf;

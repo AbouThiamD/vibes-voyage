@@ -13,9 +13,9 @@ public interface UtilisateurService {
 
  Utilisateur save(Utilisateur utilisateur);           
 
-  Optional<Utilisateur> findByPseudo(String pseudo);
+Optional<Utilisateur> findByPseudo(String pseudo);
 
-  List<Utilisateur> list();
+List<Utilisateur> list();
   
   Optional<Utilisateur> findById(long id);
   void supprimer(Utilisateur utilisateur);

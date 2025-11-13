@@ -1,7 +1,9 @@
 package com.descodeuses.voyage.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,8 +39,8 @@ public class Utilisateur {
     @OneToMany(mappedBy = "utilisateur")
     private List<Favoris> favoris;
 
-    @OneToMany(mappedBy = "utilisateur")
-    private List<Video> video;
+    @OneToMany(mappedBy = "utilisateur", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Video> videos = new ArrayList<>();
 
     private String username;
 

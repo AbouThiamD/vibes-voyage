@@ -18,6 +18,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import jakarta.persistence.FetchType;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,14 +46,10 @@ public class Video {
 
     @Column(name = "image")   
     private String image;
-     
-    @OneToMany(mappedBy = "video")
-    private List<Commentaire> commentaire;
 
-    @OneToMany(mappedBy = "video")
-    private List<Favoris> favoris;
-
-    @ManyToOne
+    
+   @ManyToOne(fetch = FetchType.EAGER, optional = false)
+   @JoinColumn(name = "utilisateur_id", nullable = false)
     private Utilisateur utilisateur;
 
     private String vid;

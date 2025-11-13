@@ -5,55 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Vibes Voyage — Contact</title>
 
-  <!-- Ton CSS global (même header/footer que l’accueil) -->
-  <link rel="stylesheet" href="/CSS/accueil.css">
+ 
+  <link rel="stylesheet" href="/CSS/header.css">
   
-  <!-- CSS spécifique à cette page -->
+ 
   <link rel="stylesheet" href="/CSS/style.css">
 </head>
 <body>
 
-  <!-- ===== Header (identique à l’accueil) ===== -->
-  <!-- HEADER (identique à l'accueil) -->
-<header class="site-header">
-  <div class="container">
-    <a class="brand" href="/card">
-      <img src="/IMAGES/logo-Emmy.png" alt="Vibes Voyage" />
-    </a>
+ 
+  <header th:replace="~{header :: siteHeader('contact')}"></header>
 
-    <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-
-        <ul class="menu" id="main-menu">
-          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
-
-          <!-- Destination avec un seul contrôleur /continent?id=... -->
-          <li class="has-submenu">
-            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
-  </div>
-</header>
-
-  <!-- ===== Image de voyage ===== -->
   <section class="contact-hero" role="img" aria-label="Image de voyage">
     <br>
     <img src="/IMAGES/afrique2.jpg" alt="Panorama de voyage">
   </section>
 
-  <!-- ===== Carte Contact ===== -->
+ 
   <main class="contact-main">
     <section class="card container">
       <header class="contact-header">
@@ -65,8 +33,19 @@
         <p class="lead">Une question ? Écris-nous, on répond vite.</p>
       </header>
 
-      <form class="contact-form" action="#" method="post" novalidate>
-        <div class="field">
+      <th:block th:if="${succMsg}">
+    <div class="message-succes" style="color: green; padding: 10px; border: 1px solid green; margin-bottom: 15px;">
+        [[${succMsg}]]
+    </div>
+    </th:block>
+    <th:block th:if="${errorMsg}">
+    <div class="message-erreur" style="color: red; padding: 10px; border: 1px solid red; margin-bottom: 15px;">
+        [[${errorMsg}]]
+    </div>
+</th:block>
+
+      <form class="contact-form" th:action="@{/contact/send}" method="post" novalidate>
+      <div class="field">
           <label for="name">Nom</label>
           <input id="name" name="name" type="text" placeholder="Votre nom" required>
         </div>
@@ -85,9 +64,11 @@
           <button type="submit" class="btn-primary">Envoyer</button>
         </div>
       </form>
+      
 
       <p class="backline">Besoin d’aide rapide ? <a href="/index.html">Retour à l’accueil</a></p>
     </section>
+    
   </main>
 
     <footer class="main-footer">

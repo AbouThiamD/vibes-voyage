@@ -1,4 +1,4 @@
-/* ================= Destination.css (complet) ================= */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap');
 
 :root{
@@ -10,7 +10,7 @@
   --line:#E6E0D8;
   --radius:16px;
   --shadow:0 10px 24px rgba(0,0,0,.12);
-  --header-h:70px;                 /* hauteur du header */
+  --header-h:70px;                
 }
 
 *{box-sizing:border-box}
@@ -18,13 +18,13 @@ html,body{margin:0}
 body{
   font-family:"DM Sans",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
   background:var(--bg); color:var(--ink); line-height:1.55;
-  padding-top:var(--header-h);        /* compense le header fixé */
+  padding-top:var(--header-h);        
 }
 
 img{max-width:100%;display:block;border-radius:inherit}
 a{text-decoration:none;color:inherit}
 
-/* ================= HEADER (même style que l'accueil) ================= */
+
 .site-header{
   position:fixed; top:0; left:0; right:0; z-index:1000;
   background:transparent; border-bottom:0;
@@ -63,20 +63,18 @@ a{text-decoration:none;color:inherit}
 .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
 .burger span{display:block;width:22px;height:2px;background:#333;margin:5px 0;border-radius:2px}
 
-/* ================= HERO (image sous le header) ================= */
 .block1img{
   position:relative; isolation:isolate;
   background:url('../IMAGES/image_montagne.jpg') center/cover no-repeat;
   min-height:72vh; width:100%;
   margin-top:calc(-1 * var(--header-h));
-  padding:12px 8% var(--header-h);      /* padding bas = espace sous nav */
+  padding:12px 8% var(--header-h);      
 }
 .block1img::before{
   content:""; position:absolute; inset:0; z-index:0;
   background:linear-gradient(0deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
 }
 
-/* Carte titre + recherche (à droite) */
 .droiteblock1{
   position:relative; z-index:10; max-width:560px; margin-left:auto; margin-top:18vh;
   background:#fff; color:#222; border:1px solid var(--line);
@@ -98,7 +96,7 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 6px 16px rgba(245,149,30,.25);
 }
 
-/* ================= SECTIONS TEXTE + IMAGE ================= */
+
 .block2sdesti1{
   width:100%;
   padding:64px 8%;
@@ -137,7 +135,7 @@ a{text-decoration:none;color:inherit}
 .footer-links a { margin-left: 20px; transition: color 0.3s ease; }
 .footer-links a:hover { color: var(--color-accent); }
 
-/* ================= RESPONSIVE ================= */
+
 @media (max-width:980px){
   :root{ --header-h:64px; }
   body{ padding-top:var(--header-h); }

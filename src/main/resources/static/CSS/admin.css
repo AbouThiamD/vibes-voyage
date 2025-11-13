@@ -22,7 +22,7 @@ body {
   height: 100vh;
 }
 
-/* ---------- HEADER ---------- */
+
 .header {
   grid-area: header;
   height: 70px;
@@ -37,7 +37,7 @@ body {
   display: none;
 }
 
-/* ---------- SIDEBAR ---------- */
+
 
 #sidebar {
   grid-area: sidebar;
@@ -90,16 +90,11 @@ body {
 .sidebar-responsive {
   display: inline !important;
   position: absolute;
-  /*
-    the z-index of the ApexCharts is 11
-    we want the z-index of the sidebar higher so that
-    the charts are not showing over the sidebar 
-    on small screens
-  */
+
   z-index: 12 !important;
 }
 
-/* ---------- MAIN ---------- */
+
 
 .main-container {
   grid-area: main;
@@ -186,9 +181,7 @@ body {
   justify-content: center;
 }
 
-/* ---------- MEDIA QUERIES ---------- */
 
-/* Medium <= 992px */
 
 @media screen and (max-width: 992px) {
   .grid-container {
@@ -212,7 +205,7 @@ body {
   }
 }
 
-/* Small <= 768px */
+
 
 @media screen and (max-width: 768px) {
   .main-cards {
@@ -227,7 +220,7 @@ body {
   }
 }
 
-/* Extra Small <= 576px */
+
 
 @media screen and (max-width: 576px) {
   .hedaer-left {

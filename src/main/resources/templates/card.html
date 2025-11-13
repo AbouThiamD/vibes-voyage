@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vibes Voyage - Accueil</title>
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="CSS/card.css" th:href="@{/CSS/card.css}">
 
-  <!-- Leaflet -->
+  <link rel="stylesheet" href="CSS/card.css" th:href="@{/CSS/card.css}">
+  <link rel="stylesheet" href="CSS/header.css">
+
+
   <link rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
@@ -21,43 +22,13 @@
 
 <body>
 
-  <!-- ===== Header ===== -->
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="/card" th:href="@{/card}">
-        <img src="/IMAGES/logo-Emmy.png" th:src="@{/IMAGES/logo-Emmy.png}" alt="Vibes Voyage" />
-      </a>
 
-    <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+  <div th:replace="~{header :: siteHeader('accueil')}"></div>
 
-        <ul class="menu" id="main-menu">
-          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
-
-          <!-- Destination avec un seul contrôleur /continent?id=... -->
-          <li class="has-submenu">
-            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <!-- ===== Hero ===== -->
+ 
   <section class="hero">
     <div class="hero-inner container">
-      <h1>De beaux endroits<br> à découvrir</h1>
+      <h1>De beaux endroitss<br> à découvrir</h1>
       <p>
         Explore le monde depuis ton écran : lieux mythiques, cultures, cuisine et histoires.
         Avec Vibes Voyage, chaque clic est une nouvelle escale.
@@ -69,7 +40,7 @@
     </div>
   </section>
 
-  <!-- ===== Carte du monde ===== -->
+  
   <section id="map" class="section map-section">
     <div class="container">
       <h2>Le monde avec Vibes Voyage</h2>
@@ -97,7 +68,7 @@
 
       <div class="card-grid">
         <article class="card">
-          <img src="/IMAGES/2.jpg" alt="Afrique" loading="lazy">
+          <img src="/IMAGES/gros-plan-d-un-elephant-mignon-marchant-sur-l-herbe-seche-dans-le-desert.jpg" alt="Afrique" loading="lazy">
           <div class="overlay"><h3>AFRIQUE</h3><a href="/Afrique" class="pill">Voir plus</a></div>
         </article>
 
@@ -112,7 +83,7 @@
         </article>
 
         <article class="card">
-          <img src="/IMAGES/5.jpg" alt="Europe" loading="lazy">
+          <img src="/IMAGES/europe2.jpg" alt="Europe" loading="lazy">
           <div class="overlay"><h3>EUROPE</h3><a href="/Europe" class="pill">Voir plus</a></div>
         </article>
 
@@ -172,6 +143,8 @@
     </div>
   </section>
 
+ 
+
   <!-- ===== Footer ===== -->
   <footer class="main-footer">
     <div class="container">
@@ -187,17 +160,7 @@
   <!-- JS -->
   <script src="/JS/jsaccueil.js" th:src="@{/JS/jsaccueil.js}"></script>
   <script defer src="/JS/vibes.js" th:src="@{/JS/vibes.js}"></script>
+  <script defer th:src="@{/JS/header.js}"></script>
 
-  <!-- Burger toggle minimal (si besoin) -->
-  <script>
-    const burger = document.querySelector('.burger');
-    const menu = document.getElementById('main-menu');
-    if (burger && menu) {
-      burger.addEventListener('click', () => {
-        const open = menu.classList.toggle('open');
-        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      });
-    }
-  </script>
 </body>
 </html>

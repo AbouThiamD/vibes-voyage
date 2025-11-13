@@ -73,17 +73,18 @@
 
               <!-- Actions -->
               <td class="lienBlanc">
-                <a class="icon-btn edit" th:href="@{/videos/{id}/edit(id=${v.id})}" title="Modifier" aria-label="Modifier">
-                  <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
-                </a>
+    <a class="icon-btn edit" th:href="@{/videos/{id}/edit(id=${v.id})}" title="Modifier" aria-label="Modifier">
+        <i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+    </a>
 
-                <a class="icon-btn danger"
-                   th:href="@{/deleteVideo/{id}(id=${v.id})}"
-                   title="Supprimer" aria-label="Supprimer"
-                   onclick="return confirm('Voulez-vous vraiment supprimer cette vidéo ?');">
-                  <i class="fa-solid fa-trash" aria-hidden="true"></i>
-                </a>
-              </td>
+    <form th:action="@{/admin/videos/{id}/delete(id=${v.id})}" method="post" style="display:inline;">
+        <button type="submit" class="icon-btn danger"
+                title="Supprimer" aria-label="Supprimer"
+                onclick="return confirm('Voulez-vous vraiment supprimer cette vidéo ?');">
+            <i class="fa-solid fa-trash" aria-hidden="true"></i>
+        </button>
+    </form>
+</td> 
             </tr>
           </tbody>
         </table>

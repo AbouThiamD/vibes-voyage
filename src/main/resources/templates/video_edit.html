@@ -14,6 +14,7 @@
     </div>
 
     <form th:action="@{/videos/{id}(id=*{id})}" th:object="${video}" method="post">
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
   <div class="form-container" th:if="${video != null}">
     <div class="input-box">
       <input type="hidden" class="input-field" th:field="*{id}">
@@ -26,12 +27,15 @@
 
       <div class="input-box">
         <label for="categorie">Catégorie</label>
-        <select id="categorie" th:field="*{categorie.id}" required>
-          <!-- ⚠️ utilise le bon nom de propriété -->
+
+        <select id="categorie" name="categorieId" required> 
+
           <option th:each="c : ${categories}"
-                  th:value="${c.id}"
-                  th:text="${c.nomCategorie}"></option>
-        </select>
+      th:value="${c.id}"
+      th:text="${c.nomCategorie}"
+       th:selected="${c.id == video.categorie.id}"> 
+          </option>
+      </select>
       </div>
 
       <div class="input-box">

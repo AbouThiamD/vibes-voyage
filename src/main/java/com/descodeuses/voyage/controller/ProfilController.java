@@ -15,7 +15,7 @@ import com.descodeuses.voyage.service.UtilisateurService;
 public class ProfilController {
 
     private final UtilisateurService utilisateurService;
-    private final PasswordEncoder passwordEncoder; // déjà déclaré dans ta config security
+    private final PasswordEncoder passwordEncoder; 
 
     public ProfilController(UtilisateurService utilisateurService, PasswordEncoder passwordEncoder) {
         this.utilisateurService = utilisateurService;
@@ -31,10 +31,10 @@ public class ProfilController {
         var u = utilisateurService.findByPseudo(auth.getName())
                  .orElseThrow(() -> new IllegalStateException("Utilisateur introuvable"));
         model.addAttribute("u", u);
-        return "profil"; // templates/profil.html
+        return "profil"; 
     }
 
-    // Mise à jour email/pseudo + changement de mot de passe (optionnel)
+    
     @PostMapping("/profil")
     public String updateProfil(@RequestParam String email,
                                @RequestParam String pseudo,
@@ -80,7 +80,7 @@ public class ProfilController {
                                  RedirectAttributes ra) {
         var u = utilisateurService.findByPseudo(auth.getName()).orElseThrow();
 
-        if (!passwordEncoder.matches(oldPassword, u.getPasswordHash())) {
+        if (!passwordEncoder.matches(oldPassword, u.getMdp())) {
             ra.addFlashAttribute("errorMsg", "Ancien mot de passe incorrect.");
             return "redirect:/profil";
         }
@@ -93,7 +93,7 @@ public class ProfilController {
             return "redirect:/profil";
         }
 
-        u.mdp(passwordEncoder.encode(newPassword));
+        u.setMdp(passwordEncoder.encode(newPassword));
         utilisateurService.save(u);
 
         ra.addFlashAttribute("succMsg", "Mot de passe changé.");

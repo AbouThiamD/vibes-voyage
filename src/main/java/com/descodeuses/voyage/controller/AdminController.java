@@ -24,6 +24,7 @@ import com.descodeuses.voyage.form.AdminForm;
 import com.descodeuses.voyage.model.Categorie;
 import com.descodeuses.voyage.model.Utilisateur;
 import com.descodeuses.voyage.model.Video;
+import com.descodeuses.voyage.repository.CategorieRepository;
 import com.descodeuses.voyage.service.CategorieService;
 import com.descodeuses.voyage.service.VideoService;
 
@@ -42,6 +43,9 @@ public class AdminController {
 
     @Autowired 
     private UtilisateurService utilisateurService;
+
+    @Autowired
+    private CategorieRepository categorieRepository;
 
     @GetMapping("/Admin")
     public String admin() {
@@ -69,7 +73,7 @@ public class AdminController {
     @PostMapping("/utilisateurs")
     public String ajouterAdministrateur(@ModelAttribute("form") AdminForm form,
                                     org.springframework.web.servlet.mvc.support.RedirectAttributes ra) {
-    // null-safe
+    
     String login = form.getLogin() == null ? "" : form.getLogin().trim();
     String email = form.getEmail() == null ? "" : form.getEmail().trim();
     String motDePasse = form.getMotDePasse() == null ? "" : form.getMotDePasse().trim();
@@ -85,7 +89,7 @@ public class AdminController {
         ra.addFlashAttribute("succMsg", "Nouvel administrateur ajouté avec succès.");
         return "redirect:/ajouterAdministrateur";
     } catch (Exception e) {
-    ra.addFlashAttribute("errorMsg", e.getMessage()); // <- vrai message
+    ra.addFlashAttribute("errorMsg", e.getMessage());
     ra.addFlashAttribute("form", form);
     return "redirect:/ajouterAdministrateur";
 }
@@ -107,12 +111,12 @@ public String allUtilisateur(Model model) {
     return "allUtilisateur";
 }
 
-@GetMapping("/utilisateurs/{id}/delete")
+@PostMapping("/admin/utilisateurs/{id}/delete")
 public String deleteUtilisateur(@PathVariable long id, RedirectAttributes ra) {
     try {
         var u = utilisateurService.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Utilisateur introuvable"));
-        utilisateurService.supprimer(u);  // ta méthode existante
+        utilisateurService.supprimer(u);
         ra.addFlashAttribute("succMsg", "Utilisateur supprimé avec succès.");
     } catch (NoSuchElementException e) {
         ra.addFlashAttribute("errorMsg", "Utilisateur introuvable.");
@@ -121,46 +125,38 @@ public String deleteUtilisateur(@PathVariable long id, RedirectAttributes ra) {
     } catch (Exception e) {
         ra.addFlashAttribute("errorMsg", "Erreur serveur : " + e.getMessage());
     }
-    return "redirect:/lesUtilisateurs"; // ta page liste
+    return "redirect:/lesUtilisateurs";
 }
 
 
     @PostMapping("/saveCategorie")
-    public String saveCategorie(@ModelAttribute Categorie categorie, HttpSession session) {
-        Boolean existCategorie = categorieService.existCategorie(categorie.getNomCategorie());
-        if (existCategorie) {
-            session.setAttribute("errorMsg", "Categorie deja existante");
-
+    public String saveCategorie(@ModelAttribute Categorie categorie, RedirectAttributes ra) {
+    Boolean existCategorie = categorieService.existCategorie(categorie.getNomCategorie());
+    if (existCategorie) {
+        ra.addFlashAttribute("errorMsg", "Categorie deja existante");
+    } else {
+        Categorie saveCategorie = categorieService.saveCategorie(categorie);
+        if (ObjectUtils.isEmpty(saveCategorie)) {
+            ra.addFlashAttribute("errorMsg", "non sauvegarder veillez bien remplir ");
         } else {
-            Categorie saveCategorie = categorieService.saveCategorie(categorie);
-            if (ObjectUtils.isEmpty(saveCategorie)) {
-                session.setAttribute("errorMsg", "non sauvegarder veillez bien remplir ");
-            } else {
-                session.setAttribute("succMsg", "Catégorie enregistrée avec succès");
-            }
+            ra.addFlashAttribute("succMsg", "Catégorie enregistrée avec succès");
         }
-        categorieService.saveCategorie(categorie);
-
-        return "redirect:/ajouterCategorie";
     }
+    
+    return "redirect:/ajouterCategorie";
+}
 
-    @GetMapping("/deleteCategorie/{id}")
-    public String deleteCategorie(@PathVariable long id, HttpSession session) {
-        // Appel à la méthode de suppression dans le service
-        Boolean deleteCategorie = categorieService.deleteCategorie(id);
-
-        // Vérification si la suppression a réussi
-        if (deleteCategorie) {
-            // Si la suppression a réussi, on met un message de succès dans la session
-            session.setAttribute("succMsg", "Categorie supprimée avec succès");
-        } else {
-            // Si la suppression a échoué, on met un message d'erreur dans la session
-            session.setAttribute("errorMsg", "Erreur dans le serveur");
-        }
-
-        // Redirection vers la page 'ajouterCategorie'
-        return "redirect:/ajouterCategorie";
+  @PostMapping("/admin/categories/{id}/delete")
+public String deleteCategorie(@PathVariable long id, RedirectAttributes ra) {
+    try {
+        boolean ok = categorieService.deleteCategorie(id);
+        ra.addFlashAttribute(ok ? "succMsg" : "errorMsg",
+            ok ? "Catégorie supprimée." : "Suppression impossible.");
+    } catch (Exception e) {
+        ra.addFlashAttribute("errorMsg", "Erreur : " + e.getMessage());
     }
+    return "redirect:/ajouterCategorie";
+}
 
     @GetMapping("/loadEditCategorie/{id}")
     public String loadEditCategorie(@PathVariable long id, Model model) {
@@ -168,37 +164,69 @@ public String deleteUtilisateur(@PathVariable long id, RedirectAttributes ra) {
         return "edit_categorie";
     }
 
-   @GetMapping("/deleteVideo/{id}")
-public String deleteVideo(@PathVariable long id,
-                          org.springframework.web.servlet.mvc.support.RedirectAttributes ra) {
+    @PostMapping("/admin/videos/{id}/delete")
+    public String deleteVideo(@PathVariable long id, RedirectAttributes ra) {
     try {
-        videoService.deleteVideo(id); // <-- appelle ton service
-        ra.addFlashAttribute("succMsg", "✅ Vidéo supprimée avec succès !");
+        videoService.deleteVideo(id);
+        ra.addFlashAttribute("succMsg", "Vidéo supprimée.");
     } catch (Exception e) {
-        ra.addFlashAttribute("errorMsg", "❌ Erreur lors de la suppression : " + e.getMessage());
+        ra.addFlashAttribute("errorMsg", "Erreur : " + e.getMessage());
     }
-    return "redirect:/lesVideos"; // retour vers la liste
-}
-    // GET: afficher le formulaire rempli
-@GetMapping("/videos/{id}/edit")
-public String editVideo(@PathVariable Long id, Model model) {
-    Video v = videoService.getVideoById(id); // <-- au lieu de findById
-    model.addAttribute("video", v);
-    model.addAttribute("categories", categorieService.getAllCategorie());
-    return "video_edit";
-}
-
-@PostMapping("/videos/{id}")
-public String updateVideo(@PathVariable Long id, @ModelAttribute("video") Video form,
-                          RedirectAttributes ra) {
-    Video v = videoService.getVideoById(id); // <-- idem
-    // ... mêmes updates que plus haut
     return "redirect:/lesVideos";
 }
 
+   
+ @GetMapping("/videos/{id}/edit") 
+public String editVideo(@PathVariable("id") Long id, Model model, RedirectAttributes redirectAttributes) {
+    
+    try {
+        
+        Video video = videoService.getVideoById(id); 
+        
+        
+        model.addAttribute("video", video);
+        model.addAttribute("categories", categorieRepository.findAll()); 
+        return "video_edit"; 
+
+    } catch (IllegalArgumentException e) {
+
+        redirectAttributes.addFlashAttribute("errorMsg", "Erreur : La vidéo avec l'ID " + id + " n'existe pas.");
+        return "redirect:/Admin"; 
+    }
+}
+
+@PostMapping("/videos/{id}")
+public String updateVideo(@PathVariable Long id, 
+                            @ModelAttribute("video") Video videoModifiee,
+                            @RequestParam("categorieId") Long categorieId,
+                            RedirectAttributes ra) {
+    try {
+        
+        Video v = videoService.getVideoById(id); 
+        
+        
+        Categorie cat = categorieRepository.findById(categorieId)
+                .orElseThrow(() -> new RuntimeException("Catégorie non trouvée"));
+
+      
+        v.setNomVideo(videoModifiee.getNomVideo()); 
+        v.setDescription(videoModifiee.getDescription());
+        v.setCategorie(cat); 
+
+     
+        videoService.saveVideo(v); 
+        
+        ra.addFlashAttribute("succMsg", "Vidéo mise à jour.");
+        return "redirect:/lesVideos";
+
+    } catch (Exception e) {
+        ra.addFlashAttribute("errorMsg", "Erreur lors de la mise à jour: " + e.getMessage());
+        return "redirect:/videos/" + id + "/edit"; 
+    }
 
 
 
+}
 }
 
    

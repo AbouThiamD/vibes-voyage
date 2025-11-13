@@ -22,7 +22,7 @@ import com.descodeuses.voyage.model.Video;
 import com.descodeuses.voyage.service.CategorieService;
 import com.descodeuses.voyage.service.VideoService;
 
-// ↓ à adapter si tu utilises un Repository au lieu d'un Service
+
 import com.descodeuses.voyage.service.UtilisateurService;
 
 @Controller
@@ -30,14 +30,12 @@ public class VideoUserController {
 
     @Autowired private VideoService videoService;
     @Autowired private CategorieService categorieService;
-    @Autowired private UtilisateurService utilisateurService; // pour trouver l'utilisateur courant
+    @Autowired private UtilisateurService utilisateurService; 
 
     @Value("${video.upload.path}")
     private String storagePath;
 
-    // ---------------------------
-    // UPLOAD d'une vidéo (UTILISATEUR)
-    // ---------------------------
+    
     @PostMapping(path = "/video/save", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String saveVideo(@RequestParam("titre") String titre,
                             @RequestParam(value = "description", required = false) String description,
@@ -47,46 +45,59 @@ public class VideoUserController {
                             Authentication auth,
                             RedirectAttributes ra) {
         try {
-            // 0) Vérifs
+            
             if (videoFile.isEmpty()) throw new IllegalArgumentException("Fichier vidéo manquant");
             if (categorieId == null) throw new IllegalArgumentException("Catégorie manquante");
 
-            // 1) Dossiers
-            Path base = Path.of(storagePath);     // ex: C:/.../upload/   (racine de /uploads/)
-            Path videosDir = base.resolve("videos");
-            Path imagesDir = base.resolve("images");
+            
+            Path base = Path.of(storagePath);      
+            Path videosDir = base.resolve("videos"); 
+            Path imagesDir = base.resolve("images"); 
             Files.createDirectories(videosDir);
             Files.createDirectories(imagesDir);
 
-            // 2) Sauvegarde de la VIDÉO
+            
             String safeVideoName = System.currentTimeMillis() + "_" +
                     videoFile.getOriginalFilename().replaceAll("\\s+", "");
-            Files.copy(videoFile.getInputStream(), videosDir.resolve(safeVideoName),
-                    StandardCopyOption.REPLACE_EXISTING);
-            String videoUrl = "/uploads/videos/" + safeVideoName; // URL publique
+            
+            
+            String relativeVideoPath = "videos/" + safeVideoName;
 
-            // 3) Sauvegarde de la MINIATURE (optionnelle) + URL publique
-            String imageUrl;
+            Files.copy(videoFile.getInputStream(), base.resolve(relativeVideoPath), 
+                    StandardCopyOption.REPLACE_EXISTING);
+            
+            
+
+            
+            String relativeImagePath; 
             if (!imageFile.isEmpty()) {
                 String safeImageName = System.currentTimeMillis() + "_" +
                         imageFile.getOriginalFilename().replaceAll("\\s+", "");
-                Files.copy(imageFile.getInputStream(), imagesDir.resolve(safeImageName),
+                
+                
+                relativeImagePath = "images/" + safeImageName; 
+
+                Files.copy(imageFile.getInputStream(), base.resolve(relativeImagePath),
                         StandardCopyOption.REPLACE_EXISTING);
-                imageUrl = "/uploads/images/" + safeImageName;
+                
+                
             } else {
-                imageUrl = "/IMAGES/Continents/afrique-hero.jpg"; // fallback
+                relativeImagePath = "/IMAGES/Continents/afrique-hero.jpg"; 
             }
 
-            // 4) Persist
+            
             Video v = new Video();
             v.setNomVideo(titre);
             v.setDescription(description);
             v.setDate(new java.sql.Date(System.currentTimeMillis()));
             v.setCategorie(categorieService.getCategorieById(categorieId));
-            v.setUrl(videoUrl);
-            v.setImage(imageUrl);
+            
+            
+            v.setUrl(relativeVideoPath); 
+            
+            v.setImage(relativeImagePath); 
 
-            // 🔑 Définir le propriétaire (owner) de la vidéo
+            
             if (auth != null) {
                 var user = utilisateurService.findByPseudo(auth.getName())
                         .orElseThrow(() -> new IllegalStateException("Utilisateur introuvable"));
@@ -105,158 +116,167 @@ public class VideoUserController {
         }
     }
 
-         @PostMapping("/video/{id}/delete")
-        public String deleteOwn(@PathVariable Long id,
-                        Authentication auth,
-                        RedirectAttributes ra) {
-
-    Video v = videoService.getById(id);
-    String current = (auth != null) ? auth.getName() : null;
-    String owner   = (v.getUtilisateur() != null) ? v.getUtilisateur().getPseudo() : null;
-
-    // PATCH: attribue l’owner si manquant (anciennes vidéos)
-    if (owner == null && current != null) {
-        var user = utilisateurService.findByPseudo(current)
-                     .orElseThrow(() -> new IllegalStateException("Utilisateur introuvable"));
-        v.setUtilisateur(user);
-        videoService.saveVideo(v);
-        owner = user.getPseudo();
-    }
-
-    if (current == null || owner == null || !current.equalsIgnoreCase(owner)) {
-        ra.addFlashAttribute("errorMsg", "Action refusée.");
-        return "redirect:/videos";
-    }
-
-    boolean ok = videoService.deleteVideo(id);
-    boolean stillThere = videoService.existsById(id);
-
-    ra.addFlashAttribute(ok && !stillThere ? "succMsg" : "errorMsg",
-            ok && !stillThere ? "✅ Vidéo supprimée." : "❌ Suppression non effectuée.");
-    return "redirect:/videos"; // ou /mes-videos si tu l’as créée
-}
 
 
-  @GetMapping("/video/{id}/edit")
-public String editForm(@PathVariable Long id,
-                       Authentication auth,
-                       Model model,
-                       RedirectAttributes ra) {
-    // 1) Charger la vidéo
-    Video v = videoService.getById(id);
+    @PostMapping("/video/{id}/delete")
+    public String deleteOwn(@PathVariable Long id,
+                            Authentication auth,
+                            RedirectAttributes ra) {
 
-    // 2) Récupérer l'utilisateur courant (en base)
-    if (auth == null) {
-        ra.addFlashAttribute("errorMsg", "Action refusée (non connecté).");
-        return "redirect:/videos";
-    }
-
-    var currentOpt = utilisateurService.findByPseudo(auth.getName()); // adapte si ton login n’est pas le pseudo
-    if (currentOpt.isEmpty()) {
-        ra.addFlashAttribute("errorMsg", "Action refusée (utilisateur inconnu).");
-        return "redirect:/videos";
-    }
-    var currentUser = currentOpt.get();
-
-    // 3) PATCH : si la vidéo n'a pas de propriétaire (anciennes vidéos), on l'assigne au user courant
-    if (v.getUtilisateur() == null) {
-        v.setUtilisateur(currentUser);
-        videoService.saveVideo(v);
-    }
-
-    // 4) Vérif propriétaire par ID
-    boolean canEdit = (v.getUtilisateur() != null)
-            && v.getUtilisateur().getId().equals(currentUser.getId());
-    // (optionnel) autoriser admin :
-    // canEdit = canEdit || auth.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-
-    if (!canEdit) {
-        ra.addFlashAttribute("errorMsg", "Action refusée.");
-        return "redirect:/videos";
-    }
-
-    // 5) OK → préparer la vue
-    model.addAttribute("v", v);
-    model.addAttribute("id", id);
-    model.addAttribute("categories", categorieService.getAllCategorie());
-    return "VideoEdit";
-}
-
-
-
-
-    @PostMapping(path = "/video/{id}/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String editSubmit(@PathVariable Long id,
-                         @RequestParam("titre") String titre,
-                         @RequestParam(value = "description", required = false) String description,
-                         @RequestParam("categorieId") Long categorieId,
-                         @RequestParam(value = "videoFile", required = false) MultipartFile videoFile,
-                         @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
-                         Authentication auth,
-                         RedirectAttributes ra) {
-    try {
         Video v = videoService.getById(id);
-
         String current = (auth != null) ? auth.getName() : null;
-        String owner   = (v.getUtilisateur()!=null) ? v.getUtilisateur().getPseudo() : null;
+        String owner   = (v.getUtilisateur() != null) ? v.getUtilisateur().getPseudo() : null;
+
+        
+        if (owner == null && current != null) {
+            var user = utilisateurService.findByPseudo(current)
+                    .orElseThrow(() -> new IllegalStateException("Utilisateur introuvable"));
+            v.setUtilisateur(user);
+            videoService.saveVideo(v);
+            owner = user.getPseudo();
+        }
+
         if (current == null || owner == null || !current.equalsIgnoreCase(owner)) {
             ra.addFlashAttribute("errorMsg", "Action refusée.");
             return "redirect:/videos";
         }
 
-        // Mettre à jour les champs simples
-        v.setNomVideo(titre);
-        v.setDescription(description);
-        v.setCategorie(categorieService.getCategorieById(categorieId));
+        boolean ok = videoService.deleteVideo(id);
+        boolean stillThere = videoService.existsById(id);
 
-        // Répertoires
-        Path base = Path.of(storagePath);   // ex: C:/.../upload/ (racine de /uploads/)
-        Path videosDir = base.resolve("videos");
-        Path imagesDir = base.resolve("images");
-        Files.createDirectories(videosDir);
-        Files.createDirectories(imagesDir);
-
-        // Remplacement éventuel de la VIDÉO
-        if (videoFile != null && !videoFile.isEmpty()) {
-            // supprimer l’ancienne si elle existe
-            try {
-                if (v.getUrl() != null && !v.getUrl().isBlank()) {
-                    java.nio.file.Files.deleteIfExists(videoService.getVideoPath(v.getUrl()));
-                }
-            } catch (Exception ignored) {}
-
-            String safeVideoName = System.currentTimeMillis() + "_" +
-                    videoFile.getOriginalFilename().replaceAll("\\s+", "");
-            Files.copy(videoFile.getInputStream(), videosDir.resolve(safeVideoName),
-                    StandardCopyOption.REPLACE_EXISTING);
-            v.setUrl("/uploads/videos/" + safeVideoName);
-        }
-
-        // Remplacement éventuel de l’IMAGE
-        if (imageFile != null && !imageFile.isEmpty()) {
-            try {
-                if (v.getImage() != null && !v.getImage().isBlank()) {
-                    java.nio.file.Files.deleteIfExists(videoService.getVideoPath(v.getImage()));
-                }
-            } catch (Exception ignored) {}
-
-            String safeImageName = System.currentTimeMillis() + "_" +
-                    imageFile.getOriginalFilename().replaceAll("\\s+", "");
-            Files.copy(imageFile.getInputStream(), imagesDir.resolve(safeImageName),
-                    StandardCopyOption.REPLACE_EXISTING);
-            v.setImage("/uploads/images/" + safeImageName);
-        }
-
-        videoService.saveVideo(v);
-        ra.addFlashAttribute("succMsg", "✅ Vidéo mise à jour.");
-        return "redirect:/videos"; // ou "redirect:/video/" + id pour revenir à la page détail
-
-    } catch (Exception e) {
-        e.printStackTrace();
-        ra.addFlashAttribute("errorMsg", "❌ " + e.getMessage());
-        return "redirect:/videos";
+        ra.addFlashAttribute(ok && !stillThere ? "succMsg" : "errorMsg",
+                ok && !stillThere ? "✅ Vidéo supprimée." : "❌ Suppression non effectuée.");
+        return "redirect:/videos"; 
     }
-}
 
 
+    @GetMapping("/video/{id}/edit")
+    public String editForm(@PathVariable Long id,
+                           Authentication auth,
+                           Model model,
+                           RedirectAttributes ra) {
+        
+        Video v = videoService.getById(id);
+
+        
+        if (auth == null) {
+            ra.addFlashAttribute("errorMsg", "Action refusée (non connecté).");
+            return "redirect:/videos";
+        }
+
+        var currentOpt = utilisateurService.findByPseudo(auth.getName());
+        if (currentOpt.isEmpty()) {
+            ra.addFlashAttribute("errorMsg", "Action refusée (utilisateur inconnu).");
+            return "redirect:/videos";
+        }
+        var currentUser = currentOpt.get();
+
+       
+        if (v.getUtilisateur() == null) {
+            v.setUtilisateur(currentUser);
+            videoService.saveVideo(v);
+        }
+
+       
+        boolean canEdit = (v.getUtilisateur() != null)
+                && v.getUtilisateur().getId().equals(currentUser.getId());
+
+
+        if (!canEdit) {
+            ra.addFlashAttribute("errorMsg", "Action refusée.");
+            return "redirect:/videos";
+        }
+
+    
+        model.addAttribute("v", v);
+        model.addAttribute("id", id);
+        model.addAttribute("categories", categorieService.getAllCategorie());
+        return "VideoEdit";
+    }
+
+
+    @PostMapping(path = "/video/{id}/edit", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String editSubmit(@PathVariable Long id,
+                             @RequestParam("titre") String titre,
+                             @RequestParam(value = "description", required = false) String description,
+                             @RequestParam("categorieId") Long categorieId,
+                             @RequestParam(value = "videoFile", required = false) MultipartFile videoFile,
+                             @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
+                             Authentication auth,
+                             RedirectAttributes ra) {
+        try {
+            Video v = videoService.getById(id);
+
+            String current = (auth != null) ? auth.getName() : null;
+            String owner   = (v.getUtilisateur()!=null) ? v.getUtilisateur().getPseudo() : null;
+            if (current == null || owner == null || !current.equalsIgnoreCase(owner)) {
+                ra.addFlashAttribute("errorMsg", "Action refusée.");
+                return "redirect:/videos";
+            }
+
+           
+            v.setNomVideo(titre);
+            v.setDescription(description);
+            v.setCategorie(categorieService.getCategorieById(categorieId));
+
+           
+            Path base = Path.of(storagePath); 
+            Path videosDir = base.resolve("videos");
+            Path imagesDir = base.resolve("images");
+            Files.createDirectories(videosDir);
+            Files.createDirectories(imagesDir);
+
+          
+            if (videoFile != null && !videoFile.isEmpty()) {
+              
+                try {
+                    if (v.getUrl() != null && !v.getUrl().isBlank()) {
+                        java.nio.file.Files.deleteIfExists(videoService.getVideoPath(v.getUrl()));
+                    }
+                } catch (Exception ignored) {}
+
+                String safeVideoName = System.currentTimeMillis() + "_" +
+                        videoFile.getOriginalFilename().replaceAll("\\s+", "");
+                
+              
+                String relativeVideoPath = "videos/" + safeVideoName;
+                
+                Files.copy(videoFile.getInputStream(), base.resolve(relativeVideoPath),
+                        StandardCopyOption.REPLACE_EXISTING);
+                
+               
+                v.setUrl(relativeVideoPath);
+            }
+
+            
+            if (imageFile != null && !imageFile.isEmpty()) {
+                try {
+                    if (v.getImage() != null && !v.getImage().isBlank()) {
+                        java.nio.file.Files.deleteIfExists(videoService.getVideoPath(v.getImage()));
+                    }
+                } catch (Exception ignored) {}
+
+                String safeImageName = System.currentTimeMillis() + "_" +
+                        imageFile.getOriginalFilename().replaceAll("\\s+", "");
+                
+              
+                String relativeImagePath = "images/" + safeImageName;
+
+                Files.copy(imageFile.getInputStream(), base.resolve(relativeImagePath),
+                        StandardCopyOption.REPLACE_EXISTING);
+                
+               
+                v.setImage(relativeImagePath);
+            }
+
+            videoService.saveVideo(v);
+            ra.addFlashAttribute("succMsg", "✅ Vidéo mise à jour.");
+            return "redirect:/videos"; 
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            ra.addFlashAttribute("errorMsg", "❌ " + e.getMessage());
+            return "redirect:/videos";
+        }
+    }
 }

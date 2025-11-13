@@ -38,7 +38,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 
         logger.info("Connexion réussie pour l'utilisateur : {}", authentication.getName());
 
-        // Récupère l'utilisateur en BDD (ici on suppose que username = pseudo)
+        
         Utilisateur user = utilisateurRepository.findByPseudo(authentication.getName()).orElse(null);
         if (user != null) {
             request.getSession().setAttribute("authenticatedUser", user);
@@ -47,7 +47,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             logger.warn("Aucun Utilisateur trouvé en BDD pour {}", authentication.getName());
         }
 
-        // Redirection selon le rôle
+       
         String targetUrl = "/card";
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority ga : authorities) {

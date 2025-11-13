@@ -1,6 +1,4 @@
-/* ================== Vibes Voyage — Formulaire d'Upload ================== */
 
-/* --- Conteneur principal --- */
 .upload-container {
     padding: 50px 20px;
     background-color: #fbf1ef; 
@@ -15,7 +13,7 @@
     box-shadow: var(--shadow);
 }
 
-/* --- En-tête du formulaire --- */
+
 .form-header {
     text-align: center;
     margin-bottom: 40px;
@@ -34,7 +32,7 @@
     font-size: 1.1em;
 }
 
-/* --- Style des groupes de champs (label + input) --- */
+
 .form-group {
     margin-bottom: 25px;
 }
@@ -75,14 +73,14 @@
     border: 1px dashed var(--line);
     border-radius: 8px;
     cursor: pointer;
-    transition: border-color 0.2s ease; /* Ajout d'une transition pour la fluidité */
+    transition: border-color 0.2s ease; 
 }
 .video-form input [type="file"]:hover {
     border-color: var(--brand);
 }
 
 
-/* le bouton interne natif */
+
 #videoFile::file-selector-button {
   padding: .5rem .9rem;
   border: 0;
@@ -94,7 +92,7 @@
 }
 
 
-/* le bouton interne natif */
+
 #imageFile::file-selector-button {
   padding: .5rem .9rem;
   border: 0;
@@ -104,26 +102,24 @@
   cursor: pointer;
   margin-right: .8rem;
 }
-/* --- Bouton de soumission --- */
+
  .form-actions {
-    text-align: right; /* Aligne le bouton à droite */
+    text-align: right; 
     margin-top: 40px;
 }
 
 button.btn-submit {
-   display: inline-block; /* Permet d'appliquer des marges et un padding */
-    background-color: #F5951E; /* La couleur orange de votre marque */
-    color: var(--paper);            /* Texte en blanc pour un bon contraste */
-    padding: 14px 32px;             /* Marge intérieure pour un bouton plus grand et cliquable */
+   display: inline-block; 
+    background-color: #F5951E; 
+    color: var(--paper);         
+    padding: 14px 32px;          
     border-radius: 50px;           
     border: none;                 
-    
-    /* --- Typographie --- */
-    font-family: "DM Sans", sans-serif; /* Assure la cohérence de la police */
-    font-weight: 700;               /* Texte en gras */
+    font-family: "DM Sans", sans-serif; 
+    font-weight: 700;             
     font-size: 1em;
-    text-decoration: none;          /* Supprime le soulignement par défaut des liens */
-    text-align: center;             /* Centre le texte si jamais il passe sur deux lignes */
+    text-decoration: none;         
+    text-align: center;             
 
 }
 
@@ -133,7 +129,7 @@ button.btn-submit {
 }
 
 
-/* ================== FOOTER ================== */
+
 .main-footer{
   background:#fbf1ef;border-top:1px solid var(--line);padding:36px 0;margin-top:40px
 }
@@ -144,7 +140,7 @@ button.btn-submit {
 .footer-links a{margin-left:18px}
 .footer-links a:hover{color:var(--accent)}
 
-/* ================== ACCESSIBILITÉ ================== */
+
 a:focus-visible, .btn:focus-visible{
   outline:3px solid rgba(0,77,64,.35); outline-offset:2px; border-radius:12px;
 }

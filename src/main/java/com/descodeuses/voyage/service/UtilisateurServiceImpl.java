@@ -47,7 +47,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     Utilisateur u = new Utilisateur();
     u.setPseudo(pseudo.trim());
     u.setEmail(email.trim());
-    u.setMdp(passwordEncoder.encode(mdp)); // BCrypt
+    u.setMdp(passwordEncoder.encode(mdp)); 
     u.setEnabled(true);
 
 
@@ -59,8 +59,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     return utilisateurRepository.save(u);
   }
 
-  /** Utile seulement si tu fais une auth "maison".
-      Si tu utilises Spring Security (formLogin), tu peux ignorer cette méthode. */
+  
   @Override
   public Utilisateur authenticate(String pseudo, String mdp) {
     return utilisateurRepository.findFirstByPseudoIgnoreCaseOrderByIdAsc(pseudo)
@@ -70,7 +69,7 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 
   
 
-
+ 
   @Override
   public Utilisateur creerAdmin(String pseudo, String mdp, String email) {
     if (pseudo == null || pseudo.isBlank() ||
@@ -88,10 +87,10 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     u.setMdp(passwordEncoder.encode(mdp));
     u.setEnabled(true);
 
-    // ➜ Si base = 'ADMIN'/'USER' :
+    
     Role roleAdmin = roleRepository.findByNom("ADMIN")
         .orElseThrow(() -> new IllegalStateException("Rôle ADMIN manquant en base"));
-    // ➜ Si base = 'ROLE_ADMIN', adapte en conséquence.
+  
 
     u.setRole(roleAdmin);
     return utilisateurRepository.save(u);

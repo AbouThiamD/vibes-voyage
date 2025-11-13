@@ -1,4 +1,4 @@
-/* ===== Fonts & couleurs ===== */
+
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&display=swap');
 
 :root{
@@ -34,7 +34,7 @@ a{text-decoration:none;color:inherit}
   .site-header .container{
     display:flex;align-items:center;justify-content:space-between;
     padding:8px 22px;
-    height:40px; /* fixe une hauteur plus compacte */
+    height:40px; 
     
   }
   .brand img{width:120px}
@@ -45,9 +45,9 @@ a{text-decoration:none;color:inherit}
   .burger{display:none;background:none;border:0;cursor:pointer;padding:8px}
   .burger span{display:block;width:22px;height:2px;background:#333;margin:5px 0;border-radius:2px}
   
-/* ===== Hero ===== */
+
 .hero{
-  margin-top:64px; /* garde la place du header fixe */
+  margin-top:64px; 
   min-height:60vh;
   display:flex;align-items:center;justify-content:center;
   background:url("../IMAGES/asie.jpg") center/cover no-repeat;
@@ -63,12 +63,12 @@ a{text-decoration:none;color:inherit}
 .btn-primary{background:var(--brand);color:#fff}
 .btn-ghost{background:#fff;color:#222;border:1px solid #ccc}
 
-/* ===== Sections ===== */
+
 .section{padding:60px 0}
 .section h2{text-align:center;margin-bottom:10px;font-size:26px}
 .section-sub{text-align:center;color:var(--muted);margin-bottom:20px}
 
-/* ===== Map section ===== */
+
 .map-section .chips{
   display:flex;flex-wrap:wrap;gap:10px;
   justify-content:center;margin-bottom:20px;
@@ -89,7 +89,7 @@ a{text-decoration:none;color:inherit}
   overflow:hidden;
 }
 
-/* ===== Cards ===== */
+
 .card-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
@@ -102,7 +102,7 @@ a{text-decoration:none;color:inherit}
   overflow:hidden;
   box-shadow:var(--shadow);
   background:#000;
-  aspect-ratio:16/10; /* ni trop hautes ni trop plates */
+  aspect-ratio:16/10; 
   transition:transform .3s;
   .card{box-shadow:0 10px 24px rgba(0,0,0,.12)}
 .card .overlay{background:linear-gradient(180deg,rgba(0,0,0,.12) 0%,rgba(0,0,0,.55) 100%)}
@@ -142,7 +142,7 @@ a{text-decoration:none;color:inherit}
   box-shadow:0 4px 10px rgba(0,0,0,.2);
 }
 
-/* ===== Benefits ===== */
+
 .benefit-grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
@@ -160,8 +160,7 @@ a{text-decoration:none;color:inherit}
 .benefit{min-height:150px;box-shadow:0 8px 18px rgba(0,0,0,.08)}
 .benefit i{font-size:28px;color:var(--brand);margin-bottom:10px}
 
-/* ===== Feature ===== */
-/* ===== Feature (image + texte) — améliorée ===== */
+
 .feature-grid{
     display:grid;
     grid-template-columns: minmax(420px, 52%) minmax(320px, 1fr);
@@ -171,7 +170,7 @@ a{text-decoration:none;color:inherit}
   
   .feature-media img{
     width:100%;
-    height:520px;               /* image bien cadrée */
+    height:520px;               
     object-fit:cover;
     border-radius:16px;
     box-shadow:0 10px 24px rgba(0,0,0,.12);
@@ -181,7 +180,7 @@ a{text-decoration:none;color:inherit}
     @media (max-width:980px){ .feature-media img{height:360px} }
   }
   
-  /* Carte de droite plus “premium” et compacte */
+
   .feature-copy{
     background:#fff;
     border:1px solid #E6E0D8;
@@ -204,7 +203,7 @@ a{text-decoration:none;color:inherit}
     margin-inline:auto;
   }
   
-  /* Puces propres avec chevrons */
+
   .bullets{list-style:none; padding:0; margin:14px 0 16px}
   .bullets li{
     position:relative;
@@ -219,7 +218,7 @@ a{text-decoration:none;color:inherit}
     box-shadow:0 2px 6px rgba(245,149,30,.35);
   }
   
-  /* Bouton plus lisible */
+ 
   .feature-copy .btn{
     display:inline-flex;
     justify-content:center;
@@ -228,13 +227,13 @@ a{text-decoration:none;color:inherit}
     font-weight:700;
   }
   
-  /* ===== Responsive ===== */
+
   @media (max-width: 980px){
     .feature-grid{ grid-template-columns:1fr }
     .feature-media img{ height:360px }
   } 
 
-/* ================== FOOTER ================== */
+
 .main-footer{
   background:#fbf1ef;border-top:1px solid var(--line);padding:36px 0;margin-top:40px
 }
@@ -245,12 +244,12 @@ a{text-decoration:none;color:inherit}
 .footer-links a{margin-left:18px}
 .footer-links a:hover{color:var(--accent)}
 
-/* ================== ACCESSIBILITÉ ================== */
+
 a:focus-visible, .btn:focus-visible{
   outline:3px solid rgba(0,77,64,.35); outline-offset:2px; border-radius:12px;
 }
 
-/* ===== Responsive ===== */
+
 @media (max-width:900px){
   .feature-grid{grid-template-columns:1fr}
   .card-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}

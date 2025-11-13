@@ -13,38 +13,8 @@
   
 </head>
 <body>
-<!-- Header -->
-  <header class="site-header">
-    <div class="container">
-      <a class="brand" href="/card" th:href="@{/card}">
-        <img src="/IMAGES/logo-Emmy.png" th:src="@{/IMAGES/logo-Emmy.png}" alt="Vibes Voyage">
-      </a>
 
-    <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-
-        <ul class="menu" id="main-menu">
-          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
-
-          <!-- Destination avec un seul contrôleur /continent?id=... -->
-          <li class="has-submenu">
-            <a th:href="@{/continent(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continent(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header th:replace="~{header :: siteHeader('videoedit')}"></header>
 <div class="watch-wrap">
     
     <div class="form-wrapper"> 
@@ -106,6 +76,7 @@
         <a href="#">Conditions d'utilisation</a>
       </div>
     </div>
+    <script defer th:src="@{/JS/header.js}"></script>
   </footer>
  </body>
 </html>

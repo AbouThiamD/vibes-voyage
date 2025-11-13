@@ -37,24 +37,25 @@
               <td><div class="cell num" th:text="${u.id}">1</div></td>
 
               <td>
-                <div class="cell cell-name">
-                  <span class="avatar" aria-hidden="true"></span>
-                  <span th:text="${u.pseudo}">jdupont</span>
-                </div>
+                  <div class="cell cell-name">
+                    <span class="avatar" aria-hidden="true"></span>
+                    <span th:text="${u.pseudo}">jdupont</span>
+                  </div>
               </td>
-
-              <td><div class="cell" th:text="${u.email}">jd@example.com</div></td>
-<td class="lienBlanc">
-  <!-- Supprimer (poubelle) -->
-  <a class="icon-btn danger"
-     th:href="@{/utilisateurs/{id}/delete(id=${u.id})}"
-     title="Supprimer" aria-label="Supprimer"
-     onclick="return confirm('Supprimer cet utilisateur ?')">
-    <i class="fa-solid fa-trash" aria-hidden="true"></i>
-  </a>
+      <td><div class="cell" th:text="${u.email}">jd@example.com</div></td>
+      <td class="lienBlanc">
+  <form th:action="@{|/admin/utilisateurs/${u.id}/delete|}" method="post" style="display:inline">
+    <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"> -->
+    <button type="submit"
+            class="icon-btn danger"
+            title="Supprimer" aria-label="Supprimer"
+            onclick="return confirm('Supprimer cet utilisateur ?')">
+      <i class="fa-solid fa-trash" aria-hidden="true"></i>
+    </button>
+  </form>
 </td>
 
-              </td>
+              
             </tr>
 
             <tr th:if="${#lists.isEmpty(utilisateurs)}">

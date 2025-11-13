@@ -5,42 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title th:text="${(v != null ? v.nomVideo : 'Vidéo')} + ' | Vibes Voyage'">Vibes Voyage | Vidéo</title>
 
-  <!-- ton CSS dédié à la page détail -->
-  <link rel="stylesheet" href="/CSS/videodetail.css" th:href="@{/CSS/videodetail.css}">
+
+  <link rel="stylesheet" href="/CSS/VideoDetail.css" th:href="@{/CSS/VideoDetail.css}">
     <link rel="stylesheet" href="/CSS/header.css" th:href="@{/CSS/header.css}">
 </head>
 <body>
-    <header class="site-header">
-    <div class="container">
-      <a class="brand" href="/card" th:href="@{/card}">
-        <img src="/IMAGES/logo-Emmy.png" th:src="@{/IMAGES/logo-Emmy.png}" alt="Vibes Voyage">
-      </a>
-
-      <nav class="nav" aria-label="Navigation principale">
-        <button class="burger" aria-label="Ouvrir le menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-
-        <ul class="menu" id="main-menu">
-          <li><a href="/card" th:href="@{/card}">Accueil</a></li>
-
-          <!-- Destination avec un seul contrôleur /continents?id=... -->
-          <li class="has-submenu">
-            <a th:href="@{/continents(nom='Afrique')}" class="menu-link" aria-haspopup="true" aria-expanded="false">Destination</a>
-
-            <ul class="submenu" th:if="${categories}">
-              <li th:each="c : ${categories}">
-                <a th:href="@{/continents(id=${c.id})}" th:text="${c.nomCategorie}">Catégorie</a>
-              </li>
-            </ul>
-          </li>
-
-          <li><a href="/Tableau" th:href="@{/Tableau}">Tableau de bord</a></li>
-          <li><a href="/Contact" th:href="@{/Contact}">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header th:replace="~{header :: siteHeader('videodetail')}"></header>
 
   <main class="watch"
         th:with="
@@ -55,17 +25,28 @@
       <div class="watch-grid">
 
         <div class="watch-player">
-          <video id="player" controls preload="metadata" playsinline
-                 th:attr="poster=${posterUrl}">
-            <source th:src="${v.url}"
-                    th:attr="type=${isWebm} ? 'video/webm' : 'video/mp4'"/>
-            Votre navigateur ne supporte pas la vidéo HTML5.
-          </video>
-        </div>
+  <video id="player" controls preload="metadata" playsinline
+         
+         th:attr="poster=${#strings.startsWith(posterUrl, '/')} 
+                           ? @{${posterUrl}} 
+                           : @{/uploads/{path}(path=${posterUrl})}">
+    
+    <source th:src="@{/uploads/{path}(path=${v.url})}"
+            th:attr="type=${isWebm} ? 'video/webm' : 'video/mp4'"/>
+    
+    Votre navigateur ne supporte pas la vidéo HTML5.
+  </video>
+</div>
 
         <div class="watch-left">
           <h1 class="watch-title" th:text="${v.nomVideo}">Titre de la vidéo</h1>
+          <h2 class="watch-author" 
+      th:if="${v.utilisateur != null}" 
+      th:text="${v.utilisateur.pseudo}">
+    Auteur
+  </h2>
           <p class="watch-meta">
+            
             <span class="badge" th:text="${v.categorie != null ? v.categorie.nomCategorie : 'Catégorie'}">Catégorie</span>
             <span class="date" th:if="${v.date != null}" th:text="${#dates.format(v.date, 'dd/MM/yyyy')}">01/01/2025</span>
           </p>
@@ -89,6 +70,6 @@
       </div>
     </div>
   </footer>
-
+  <script defer th:src="@{/JS/header.js}"></script>
 </body>
 </html>

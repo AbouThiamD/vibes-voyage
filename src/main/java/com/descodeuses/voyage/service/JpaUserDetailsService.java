@@ -73,7 +73,7 @@ public class JpaUserDetailsService implements UserDetailsService {
         Utilisateur u = utilisateurRepository.findByPseudo(pseudo)
             .orElseThrow(() -> new UsernameNotFoundException("Aucun utilisateur trouvé avec le pseudo : " + pseudo));
 
-        // Rôle BDD: "ADMIN" / "USER" (recommandé) ou déjà "ROLE_ADMIN"
+       
         String rawRole = (u.getRole() != null && u.getRole().getNom() != null)
                 ? u.getRole().getNom().toUpperCase()
                 : "USER";
@@ -81,9 +81,9 @@ public class JpaUserDetailsService implements UserDetailsService {
         String authority = rawRole.startsWith("ROLE_") ? rawRole : "ROLE_" + rawRole;
 
         return User.builder()
-            .username(u.getPseudo())   // ou u.getEmail() si login par email
-            .password(u.getMdp())      // hash BCrypt stocké en BDD
-            .authorities(List.of(new SimpleGrantedAuthority(authority))) // => ROLE_ADMIN / ROLE_USER
+            .username(u.getPseudo())   
+            .password(u.getMdp())      
+            .authorities(List.of(new SimpleGrantedAuthority(authority))) 
             .build();
     }
 }

@@ -4,25 +4,11 @@ package com.descodeuses.voyage.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestParam;
-
-// import com.descodeuses.voyage.model.Role;
-// import com.descodeuses.voyage.service.RoleService;
 
 @Controller
 public class MainController {
 
-    // private final RoleService roleService;
-
-    // public MainController(RoleService roleService) {
-    // this.roleService = roleService;
-    // }
-
-    // @GetMapping("/home")
-    // public String registre() {
-    // return "registre";
-    // }
+    
 
     @GetMapping("/card")
     public String card() {

@@ -14,7 +14,6 @@ public class SecurityConfig {
 
     private final CustomAuthenticationSuccessHandler successHandler;
 
-    // Injection du bean @Component CustomAuthenticationSuccessHandler
     public SecurityConfig(CustomAuthenticationSuccessHandler successHandler) {
         this.successHandler = successHandler;
     }
@@ -27,7 +26,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain security(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
+           
             .authorizeHttpRequests(auth -> auth
                .requestMatchers("/Admin", "/Admin/**").hasRole("ADMIN") 
                 .requestMatchers(
@@ -39,12 +38,12 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
-                .loginPage("/")                        // ta page de login
-                .loginProcessingUrl("/perform_login")  // action du <form>
-                .usernameParameter("pseudo")           // doit matcher le name du champ
-                .passwordParameter("mdp")              // idem
-                .successHandler(successHandler)        // <-- utilise le bean injecté
-                .failureUrl("/?error=true")
+                .loginPage("/")                       
+                .loginProcessingUrl("/perform_login")
+                .usernameParameter("pseudo")           
+                .passwordParameter("mdp")              
+                .successHandler(successHandler)        
+              .failureUrl("/error?login=1")   
                 .permitAll()
             )
             .logout(logout -> logout
