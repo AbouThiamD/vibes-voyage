@@ -4,12 +4,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-// --- Nouveaux Imports ---
+
 import com.descodeuses.voyage.model.Categorie;
 import com.descodeuses.voyage.repository.CategorieRepository; 
 import com.descodeuses.voyage.model.Role; 
 import com.descodeuses.voyage.repository.RoleRepository;
-// --- Fin des Imports ---
+
 import com.descodeuses.voyage.model.Utilisateur;
 import com.descodeuses.voyage.repository.UtilisateurRepository;
 
@@ -22,30 +22,30 @@ public class InitialDataLoader implements CommandLineRunner {
     private final RoleRepository roleRepository; 
     private final UtilisateurRepository utilisateurRepository;
     private final PasswordEncoder passwordEncoder;
-    private final CategorieRepository categorieRepository; // AJOUTÉ
+    private final CategorieRepository categorieRepository;
 
     public InitialDataLoader(RoleRepository roleRepository, 
                              UtilisateurRepository utilisateurRepository, 
                              PasswordEncoder passwordEncoder,
-                             CategorieRepository categorieRepository) { // AJOUTÉ AU CONSTRUCTEUR
+                             CategorieRepository categorieRepository) {
         this.roleRepository = roleRepository;
         this.utilisateurRepository = utilisateurRepository;
         this.passwordEncoder = passwordEncoder;
-        this.categorieRepository = categorieRepository; // Initialisation
+        this.categorieRepository = categorieRepository; 
     }
 
     @Override
     @Transactional
     public void run(String... args) throws Exception {
         
-        // --- 1. CRÉATION DES RÔLES ET UTILISATEURS ---
+       
         Role adminRole = findOrCreateRole("ADMIN");
         Role userRole = findOrCreateRole("USER"); 
 
         createDefaultUser("admin", "admin@voyage.com", "motdepasse123", adminRole);
         createDefaultUser("utilisateur", "user@voyage.com", "test1234", userRole);
         
-        // --- 2. CRÉATION DES CATÉGORIES/CONTINENTS ---
+       
         findOrCreateCategorie("Afrique");
         findOrCreateCategorie("Amérique du Nord");
         findOrCreateCategorie("Amérique du Sud");
@@ -54,7 +54,7 @@ public class InitialDataLoader implements CommandLineRunner {
         findOrCreateCategorie("Océanie");
     }
 
-    // --- LOGIQUE RÔLES (inchangée) ---
+ 
     private Role findOrCreateRole(String nom) {
         return roleRepository.findByNom(nom)
                 .orElseGet(() -> {
@@ -73,13 +73,13 @@ public class InitialDataLoader implements CommandLineRunner {
             user.setMdp(passwordEncoder.encode(password)); 
             user.setRole(role); 
             utilisateurRepository.save(user);
-            System.out.println(">>> Utilisateur " + role.getNom() + " créé: " + pseudo + "/" + password);
+           
         }
     }
     
-    // --- NOUVELLE LOGIQUE : CRÉATION DES CATÉGORIES ---
+    
     private void findOrCreateCategorie(String nom) {
-        // Utilise la méthode findByNomCategorieIgnoreCase de votre Repository
+        
         categorieRepository.findByNomCategorieIgnoreCase(nom) 
                 .orElseGet(() -> {
                     Categorie newCat = new Categorie();

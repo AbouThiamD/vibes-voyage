@@ -98,13 +98,5 @@ public class MainController {
     // return "role";
     // }
 
-    // @PostMapping("/add-role")
-    // public String addRole(@RequestParam("nom") String nom) {
-    // System.out.println("le nom saisi par l'utilisateur est: " + nom);
-    // Role role = new Role();
-    // role.setNom(nom);
-    // roleService.save(role);
-    // return "redirect:/role-list";
-    // }
     
 }

@@ -106,12 +106,12 @@ public class VideoUserController {
 
             videoService.saveVideo(v);
 
-            ra.addFlashAttribute("succMsg", "🎉 Vidéo envoyée !");
+            ra.addFlashAttribute("succMsg", " Vidéo envoyée !");
             return "redirect:/continents?id=" + v.getCategorie().getId() + "#videos";
 
         } catch (Exception e) {
             e.printStackTrace();
-            ra.addFlashAttribute("errorMsg", "❌ " + e.getMessage());
+            ra.addFlashAttribute("errorMsg", "Une erreur est survenue : " + e.getMessage());
             return "redirect:/FormulairePage";
         }
     }

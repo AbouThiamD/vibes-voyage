@@ -75,10 +75,10 @@ public class UtilisateurController {
     
     @GetMapping("/utilisateur/{id}")
     public String voirUtilisateur(@PathVariable Long id, Model model) {
-        System.out.println("appel voirUtilisateur id = " + id);
+       
         Utilisateur user = utilisateurRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur introuvable"));
-             System.out.println("pseudo trouvé = " + user.getPseudo());
+          
         model.addAttribute("pseudo", user.getPseudo());
         return "utilisateur";
     }
